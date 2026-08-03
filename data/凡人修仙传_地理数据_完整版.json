@@ -1,0 +1,869 @@
+{
+  "meta": {
+    "title": "凡人修仙传 完整地理数据 (A Record of a Mortal's Journey to Immortality - Complete Geographic Reference)",
+    "author": "忘语 (Wang Yu)",
+    "description": "Comprehensive geographic data across Mortal Realm (人界), Spirit Realm (灵界), and Immortal Realm (仙界), compiled from novel text, fan wikis, and reader analysis.",
+    "dataQuality": "Fan-compiled from novel text. Author did not publish an official world map. Some spatial relationships remain debated among readers.",
+    "lastUpdated": "2026-07-20",
+    "format": "Structured for interactive map website development"
+  },
+
+  "realmStructure": {
+    "description": "The universe consists of multiple hierarchical realms. Cultivators ascend from lower to higher realms.",
+    "hierarchy": [
+      { "level": 1, "name": "人界 (Mortal Realm)", "ascendsTo": "灵界", "cultivationCeiling": "化神期 (Deity Transformation)" },
+      { "level": 2, "name": "灵界 (Spirit Realm)", "ascendsTo": "仙界", "cultivationCeiling": "大乘期 (Mahayana)" },
+      { "level": 3, "name": "仙界 (Immortal Realm)", "ascendsTo": null, "cultivationCeiling": "道祖 (Dao Ancestor)" }
+    ],
+    "parallelRealms": [
+      { "name": "魔界 (Demon Realm)", "sameLevelAs": "灵界", "note": "Periodically intersects with Spirit Realm causing 魔劫 (Demon Calamity)" },
+      { "name": "冥界 (Netherworld/Underworld)", "sameLevelAs": "灵界", "note": "Handles reincarnation; relatively weaker than other realms" },
+      { "name": "灰界 (Gray Realm)", "sameLevelAs": "仙界", "note": "Appears in Immortal Realm arc; has 洗煞池 (Pool of Cleansing)" },
+      { "name": "广寒界 (Guanghan Realm)", "sameLevelAs": "灵界", "note": "A special trial dimension accessible from Spirit Realm" },
+      { "name": "小修罗界 (Minor Shura Realm)", "sameLevelAs": "灵界", "note": "Where Han Li obtained 光阴之丝 (Thread of Time)" },
+      { "name": "小灵天 (Minor Spirit Heaven)", "sameLevelAs": "灵界", "note": "Where Nangong Wan was trapped" }
+    ],
+    "realmGroups": {
+      "description": "The cosmos is organized into realm groups (界群). The story is set in 小南洲界群 (Xiaonanzhou Realm Group).",
+      "knownGroups": ["小南洲界群"]
+    }
+  },
+
+  "mortalRealm": {
+    "name": "人界 (Mortal Realm)",
+    "nameEn": "Mortal Realm",
+    "description": "The lowest cultivation realm. Multiple continents and seas. Han Li's home realm.",
+    "maxCultivation": "化神期 (Deity Transformation)",
+    "regions": {
+      "tiannan": {
+        "name": "天南 (Tiannan)",
+        "nameEn": "Southern Heaven",
+        "type": "majorRegion",
+        "description": "Han Li's homeland region. Composed of dozens of small-to-medium countries. Relatively poor in spiritual resources. Approximately 1/10 the size of Dajin.",
+        "totalNascentSoulCultivators": 54,
+        "powerBlocs": [
+          {
+            "name": "正道盟 (Righteous Dao Alliance)",
+            "location": "西部 (West Tiannan)",
+            "hq": "风都国 (Fengdu Country)",
+            "leader": "至阳上人 (Zhiyang Shangren, Late Nascent Soul)",
+            "memberSects": ["太真门 (Taizhen Sect)", "浩然阁 (Haoran Pavilion)", "天极门 (Tianji Sect)"]
+          },
+          {
+            "name": "魔道六宗 (Six Devil Dao Sects)",
+            "location": "东部 (East Tiannan)",
+            "hq": "天罗国 (Tianluo Country)",
+            "leader": "合欢老魔 (Hehuan Laomo, Late Nascent Soul)",
+            "memberSects": ["合欢宗 (Hehuan Sect)", "御灵宗 (Yu Ling Sect)", "魔焰门 (Devil Flame Sect)", "天煞宗 (Tiansha Sect)", "千幻宗 (Qianhuan Sect)", "鬼灵门 (Ghost Spirit Sect)"]
+          },
+          {
+            "name": "九国盟 (Nine Nations Alliance)",
+            "location": "南部 (South Tiannan, border with Mulan Grasslands)",
+            "hq": "South Tiannan border",
+            "leader": "魏无涯 (Wei Wuyai, Late Nascent Soul)",
+            "memberCountries": ["北凉国 (Beiliang)", "虞国 (Yu)", "丰原国 (Fengyuan)", "紫金国 (Zijin)", "朔国 (Shuo)", "磐国 (Pan)", "阳谷国 (Yanggu)", "朱崖国 (Zhuya)", "桑渊国 (Sangyuan)"],
+            "hqLocation": "阗天城 (Tiantian City), 虞国境内 (within Yu Country)",
+            "leadSect": "化意门 (Huayi Sect) - led by 魏无涯 (Wei Wuyai, Late Nascent Soul)",
+            "otherSects": ["贝叶宗 (Beiye Sect)", "暗影宗 (Anyin/Shadow Sect)"],
+            "note": "Defensive military alliance formed by 9 southern countries to resist Mulan Grassland invasions. After Devil Dao invasion, Yue's 6 refugee sects fled here and re-established in 北凉国."
+          },
+          {
+            "name": "天道盟 (Heavenly Dao Alliance)",
+            "location": "北部/中部 (North/Central Tiannan)",
+            "hq": "溪国 (Xi Country) area",
+            "leader": "龙晗/凤冰夫妇 (Long Han & Feng Bing, Mid Nascent Soul), based at 鸾鸣宗 (Luanming Sect)",
+            "memberSects": ["鸾鸣宗 (Luanming Sect - leader)", "落云宗 (Luoyun Sect)", "古剑门 (Ancient Sword Sect)", "百巧院 (Hundred Ingenuity Court)", "倪航斋 (Nihang Studio)"],
+            "note": "Later dominated by Han Li through Luoyun Sect"
+          }
+        ],
+        "countries": [
+          {
+            "name": "越国 (Yue Country)",
+            "type": "country",
+            "location": "天南中部偏西 (Central-Western Tiannan)",
+            "size": "中等 (Medium), ~1/3 of Tianluo or Fengdu",
+            "borders": { "north": "元武国", "south": "紫金国", "east": "姜国/车骑国 → 天罗国", "west": "风都国" },
+            "prefectureCount": 13,
+            "totalPrefectures": "镜州, 建州, 岚州, 蔺州, 溪州, 允州, +7 unnamed in novel",
+            "note": "Yue is a medium country, ~1/3 the size of Tianluo or Fengdu. Sandwiched between Righteous (West) and Devil (East) Dao blocs. After Devil Dao invasion, the country was overrun.",
+            "prefectures": [
+              {
+                "name": "镜州 (Jingzhou)",
+                "location": "越国西北部",
+                "keyLocations": [
+                  { "name": "青牛镇 (Qingniu Town)", "description": "Han Li's hometown area" },
+                  { "name": "五里沟 (Wuligou)", "description": "Han Li's actual birthplace village" },
+                  { "name": "彩霞山/落凤山 (Caixia Mountain/Luofeng Mountain)", "description": "Site of 七玄门 (Seven Mysteries Sect)" }
+                ]
+              },
+              {
+                "name": "建州 (Jianzhou)",
+                "location": "越国北部, bordering 元武国",
+                "keyLocations": [
+                  { "name": "太岳山脉 (Taiyue Mountains)", "description": "Largest mountain range in Jianzhou, spanning thousands of li. HQ of 黄枫谷." },
+                  { "name": "血色禁地 (Bloody Forbidden Zone)", "description": "Ancient wind-sealed zone in northern Jianzhou. Only accessible to Qi Condensation cultivators. Site of 太南小会 trials." }
+                ]
+              },
+              { "name": "岚州 (Lanzhou)", "keyLocations": [{ "name": "灵兽山 (Spirit Beast Mountain)", "description": "HQ of 灵兽山 sect" }] },
+              { "name": "越京 (Yuejing)", "description": "Capital city of Yue Country" }
+            ],
+            "sevenSects": [
+              { "name": "掩月宗 (Yanyue/Hidden Moon Sect)", "rank": 1, "description": "Strongest of the 7. Controlled 3+ prefectures. 南宫婉's sect. After retreat: relocated to 玲珑山, 北凉国." },
+              { "name": "黄枫谷 (Yellow Maple Valley)", "rank": 2, "description": "Han Li's sect. Located in 太岳山脉, 建州. After retreat: relocated to 北凉国." },
+              { "name": "灵兽山 (Spirit Beast Mountain)", "rank": 3, "description": "Beast-taming sect in 岚州. Secretly a branch of Devil Dao's 御灵宗 (spy within the 7 sects)." },
+              { "name": "巨剑门 (Giant Sword Gate)", "rank": 4, "description": "Sword cultivation sect. Controlled 1 prefecture. Fled to Nine Nations Alliance." },
+              { "name": "天阙堡 (Tianque Fortress)", "rank": 5, "description": "Fortress sect. Controlled 1 prefecture. Fled to Nine Nations Alliance." },
+              { "name": "清虚门 (Qingxu Gate)", "rank": 6, "description": "Daoist sect. Controlled 1 prefecture. Fled to Nine Nations Alliance." },
+              { "name": "化刀坞 (Hua Blade Dock)", "rank": 7, "description": "Blade cultivation sect. Controlled 1 prefecture. Fled to Nine Nations Alliance." }
+            ]
+          },
+          {
+            "name": "元武国 (Yuanwu Country)",
+            "type": "country",
+            "location": "越国北方 (North of Yue)",
+            "description": "Medium country bordering Yue. Later dominated by Devil Dao's 魔焰门."
+          },
+          {
+            "name": "紫金国 (Zijin Country)",
+            "type": "country",
+            "location": "越国南方 (South of Yue)",
+            "description": "Medium country. Member of Nine Nations Alliance. Contains an ancient teleportation formation to Scattered Star Seas."
+          },
+          {
+            "name": "天罗国 (Tianluo Country)",
+            "type": "country",
+            "location": "天南东部 (East Tiannan, east of Yue across Jiang/Cheqi buffer states)",
+            "description": "Major country. HQ of the Devil Dao 6 Sects."
+          },
+          {
+            "name": "风都国 (Fengdu Country)",
+            "type": "country",
+            "location": "天南西部 (West Tiannan, west of Yue)",
+            "description": "Major country. HQ of the Righteous Dao Alliance."
+          },
+          {
+            "name": "溪国 (Xi Country)",
+            "type": "country",
+            "location": "天南北部/中部 (North-Central Tiannan)",
+            "description": "Home of 云梦山三派 (Three Sects of Cloud Dream Mountain). Han Li joined 落云宗 here.",
+            "keySects": [
+              { "name": "落云宗 (Luoyun/Falling Cloud Sect)", "location": "云梦山东部, 湳州", "note": "Han Li's sect after returning from Scattered Star Seas. Eventually became Tiannan's #1 sect." },
+              { "name": "古剑门 (Ancient Sword Sect)", "location": "云梦山" },
+              { "name": "百巧院 (Hundred Ingenuity Court)", "location": "云梦山" }
+            ]
+          },
+          { "name": "姜国 (Jiang Country)", "description": "Small buffer state between Yue and Tianluo. First invaded by Devil Dao." },
+          { "name": "车骑国 (Cheqi Country)", "description": "Small buffer state between Yue and Tianluo." },
+          { "name": "花雨国 (Huayu Country)", "description": "Northern Tiannan, near Xi Country. Part of Heavenly Dao Alliance." },
+          { "name": "刹云国 (Chayun Country)", "description": "Near Yuanwu Country. Part of Heavenly Dao Alliance." },
+          { "name": "东裕国 (Dongyu Country)", "description": "Central Tiannan. Neutral country." },
+          { "name": "望水国 (Wangshui Country)", "description": "Western Tiannan. Member of Righteous Dao Alliance." },
+          { "name": "北凉国 (Beiliang Country)", "description": "Southern Tiannan, Nine Nations Alliance member. 掩月宗 relocated to 玲珑山 here. 黄枫谷 also relocated here." },
+          { "name": "朔国 (Shuo Country)", "description": "Southern Tiannan, Nine Nations Alliance member." },
+          { "name": "磐国 (Pan Country)", "description": "Southern Tiannan, Nine Nations Alliance member." },
+          { "name": "阳谷国 (Yanggu Country)", "description": "Southern Tiannan, Nine Nations Alliance member." },
+          { "name": "朱崖国 (Zhuya Country)", "description": "Southern Tiannan, Nine Nations Alliance member." },
+          { "name": "桑渊国 (Sangyuan Country)", "description": "Southern Tiannan, Nine Nations Alliance member." }
+        ],
+        "forbiddenZones": [
+          {
+            "name": "坠魔谷 (Demon Fall Valley)",
+            "type": "forbiddenZone",
+            "location": "天南 昌州 (Changzhou, Tiannan)",
+            "description": "Ancient battlefield where cultivators fought demons. The main ancient demon force was sealed here. 古魔血焰 was split-sealed: body in special space, twin souls imprisoned in 血咒之门. Extremely dangerous even for Nascent Soul cultivators. Contains 灵缈园."
+          }
+        ],
+        "neighbors": {
+          "north": "无边海 (Unbounded Sea)",
+          "south": "慕兰草原 (Mulan Grasslands) via 九国盟 border",
+          "east": "无边海 → 乱星海 (Scattered Star Seas)",
+          "west": "极西之地 (Extreme West)"
+        }
+      },
+
+      "dajin": {
+        "name": "大晋 (Dajin)",
+        "nameEn": "Great Jin",
+        "type": "superContinent",
+        "description": "The undisputed #1 cultivation region in the Mortal Realm. 10x larger than Tiannan. Dense spiritual energy, rich resources. Called 'Holy Land of Cultivation' (修仙圣地).",
+        "adminDivisions": { "commanderies": 36, "prefectures": 108 },
+        "totalDeityTransformations": "Multiple (向之礼, 呼老魔, 白老鬼, 车老妖, etc.)",
+        "totalLateNascentSoul": "40-50+",
+        "totalNascentSoul": "Hundreds+",
+        "topPowers": [
+          {
+            "name": "太一门 (Taiyi Sect)",
+            "type": "sect",
+            "alignment": "Righteous",
+            "rank": 1,
+            "hq": "真桓山 (Zhenhuan Mountain), one of Dajin's 4 Great Spirit Veins, spanning 100,000 li",
+            "leader": "白老鬼 (Bai Laogui, Deity Transformation)",
+            "nascentSoulCount": "70-80, 4-5 Late Nascent Soul",
+            "description": "Strongest sect in Dajin. Controls hundreds of spirit mountains."
+          },
+          {
+            "name": "天魔宗 (Tianmo Sect)",
+            "type": "sect",
+            "alignment": "Devil",
+            "rank": 2,
+            "hq": "魔陀山 (Motuo Mountain), northwest Dajin",
+            "leader": "呼庆雷/呼老魔 (Hu Qinglei, Deity Transformation, #1 Devil Cultivator in Mortal Realm)",
+            "nascentSoulCount": "Tens, 4-5 Late Nascent Soul",
+            "description": "#1 Devil Sect in Dajin."
+          },
+          {
+            "name": "万妖谷 (Ten Thousand Demon Valley)",
+            "type": "sect/forbiddenZone",
+            "alignment": "Neutral (Demon Beasts)",
+            "rank": 3,
+            "hq": "Within Dajin territory",
+            "leader": "车老妖 (Che Laoyao, Deity Transformation, ancient demon beast)",
+            "description": "Only organized demon beast cultivator sect in the Mortal Realm. 车老妖 bound here by ancient pact."
+          },
+          {
+            "name": "皇族叶家 (Imperial Ye Family)",
+            "type": "cultivationClan",
+            "rank": "Top clan",
+            "hq": "玉州 (Yu Prefecture), eastern Dajin",
+            "description": "#1 cultivation clan in Mortal Realm. ~20 Nascent Soul cultivators, 2 Late Nascent Soul. Annihilated after Kunwu Mountain incident.",
+            "status": "destroyed"
+          },
+          {
+            "name": "小极宫 (Xiaoji Palace)",
+            "type": "sect",
+            "hq": "Far north Dajin",
+            "nascentSoulCount": "31-35",
+            "description": "Ice Soul Fairy's lineage. Comparable to top-10 sects."
+          }
+        ],
+        "righteousTenSects": [
+          "太一门 (Taiyi Sect)",
+          "岳阳宫 (Yueyang Palace) - 陇洲, 西川府, 南天峰",
+          "真极门 (Zhenji Sect) - parent of Tiannan's 太真门",
+          "天圣宗 (Tiansheng Sect) - Confucian sect",
+          "泰阳门 (Taiyang Sect) - 五原府, 辽洲",
+          "九仙宫 (Jiuxian Palace) - 关宁府, 辽洲",
+          "雷音宗 (Leiyin Sect) - Buddhist, 3 Late Nascent Soul",
+          "净火宗 (Jinghuo Sect) - Buddhist",
+          "金罗宗/金罗门 (Jinluo Sect) - Buddhist",
+          "(+1-2 unnamed)"
+        ],
+        "devilTenSects": [
+          "天魔宗 (Tianmo Sect)",
+          "阴罗宗 (Yinluo Sect) - destroyed by Han Li",
+          "九幽宗 (Jiuyou Sect)",
+          "魔木宗 (Momu Sect)",
+          "黑阳宗 (Heiyang Sect)",
+          "血凄门 (Xueqi Sect)",
+          "血骨门 (Xuegu Sect)",
+          "(+3 unnamed)"
+        ],
+        "knownCommanderies": [
+          { "name": "辽洲 (Liao)", "location": "北部 (North)", "description": "Snowy region. Contains 关宁府 (Guanning Prefecture)" },
+          { "name": "湳郡 (Nan Commandery)", "location": "中北部边界 (North-Central border)", "key": "太昌府" },
+          { "name": "益洲 (Yi)" },
+          { "name": "樊郡 (Fan Commandery)", "key": "樊川" },
+          { "name": "丰洲 (Feng)", "key": "开隆府 - 鸣剑宗" },
+          { "name": "陇洲 (Long)", "location": "中西部边界 (Central-West border)", "key": "西川府, 天岳山脉·南天峰 - 岳阳宫 HQ" },
+          { "name": "玉州 (Yu)", "location": "东部腹地 (Eastern hinterland)", "key": "Imperial Ye Family HQ, 晋京 (Jinjing capital)" },
+          { "name": "金江郡 (Jinjiang Commandery)", "location": "邻近晋京 (Adjacent to Jinjing)" },
+          { "name": "曲郡 (Qu Commandery)" },
+          { "name": "湾南洲 (Wannan)" },
+          { "name": "宁川郡 (Ningchuan Commandery)" },
+          { "name": "华云洲 (Huayun)", "location": "东部沿海 (Eastern coastal)" },
+          { "name": "霜郡 (Shuang Commandery)", "description": "Icy region, ranked 5th of 36 commanderies" },
+          { "name": "封州 (Feng)", "key": "阴罗宗 territory" },
+          { "name": "苀郡 (Hang Commandery)", "location": "邻近封州" },
+          { "name": "霍洲 (Huo)" },
+          { "name": "南疆 (Nanjang)", "location": "南部 (South)", "key": "南疆府, 潮云府; 火狱 forbidden zone" }
+        ],
+        "keyLocations": [
+          {
+            "name": "晋京 (Jinjing)",
+            "type": "capital",
+            "location": "邻近金江郡, near 玉州",
+            "description": "Imperial capital of Dajin. Political and cultivation hub."
+          },
+          {
+            "name": "昆吾山 (Kunwu Mountain)",
+            "type": "forbiddenZone",
+            "location": "大晋南疆 (Southern Dajin)",
+            "description": "'Nascent Soul Meat Grinder'. Ancient immortal mountain sealed after demon invasion. Contained 元刹圣祖 split soul, 通天灵宝 八灵尺 and 黑风旗. Final death toll: 33 Nascent Soul cultivators including 11 Late Nascent Soul. Later destroyed by Mahayana Han Li who slapped it into the void.",
+            "status": "destroyed"
+          },
+          {
+            "name": "魔陀山 (Motuo Mountain)",
+            "type": "sectHQ",
+            "location": "西北大晋 (Northwest Dajin)",
+            "description": "天魔宗 base, 呼老魔's demon palace."
+          },
+          {
+            "name": "火狱 (Fire Prison)",
+            "type": "forbiddenZone",
+            "location": "南疆 (Southern Dajin)",
+            "description": "One of the 7 Great Forbidden Zones."
+          },
+          {
+            "name": "苦竹岛 (Kuzhu Island)",
+            "type": "island",
+            "location": "Adjacent to Dajin coast",
+            "description": "Home of 苦竹老人 (Kuzhu Elder)."
+          }
+        ]
+      },
+
+      "scatteredStarSeas": {
+        "name": "乱星海 (Scattered Star Seas)",
+        "nameEn": "Scattered Star Seas / Luan Xing Hai",
+        "type": "oceanicArchipelago",
+        "description": "Vast ocean with countless islands. East of Tiannan continent. Richest region for demon beast resources in the Mortal Realm. Han Li's 'fortune-making' region.",
+        "relativeLocation": "天南以东 (East of Tiannan), across vast Unbounded Sea",
+        "powerRank": 2,
+        "rulingPower": "星宫 (Star Palace)",
+        "rebelPower": "逆星盟 (Anti-Star Alliance)",
+        "subRegions": {
+          "innerSea": {
+            "name": "内星海 (Inner Star Sea)",
+            "description": "Human-dominated, orderly. Ruled by Star Palace.",
+            "majorIslands": [
+              {
+                "name": "天星城 (Tianxing City)",
+                "type": "superCity",
+                "description": "Built on a giant island in Inner Sea. Core: 圣山 (Sacred Mountain) with 50+ levels. Layer 1: markets/auction houses. Layer 39: rental caves (2700 spirit stones/century). Layer 50: Star Palace main hall + teleportation arrays. Ruled by 天星双圣 (Twin Sages, 2 Late Nascent Soul)."
+              },
+              { "name": "南明岛 (Nanming Island)", "type": "transitHub", "description": "Outer transit island near Tianxing City." },
+              {
+                "name": "魁星岛 (Kuixing Island)",
+                "type": "majorIsland",
+                "description": "Southwest corner of Inner Sea, one of 3 major SW islands (with 尾星岛 and 桑星岛). Han Li's first landing point in Scattered Star Seas. Contains 魁星城, 天都街, 云梦阁, 山海阁, 六连殿. Adjacent: 金鳖岛, 小寰岛 (Xiaohuan Island - Han Li's secluded cultivation spot). Nearby mountains: 青云山 (天柱峰, 天宵峰, 天门峰)."
+              },
+              { "name": "尾星岛 (Weixing Island)", "description": "Southwest corner alongside Kuixing." },
+              { "name": "桑星岛 (Sangxing Island)", "description": "Southwest corner alongside Kuixing." },
+              { "name": "双峰岛 (Shuangfeng Island)", "description": "Hosts teleportation array to Outer Sea." },
+              { "name": "皇明岛 (Huangming Island)", "description": "Medium island, Devil Dao territory. Has outer sea teleportation array." },
+              { "name": "苦门岛 (Kumen Island)", "description": "黄沙门 monopoly." },
+              { "name": "魔湖岛 (Mohu Island)", "description": "Near demon beast territory. 蛮胡子 cave residence." },
+              { "name": "海猿岛 (Haiyuan Island)", "description": "Han Li's temporary residence." },
+              { "name": "极阴岛 (Jiyin Island)", "description": "极阴祖师 territory. Above it floats 虚天殿." }
+            ]
+          },
+          "outerSea": {
+            "name": "外星海/妖海 (Outer Star Sea / Demon Sea)",
+            "description": "Dominated by demon beasts. Resource-rich but extremely dangerous. Requires teleportation for practical travel.",
+            "majorIslands": [
+              {
+                "name": "奇渊岛 (Qiyuan Island)",
+                "type": "majorHub",
+                "description": "Major Outer Sea hub. 黑石城 (Black Stone City) with shops. 碧云门 territory. Near vast demon beast abyss. 风希 (Feng Xi, 9th-grade demon beast) had lair here. Han Li forced to help refine 风雷翅 here."
+              },
+              {
+                "name": "碧灵岛 (Biling Island)",
+                "type": "resourceIsland",
+                "description": "North of 银鲨岛. Contains the ONLY spirit stone mine in Scattered Star Seas. Han Li killed 金蛟王 here for top-grade spirit stones."
+              },
+              { "name": "银鲨岛 (Yinsha Island)", "description": "South of Biling. Simple structures." },
+              { "name": "雷空岛 (Leikong Island)", "description": "Has a market (坊市)." },
+              { "name": "凝翠岛 (Ningcui Island)" },
+              { "name": "红瑚岛 (Honghu Island)" },
+              { "name": "珊瑚岛 (Shanhu Island)" },
+              { "name": "南黎岛 (Nanli Island)" }
+            ]
+          },
+          "specialLocations": [
+            {
+              "name": "虚天殿 (Xutian Palace)",
+              "type": "floatingRuin",
+              "description": "Hovers above 极阴岛海域. Built by 冰魄仙子. Ancient relic containing 虚天鼎 (Heavenly Void Cauldron), 乾蓝冰焰, 九曲灵参, 养魂木, 啼魂兽. Opens every 300 years. Han Li obtained 虚天鼎 here. Also seals 银月 (Snowling/Linglong's second clone)."
+            }
+          ]
+        }
+      },
+
+      "mulanGrasslands": {
+        "name": "慕兰草原/天澜草原 (Mulan Grasslands / Tianlan Grasslands)",
+        "type": "grasslandRegion",
+        "description": "Vast nomadic cultivation region between Tiannan (north) and Dajin (south). Perpetual tribal warfare.",
+        "relativeLocation": "天南以南/大晋以北 (South of Tiannan, North of Dajin)",
+        "tribes": [
+          {
+            "name": "慕兰族 (Mulan Tribe)",
+            "location": "东部草原 (East side, near Tiannan border)",
+            "culture": "Worship 火灵神禽 (Fire Spirit Divine Bird). Cultivators called 法士 (Fashi/Sorcerers).",
+            "situation": "Sandwiched between Tiannan and Tuwu. Repeatedly invaded Tiannan through Nine Nations Alliance border."
+          },
+          {
+            "name": "突兀人 (Tuwu People)",
+            "location": "西部/北部草原 (West/North side, near Dajin border)",
+            "culture": "Worship 天澜圣兽 (Tianlan Sacred Beast). Cultivators called 仙师 (Xianshi/Immortal Masters).",
+            "keyFigures": ["天澜圣女林银屏 (Tianlan Holy Maiden Lin Yinping)"]
+          }
+        ],
+        "spatialLayout": "Tiannan (N) → 九国盟防线 → 慕兰族 (E side) / 突兀人 (W side) → Dajin (S)"
+      },
+
+      "fiveDragonSeas": {
+        "name": "五龙海 (Five Dragon Seas)",
+        "type": "oceanicArchipelago",
+        "description": "Islands and sea territory. Contains a stable space node leading to Spirit Realm. Cultivation strength roughly equal to Tiannan.",
+        "relativeLocation": "宽广无边海域 (Part of the broader Unbounded Sea system)",
+        "powerRank": 4,
+        "notables": ["白鹿老怪 (White Deer Old Monster, Deity Transformation) once resided here"],
+        "keyFeature": "Stable space node to Spirit Realm - Han Li and 冰凤 used this to enter Spirit Realm"
+      },
+
+      "extremeWest": {
+        "name": "极西之地 (Extreme West)",
+        "type": "desertContinent",
+        "description": "Desert wasteland directly west of Tiannan. 千竹教 (Qianzhu Sect) headquarters here. Han Li traveled here at Nascent Soul stage.",
+        "relativeLocation": "天南以西, 直接相邻 (West of Tiannan, directly adjacent)"
+      },
+
+      "tianShaContinent": {
+        "name": "天沙大陆 (Tian Sha Continent)",
+        "type": "separateContinent",
+        "description": "Separate continent reached by sea. Han Li came here at Deity Transformation stage to seize 金烁环.",
+        "relativeLocation": "另一片海域可达的大陆 (Another continent reachable by sea)"
+      },
+
+      "unboundedSea": {
+        "name": "无边海 (Unbounded Sea)",
+        "type": "ocean",
+        "description": "Vast boundary ocean. 'Even immortals cannot cross.' Murky waters, few fish survive. Connects all Mortal Realm regions.",
+        "relativeLocation": "天南以北, 连接所有区域 (North of Tiannan, connects all regions)"
+      }
+    },
+
+    "travelRoutes": [
+      { "from": "天南 (Tiannan)", "to": "乱星海 (Scattered Star Seas)", "method": "Ancient teleportation formation", "fromLocation": "紫金国 (Zijin Country)" },
+      { "from": "乱星海 (Scattered Star Seas)", "to": "天南 (Tiannan)", "method": "Flight across Unbounded Sea", "requirement": "Nascent Soul stage" },
+      { "from": "天南 (Tiannan)", "to": "大晋 (Dajin)", "method": "Travel south through Mulan Grasslands", "route": "九国盟 → 慕兰草原 → 大晋" },
+      { "from": "内星海 (Inner Sea)", "to": "外星海 (Outer Sea)", "method": "Teleportation array", "fromLocation": "双峰岛, 皇明岛" },
+      { "from": "人界 (Mortal Realm)", "to": "灵界 (Spirit Realm)", "method": "Space node traversal", "location": "五龙海 (Wulong Sea)" }
+    ],
+
+    "powerComparison": [
+      { "region": "大晋 (Dajin)", "deityTransformation": "Multiple", "lateNascentSoul": "40-50+", "totalNascentSoul": "Hundreds", "rank": 1 },
+      { "region": "乱星海 (Scattered Star Seas)", "deityTransformation": 0, "lateNascentSoul": "4+", "totalNascentSoul": "~100+", "rank": 2 },
+      { "region": "天南 (Tiannan)", "deityTransformation": 0, "lateNascentSoul": 3, "totalNascentSoul": "~54", "rank": 3 },
+      { "region": "五龙海 (Wulong Sea)", "deityTransformation": 1, "lateNascentSoul": "Some", "rank": 4 },
+      { "region": "慕兰草原 (Mulan)", "deityTransformation": 0, "lateNascentSoul": "Several", "rank": 5 },
+      { "region": "天沙大陆 (Tian Sha)", "deityTransformation": 0, "rank": 6 }
+    ]
+  },
+
+  "spiritRealm": {
+    "name": "灵界 (Spirit Realm)",
+    "nameEn": "Spirit Realm",
+    "description": "The middle realm. Three major continents plus surrounding seas. Home to hundreds of races.",
+    "maxCultivation": "大乘期 (Mahayana) - can stay; must ascend to Immortal Realm to reach True Immortal",
+    "continents": {
+      "tianyuan": {
+        "name": "风元大陆/天元大陆 (Fengyuan/Tianyuan Continent)",
+        "nameEn": "Wind Origin Continent",
+        "type": "continent",
+        "description": "The continent where Han Li landed in Spirit Realm. Most fragmented in terms of racial power - no super-dominant races. Home to many middle-to-small races. Actually contains the most hidden top-tier experts.",
+        "relativeLocation": "One of 3 major continents",
+        "races": [
+          {
+            "name": "人族 (Human Race)",
+            "territory": "西北角 (Northwest corner)",
+            "description": "Forcibly broke into Spirit Realm from another realm. Relatively short history. 3 domains: 天元境, 玄武霸城, 天妙境 (West/East/North). Over 110合体期, 2大乘期.",
+            "keyLocations": [
+              {
+                "name": "天渊城 (Tianyuan City)",
+                "type": "fortressCity",
+                "description": "Human race's southern fortress. Key阵眼 of the 三皇七地 super formation. Guards against demon realm invasions. 飞升者 must serve as 青冥卫/天渊卫 to earn 灭尘丹 and freedom."
+              },
+              { "name": "安远城 (Anyuan City)", "type": "city", "description": "Han Li's first human city after arriving in Spirit Realm." },
+              { "name": "虞阳城 (Yuyang City)", "type": "city", "description": "Where Han Li trained 金刚诀." },
+              { "name": "落日城/落日之墓 (Luori City/Sunset Tomb)", "type": "ancientSite", "description": "Where Han Li fused divine flame, obtained 豹麟兽 and 灵族神血." }
+            ]
+          },
+          {
+            "name": "妖族 (Demon Beast Race)",
+            "territory": "西北角, 与人族相邻 (Northwest, adjacent to Humans)",
+            "note": "~100合体期, similar strength to humans"
+          },
+          {
+            "name": "飞灵族 (Feiling/Spirit Flight Race)",
+            "territory": "风元大陆东端 (East end of continent)",
+            "description": "72 branches, all flying bird races. Ancient race spanning millions of years. 天鹏族 is one branch. 3-4+ Mahayana experts.",
+            "keyLocation": "飞灵族半岛 (Feiling Peninsula) - where Han Li was accidentally teleported to"
+          },
+          {
+            "name": "蜉蝣族 (Fuyou/Mayfly Race)",
+            "territory": "风元大陆南端 (South end, south of Feiling)",
+            "description": "Top-10 ranked race in Spirit Realm. Multiple Mahayana experts. Has a 渡劫期 grand elder (虚灵). Owns one 玄天之宝. Controls 地渊 (Earth Abyss) and 冥河神乳 pool."
+          },
+          { "name": "灵族 (Spirit Race)", "territory": "西北角 (Northwest)" },
+          { "name": "木族 (Wood Race)", "territory": "西北角 (Northwest)" },
+          { "name": "夜叉族 (Yecha/Yaksha Race)", "territory": "西北角 (Northwest)" },
+          { "name": "影族 (Shadow Race)", "territory": "西北角 (Northwest)" },
+          { "name": "长元族 (Changyuan Race)", "territory": "风元大陆" }
+        ],
+        "keyZones": [
+          {
+            "name": "地渊 (Earth Abyss)",
+            "type": "undergroundWorld",
+            "location": "蜉蝣族和飞灵族之间 (Between Feiling and Fuyou territory)",
+            "description": "Underground world controlled by Fuyou Race. Contains passage to 冥河之地 (Nether River Land). Multiple layers. 四大妖王 (4 Demon Kings, all合体期) operated here. Access requires payment to Fuyou Race.",
+            "fourDemonKings": [
+              { "name": "六足 (Liu Zu)", "origin": "蜉蝣族出身", "note": "Strongest of the four" },
+              { "name": "木青 (Mu Qing)", "origin": "木灵修炼", "note": "Collected blood food on level 1" },
+              { "name": "地血 (Di Xue)", "note": "Refined puppets" },
+              { "name": "蓝鬼婆 (Lan Guipo)", "note": "Raised 8000 阴甲玄鬼" }
+            ]
+          },
+          {
+            "name": "冥河之地 (Nether River Land)",
+            "type": "secretRealm",
+            "location": "地渊深处 (Deep within Earth Abyss)",
+            "description": "Contains 冥河神乳 (Nether River Divine Milk). Han Li met 青元子 (Qing Yuanzi) here."
+          }
+        ]
+      },
+      "leiming": {
+        "name": "雷鸣大陆 (Thunder Continent)",
+        "nameEn": "Thunder Continent",
+        "type": "continent",
+        "description": "The continent with the strongest surface-level power. Most unified racial blocs.",
+        "races": [
+          {
+            "name": "角蚩族 (Jiaochi Race)",
+            "territory": "雷鸣大陆西边 (West side of Thunder Continent)",
+            "description": "Ranked top-5 in Spirit Realm. Across the sea from Feiling Race.",
+            "keyLocations": ["魔金山脉 (Magic Gold Mountains) - where Han Li obtained giant ape true blood"]
+          },
+          {
+            "name": "天云十三族 (Tianyun Thirteen Races)",
+            "territory": "雷鸣大陆 (Thunder Continent)",
+            "description": "Alliance of 13 races on Thunder Continent. 绿光族 (Green Light Race) is one member - Han Li joined them.",
+            "keyLocations": ["天云城 (Tianyun City) - center of activities"]
+          },
+          { "name": "海王族 (Haiwang/Sea King Race)", "territory": "雷鸣大陆", "rank": "Top-5 in Spirit Realm" },
+          { "name": "暴鸣族/爆鸣族 (Baoming Race)", "territory": "雷鸣大陆" },
+          { "name": "银族 (Silver Race)", "territory": "雷鸣大陆" },
+          { "name": "夜族 (Night Race)", "territory": "雷鸣大陆" },
+          { "name": "晶族 (Crystal Race)", "territory": "雷鸣大陆" }
+        ]
+      },
+      "xuetian": {
+        "name": "血天大陆 (Blood Sky Continent)",
+        "nameEn": "Blood Sky Continent",
+        "type": "continent",
+        "description": "The smallest of the three continents. Dominated by blood-path sects rather than races.",
+        "races": [
+          {
+            "name": "血骨门 (Xuegu Sect)",
+            "type": "superSect",
+            "description": "Dominant blood-path sect on Blood Sky Continent."
+          },
+          {
+            "name": "碧影族 (Biying Race)",
+            "territory": "血天大陆"
+          }
+        ]
+      },
+      "guanghanRealm": {
+        "name": "广寒界 (Guanghan Realm)",
+        "type": "parallelDimension",
+        "description": "Special trial dimension created by ancient True Immortals. Different time flow rate. Accessed via 广寒令 and exclusive teleportation array. Han Li reached late-stage 炼虚 through 星图灌体 here. Obtained 炼神术, 太乙青山, 金剑图, etc.",
+        "returnDestination": "Can be used to return to 风元大陆"
+      }
+    },
+
+    "crossContinentTravel": {
+      "description": "Han Li was accidentally teleported from 风元大陆 to 雷鸣大陆. The three continents are separated by vast oceans. Travel requires either ultra-long-range teleportation or extended flight."
+    },
+
+    "superPowersInSpiritRealm": [
+      {
+        "name": "三皇七妖王 (Three Emperors and Seven Demon Kings)",
+        "domain": "风元大陆人族/妖族",
+        "description": "Human race's top forces. The 3 Emperors and 7 Demon Kings built the 三皇七地 super formation with 天渊城 as key 阵眼."
+      }
+    ],
+
+    "demonRealmConnection": {
+      "description": "Spirit Realm and Demon Realm periodically intersect, causing 魔劫 (Demon Calamity). 天渊城 is the primary defensive point for the human race against demon invasions.",
+      "entryPoints": ["魔金山脉 (Magic Gold Mountains)", "空间裂缝 (Spatial Rifts)"]
+    }
+  },
+
+  "immortalRealm": {
+    "name": "仙界 (Immortal Realm)",
+    "nameEn": "Immortal Realm",
+    "description": "The highest realm. Home to True Immortals and Dao Ancestors. Contains ~3000 immortal domains (仙域) ranging from grand to minor.",
+    "realmCount": "36 top-level grand domains, 500 intermediate domains, 3000 minor immortal domains",
+    "spatialLayers": [
+      { "layer": 1, "name": "青冥域 (Qingming Domain)", "description": "No spiritual energy at all" },
+      { "layer": 2, "name": "天风域 (Tianfeng Domain)", "description": "Filled with九天罡风/黑垩风 (Heavenly Winds)" },
+      { "layer": 3, "name": "天外域 (Tianwai Domain)", "description": "Home of extraterritorial heavenly demons (域外天魔), led by 天魔道祖隐明" }
+    ],
+    "majorForces": {
+      "heavenlyCourt": {
+        "name": "天庭 (Heavenly Court)",
+        "type": "rulingBody",
+        "hq": "中土仙域 (Zhongtu Immortal Domain)",
+        "description": "The supreme governing body of the Immortal Realm. Multi-Dao-Ancestor central government.",
+        "sevenLords": [
+          { "name": "古或今 (Gu Huojin)", "dao": "时间道祖 (Time Dao Ancestor)", "role": "天庭掌权者 (Ruler of Heavenly Court)" },
+          { "name": "李元究 (Li Yuanjiu)", "dao": "金之本源道祖 (Metal Origin Dao Ancestor)", "alias": "九元道祖" },
+          { "name": "轩辕杰 (Xuanyuan Jie)", "dao": "土之本源道祖 (Earth Origin Dao Ancestor)" },
+          { "name": "赤融 (Chi Rong)", "dao": "火之本源道祖 (Fire Origin Dao Ancestor)" },
+          { "name": "陈如烟 (Chen Ruyan)", "dao": "水之本源道祖 (Water Origin Dao Ancestor)" },
+          { "name": "隐明 (Yin Ming)", "dao": "天魔道祖 (Heavenly Demon Dao Ancestor)" },
+          { "name": "陈抟 (Chen Tuan)", "dao": "预言道祖 (Prophecy Dao Ancestor)" }
+        ],
+        "subOrganizations": ["仙宫 (Immortal Palaces - local governing bodies in each domain)", "监察司/监察仙使 (Inspection Bureau)"]
+      },
+      "reincarnationPalace": {
+        "name": "轮回殿 (Reincarnation Palace)",
+        "type": "rebelOrganization",
+        "description": "Cross-domain resistance force against Heavenly Court. Recruits oppressed talents. Has 轮回之子 system. Sub-forces include: 十方楼, 无常盟."
+      }
+    },
+    "knownImmortalDomains": [
+      {
+        "name": "中土仙域 (Zhongtu Immortal Domain)",
+        "type": "grandDomain",
+        "description": "Largest immortal domain. Heavenly Court headquarters. Time Dao Ancestor 古或今's domain."
+      },
+      {
+        "name": "北寒仙域 (Beihan Immortal Domain)",
+        "type": "minorDomain",
+        "location": "仙界偏远北方 (Remote far north)",
+        "description": "Han Li's entry point into Immortal Realm.",
+        "subRegions": [
+          { "name": "黑风海域 (Black Wind Sea)", "key": "乌蒙岛, 冥寒仙府秘境" },
+          { "name": "荒澜大陆 (Huanglan Continent)", "key": "Near 雷暴海洋" },
+          { "name": "上阿大陆 (Shang'a Continent)", "key": "苍流宫" },
+          { "name": "小天幽境 (Minor Tianyou Realm)", "key": "伏凌宗" },
+          { "name": "古云大陆 (Guyun Continent)", "key": "烛龙道" },
+          { "name": "冥寒大陆 (Minghan Continent)", "key": "北寒仙宫" },
+          { "name": "临荒大陆 (Linhuang Continent)", "key": "Bordering蛮荒界域" }
+        ]
+      },
+      {
+        "name": "金源仙域 (Jinyuan Immortal Domain)",
+        "type": "majorDomain",
+        "description": "Contains 4 major forces: 九元观九元城, 金源仙宫金源城, 百造山百造城, 日月盟鎏金城.",
+        "keySects": ["九元观 (Jiuyuan Temple) - headed by 李元究/九元道祖"]
+      },
+      { "name": "黑山仙域 (Heishan Immortal Domain)", "type": "member of四盟仙区" },
+      {
+        "name": "黑土仙域 (Heitu Immortal Domain)",
+        "type": "member of四盟仙区",
+        "keySects": ["真言门 (True Word Sect) original site, 百造山 branch"]
+      },
+      { "name": "伏泽仙域 (Fuzhe Immortal Domain)", "type": "member of四盟仙区" },
+      { "name": "元竞仙域 (Yuanjing Immortal Domain)", "type": "member of四盟仙区" },
+      { "name": "开元仙域 (Kaiyuan Immortal Domain)", "key": "轮回之子陆仁岬's domain" },
+      { "name": "金翰仙域 (Jinhan Immortal Domain)", "key": "仙宫之主 from 九元观" }
+    ],
+    "demonRealmInImmortal": {
+      "name": "魔域 (Demon Domain)",
+      "type": "parallelRegion within Immortal Realm",
+      "description": "Where demons and devil cultivators ascend to. Holy City: 夜阳城.",
+      "domains": [
+        "南荒域, 临圣域 (South)",
+        "山泽域, 沉丘域, 旷景域 (Mid-West)",
+        "黄粱域, 十梦域, 墨海域 (Others)",
+        "十患山脉 (Ten Misfortunes Mountains - border蛮荒)"
+      ]
+    },
+    "wilderness": {
+      "name": "蛮荒界域 (Wilderness Realm)",
+      "type": "wildRegion",
+      "description": "Boundless primitive regions between immortal domains. Home to蛮荒古族 (Barbarian Ancient Clans) and真灵 (True Spirits). All immortal domains were carved out from the Wilderness."
+    },
+    "daoAncestorRules": {
+      "description": "Dao Ancestors are the highest cultivation level. They must bind to a specific immortal domain - their true body cannot leave it. Overusing 'Dao' power leads to merging with Heavenly Dao. Three supreme laws: 混沌 > 时间 > 轮回 > 空间 > 五行本源"
+    }
+  },
+
+  "demonRealm": {
+    "name": "魔界 (Demon Realm)",
+    "nameEn": "Demon Realm",
+    "type": "parallelRealm",
+    "sameLevelAs": "灵界",
+    "description": "Home of ancient demons (古魔). Periodically intersects with Spirit Realm causing 魔劫.",
+    "notableLocations": [
+      { "name": "魔源海 (Demon Source Sea)", "description": "Territory of 蟹道人 (Golden Saint Crab). Han Li came here to obtain 掌天瓶瓶灵." },
+      { "name": "洗灵池 (Spirit Cleansing Pool)", "description": "Han Li entered here to purify his cultivation." },
+      { "name": "蓝瀑湖 (Blue Waterfall Lake)", "description": "Han Li encountered 紫灵 again here." }
+    ],
+    "hierarchy": {
+      "threeAncestors": [
+        { "name": "宝花 (Baohua)", "trueForm": "宝煌圣花 (Precious Brilliant Saint Flower)", "title": "智魔 (Wisdom Demon)" },
+        { "name": "涅槃 (Niepan)", "title": "当代魔界第一人 (Current #1 in Demon Realm)", "technique": "涅槃圣体" },
+        { "name": "元魇 (Yuanye)", "companion": "三首魔蛟 (Three-Headed Demon Dragon)" }
+      ],
+      "saintAncestors": [
+        "蓝瀑, 天泣, 鹤颜, 泣灵, 黄沙老怪, 邪莲, 吞天, 凌源",
+        "万兽圣祖, 灭情, 无常, 雪天圣祖",
+        "车骑恭, 风邪 (trapped in镇魔锁)",
+        "枯寂圣祖, 天鸦老祖, 毒龙圣祖, 沙翁, 冥罗圣祖"
+      ]
+    }
+  },
+
+  "keyLocationsDetailed": {
+    "sevenMysteriesSect": {
+      "name": "七玄门 (Seven Mysteries Sect)",
+      "nameEn": "Seven Mysteries Sect",
+      "type": "mortalMartialArtsSect",
+      "location": "越国 → 镜州 → 彩霞山/落凤山 (Yue Country, Jingzhou, Caixia Mountain, originally Luofeng Mountain)",
+      "subLocations": ["神手谷 (Divine Hand Valley) - 墨大夫's residence, Han Li's cultivation spot"],
+      "description": "A mortal martial arts sect, NOT a cultivation sect. Han Li joined at age 10 as an outer disciple. This is where he received the mysterious 掌天瓶 (Heavenly Palm Bottle) and learned 长春功 (Eternal Spring Art) from墨大夫.",
+      "keyEvents": [
+        "Han Li joins at age 10",
+        "Obtains 掌天瓶",
+        "墨大夫 tries to possess Han Li's body - Han Li kills him at age 16",
+        "Han Li leaves at age 18 to become a cultivator"
+      ],
+      "status": "Still exists but irrelevant after Han Li enters cultivation world",
+      "associatedCharacters": ["韩立 (Han Li)", "墨大夫 (Doctor Mo)", "厉飞雨 (Li Feiyu)"]
+    },
+    "yellowMapleValley": {
+      "name": "黄枫谷 (Yellow Maple Valley)",
+      "nameEn": "Yellow Maple Valley Sect",
+      "type": "cultivationSect",
+      "location": "越国 → 建州 → 太岳山脉 (Yue Country, Jianzhou, Taiyue Mountains, near border with Yuanwu)",
+      "description": "Yue Country's 2nd ranked sect. Han Li joined at age 19 through the 太南小会 (Tai Nan Gathering) trials using a 升仙令牌 (Ascension Token). He spent nearly all his Qi Condensation and Foundation Establishment years here.",
+      "keyEvents": [
+        "Han Li joins at age 19 (Qi Condensation stage)",
+        "血色禁地 trial at age 21 - meets 南宫婉",
+        "Han Li reaches Foundation Establishment at age 25",
+        "Formation Establishment: forced to abandoned sect and relocate to 北凉国 when Devil Dao invades Yue Country",
+        "Sect continues to exist in 北凉国 under Nine Nations Alliance protection"
+      ],
+      "status": "Relocated to 北凉国. Survived."
+    },
+    "fallingCloudSect": {
+      "name": "落云宗 (Luoyun/Falling Cloud Sect)",
+      "nameEn": "Falling Cloud Sect",
+      "type": "cultivationSect",
+      "location": "天南 → 溪国 → 云梦山东部, 湳州 (Tiannan, Xi Country, East Cloud Dream Mountain, Nanzhou)",
+      "description": "Han Li joined this sect at age 204 under an alias after returning from Scattered Star Seas. He broke through to Nascent Soul (元婴) here at age 217 and became an elder. Under his influence, Luoyun Sect eventually became Tiannan's #1 sect. Associated with 大衍神君 (Dayan Divine Lord) and 银月 (Yinyue).",
+      "neighbors": "云梦山三派 (Three Sects of Cloud Dream Mountain): 古剑门, 百巧院",
+      "status": "Flourished as Tiannan's #1 sect under Han Li's influence"
+    },
+    "starPalace": {
+      "name": "星宫 (Star Palace)",
+      "nameEn": "Star Palace",
+      "type": "rulingOrganization",
+      "location": "乱星海 → 内星海 → 天星城 (Scattered Star Seas, Inner Sea, Tianxing City)",
+      "hqStructure": "圣山 (Sacred Mountain) - 50+ levels on a giant island",
+      "description": "Ruling power of the Scattered Star Seas' Inner Sea. Founded by ancient cultivators. Controlled all key teleportation arrays and trade. Ruled by 天星双圣 (Twin Sages, 2 Late Nascent Soul cultivators).",
+      "keyEvents": [
+        "Han Li rented cave abode on Layer 39 of Sacred Mountain",
+        "Civil war with Anti-Star Alliance (逆星盟)",
+        "Twin Sages self-destructed to severely wound 万三姑",
+        "Han Li killed 六道极圣 and helped Star Palace survive",
+        "Han Li obtained 元磁神山 from the aftermath"
+      ]
+    },
+    "kunwuMountain": {
+      "name": "昆吾山 (Kunwu Mountain)",
+      "nameEn": "Kunwu Mountain",
+      "type": "forbiddenZone",
+      "location": "大晋 → 南疆 (Dajin, Southern Border)",
+      "description": "Ancient immortal mountain sealed after the ancient demon invasion. Contained the split soul of 元刹圣祖 (one of Demon Realm's 3 invasion commanders). Sealed by 昆吾三老 using 黑风旗 and 八灵尺 (both Heaven-Connecting Spirit Treasures). When opened by Ye Family: 33 Nascent Soul cultivators died (11 Late Nascent Soul). Later, Mahayana-stage Han Li returned and slapped the entire mountain into the void with a thousand-zhang giant hand - only a bottomless pit remains.",
+      "sealedEntity": "元刹圣祖分身 (Yuan Cha Saint Ancestor split soul)",
+      "treasures": ["八灵尺 (Eight Spirit Ruler)", "黑风旗 (Black Wind Banner)", "通灵火鼎", "天晶碑"],
+      "status": "Destroyed (smashed into void by Han Li)"
+    },
+    "demonFallValley": {
+      "name": "坠魔谷 (Demon Fall Valley)",
+      "nameEn": "Demon Fall Valley",
+      "type": "forbiddenZone",
+      "location": "天南 → 昌州山脉深处 (Tiannan, Changzhou, deep mountain ranges)",
+      "description": "Main battlefield of the ancient human-demon war. The demon army emerged from the mountains and fought a cataclysmic battle here. The demon leader 古魔血焰 (Ancient Demon Blood Flame) was defeated and seal-divided: body in special space, twin souls in Blood Curse Door. Contains 灵缈园 (Spirit Mist Garden). Even Nascent Soul cultivators fear entering.",
+      "contains": "灵缈园 (Spirit Mist Garden) - transferred from Spirit Realm, key to Han Li's 元磁神光 cultivation",
+      "treasures": ["火蟾妖丹", "七焰扇 recipe", "破灭法目", "灵烛果"]
+    }
+  },
+
+  "hanLiJourney": {
+    "description": "Han Li's complete geographic journey across all realms in chronological order.",
+    "mortalRealm": [
+      { "age": "0-10", "location": "青牛镇五里沟 (Qingniu Town, Wuligou)", "description": "Birth and childhood" },
+      { "age": "10-18", "location": "七玄门, 彩霞山 (Seven Mysteries Sect)", "description": "Martial arts training, obtains 掌天瓶" },
+      { "age": "19-25", "location": "黄枫谷, 太岳山脉 (Yellow Maple Valley)", "description": "Joins cultivation sect, reaches Foundation Establishment" },
+      { "age": "21", "location": "血色禁地 (Bloody Forbidden Zone)", "description": "Trial - meets Nangong Wan" },
+      { "age": "31-204", "location": "乱星海 (Scattered Star Seas)", "description": "Teleported via ancient formation. Spends ~173 years between Inner/Outer Sea." },
+      { "age": "61", "location": "天星城 (Tianxing City)", "description": "Returns after outer sea demon hunting" },
+      { "age": "151", "location": "虚天殿 (Xutian Palace)", "description": "Obtains 虚天鼎, 啼魂兽" },
+      { "age": "204-217", "location": "落云宗, 溪国云梦山 (Luoyun Sect)", "description": "Returns from Scattered Star Seas, breaks through to Nascent Soul" },
+      { "age": "220", "location": "慕兰草原边界 (Mulan Grasslands border)", "description": "Border Great War - makes name as Nascent Soul cultivator" },
+      { "age": "232", "location": "极西之地 (Extreme West)", "description": "Meets 大衍神君" },
+      { "age": "233-252", "location": "坠魔谷 (Demon Fall Valley)", "description": "Trapped in 灵缈园, reaches mid Nascent Soul" },
+      { "age": "264-280", "location": "大晋 (Dajin)", "description": "Journeys to solve煞气 problem" },
+      { "age": "275", "location": "昆吾山 (Kunwu Mountain)", "description": "Major battle, 银月 ascends to Spirit Realm" },
+      { "age": "375", "location": "落云宗 (Luoyun Sect)", "description": "Marries Nangong Wan" },
+      { "age": "500", "location": "天星城 (Tianxing City)", "description": "Star Palace civil war, kills 六道极圣" },
+      { "age": "950-1058", "location": "五龙海空间节点 (Wulong Sea)", "description": "Prepares to sneak into Spirit Realm" }
+    ],
+    "spiritRealm": [
+      { "age": "1007", "location": "青罗沙漠, 天元境 (Qingluo Desert)", "description": "Arrives in Spirit Realm, loses all power" },
+      { "age": "1047", "location": "安远城→虞阳城 (Anyuan→Yuyang)", "description": "Recovers cultivation" },
+      { "age": "1050", "location": "落日之墓 (Sunset Tomb)", "description": "Fuses divine flame" },
+      { "age": "1160-1220", "location": "天渊城 (Tianyuan City)", "description": "Serves as 青冥卫/天渊卫" },
+      { "age": "1220", "location": "木族 (Wood Race)", "description": "Obtains 天凤真血" },
+      { "age": "1315-1320", "location": "飞灵族→地渊→冥河之地 (Feiling→Earth Abyss→Nether River)", "description": "Meets 元瑶 and 青元子" },
+      { "age": "1461", "location": "雷鸣大陆 (Thunder Continent)", "description": "Accidentally teleported across continent" },
+      { "age": "1464", "location": "魔金山脉 (Magic Gold Mountains)", "description": "Giant ape true blood" },
+      { "age": "1468", "location": "广寒界 (Guanghan Realm)", "description": "星图灌体, reaches late炼虚" },
+      { "age": "1564", "location": "返回天元大陆 (Returns to Tianyuan)", "description": "" },
+      { "age": "2337", "location": "天渊城 (Tianyuan City)", "description": "Demon realm invasion" },
+      { "age": "2340", "location": "魔界 (Demon Realm)", "description": "Enters Demon Realm, 洗灵池, meets 蟹道人" },
+      { "age": "2400", "location": "蓝瀑湖 (Blue Waterfall Lake)", "description": "Meets 紫灵 again" },
+      { "age": "2468", "location": "天渊城 (Tianyuan City)", "description": "Mahayana ceremony, severely wounds Yecha Mahayana" },
+      { "age": "2477", "location": "天鼎宫 (Tianding Palace)", "description": "Rescues 冰魄仙子" },
+      { "age": "2480", "location": "小灵天 (Minor Spirit Heaven)", "description": "Rescues Nangong Wan" },
+      { "age": "2482", "location": "风元大陆 (Fengyuan Continent)", "description": "Kills True Immortal 马良" },
+      { "age": "2488", "location": "龙岛 (Dragon Island)", "description": "Obtains 广陵道果" },
+      { "age": "11134", "location": "人界 (Returns to Mortal Realm)", "description": "Obtains 北极元晶" }
+    ]
+  },
+
+  "spatialDebates": {
+    "description": "Key geographic debates among fans since the author did not publish an official world map.",
+    "debates": [
+      {
+        "topic": "大晋在天南的南方还是北方? (Is Dajin north or south of Tiannan?)",
+        "positions": [
+          "Majority view: Dajin is SOUTH of Tiannan, accessed by traveling south through Mulan Grasslands",
+          "Minority view: Some argue Dajin is NORTH based on different textual interpretations"
+        ],
+        "resolution": "Most fan maps place Dajin south of Tiannan, separated by Mulan Grasslands"
+      },
+      {
+        "topic": "乱星海位置 (Where exactly are Scattered Star Seas?)",
+        "positions": [
+          "Dominant: East of Tiannan, across Unbounded Sea",
+          "The teleportation formation in 紫金国 connects to it"
+        ],
+        "resolution": "East of the main continent"
+      },
+      {
+        "topic": "人界是否有统一大陆? (Is Mortal Realm one supercontinent?)",
+        "positions": [
+          "Multiple continents separated by seas is the consensus",
+          "Dajin is the largest landmass, 10x Tiannan"
+        ],
+        "resolution": "Multiple landmasses in a vast global ocean (无边海)"
+      }
+    ]
+  },
+
+  "mapDescriptionReferences": [
+    { "source": "贴吧 (Tieba)", "description": "Numerous fan-made maps on 凡人修仙传吧 showing Tiannan with countries, sects, power blocs marked in color-coded regions" },
+    { "source": "B站 (Bilibili)", "description": "Multiple fan-created animated maps showing Han Li's travel routes and sect distributions" },
+    { "source": "小红书 (Xiaohongshu)", "description": "Visual reference posts mapping 黄枫谷, 七玄门, and other specific locations within Yue Country" },
+    { "source": "微信/头条 (WeChat/Toutiao)", "description": "Long-form articles with text-based geographic analysis and power distribution diagrams" },
+    { "source": "酷口家数字花园 (Weqoocu)", "description": "Comprehensive text-based geographic site with maps for all regions - mortal realm, spirit realm, and immortal realm" }
+  ]
+
+}

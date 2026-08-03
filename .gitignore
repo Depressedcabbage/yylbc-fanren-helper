@@ -1,0 +1,12 @@
+# 本地备份资产（版权资源，不入库）
+_local_assets/
+
+# 开发产物
+build-manifest.json
+audio-validation.json
+
+# 系统与编辑器
+.DS_Store
+Thumbs.db
+node_modules/
+*.log

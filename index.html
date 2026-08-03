@@ -1,0 +1,928 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#07100e">
+<meta name="color-scheme" content="dark">
+<title>凡人修仙传 · 阅读助手</title>
+<style id="fanren-persistent-shell-style">
+
+:root {
+  color-scheme: dark;
+  --audio-jade: #7ef2c8;
+  --audio-jade-deep: #2e9d7d;
+  --audio-gold: #e1bd72;
+  --audio-paper: #efe4ca;
+  --audio-muted: #819087;
+  --audio-line: rgba(225, 189, 114, .22);
+}
+* { box-sizing: border-box; }
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #050b09;
+}
+body {
+  font-family: "Songti SC", "SimSun", serif;
+}
+.fanren-app-frame {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #07100e;
+  opacity: 0;
+  transition: opacity .18s ease;
+}
+.fanren-app-frame.is-ready { opacity: 1; }
+
+.fanren-shell-loading {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  color: rgba(225,189,114,.76);
+  background:
+    radial-gradient(circle at center, rgba(126,242,200,.08), transparent 30%),
+    #050b09;
+  letter-spacing: .25em;
+  transition: opacity .25s ease;
+}
+.fanren-shell-loading.is-hidden { opacity: 0; }
+.fanren-shell-loading::before {
+  content: "";
+  width: 42px;
+  height: 42px;
+  margin-right: 13px;
+  display: inline-block;
+  vertical-align: middle;
+  border: 1px solid rgba(126,242,200,.34);
+  border-top-color: var(--audio-gold);
+  border-radius: 50%;
+  animation: shell-spin 1.2s linear infinite;
+}
+@keyframes shell-spin { to { transform: rotate(360deg); } }
+
+.fanren-shell-route {
+  position: fixed;
+  z-index: 1600;
+  left: 15px;
+  bottom: 13px;
+  max-width: min(430px, calc(100vw - 95px));
+  padding: 7px 11px;
+  border: 1px solid rgba(225,189,114,.14);
+  border-radius: 2px 9px 2px 9px;
+  color: #7d8c82;
+  background: rgba(3,12,10,.82);
+  backdrop-filter: blur(10px);
+  font-size: .62rem;
+  letter-spacing: .08em;
+  pointer-events: none;
+  opacity: .75;
+}
+
+/* Persistent floating audio player */
+.fanren-audio-dock {
+  position: fixed;
+  z-index: 1900;
+  right: 18px;
+  top: 50%;
+  width: 318px;
+  transform: translateY(-50%) translateX(calc(100% - 54px));
+  transition: transform .38s cubic-bezier(.2,.8,.2,1);
+  filter: drop-shadow(0 24px 50px rgba(0,0,0,.48));
+}
+.fanren-audio-dock.is-open {
+  transform: translateY(-50%) translateX(0);
+}
+.fanren-audio-panel {
+  position: relative;
+  overflow: hidden;
+  min-height: 316px;
+  padding: 18px 17px 15px 70px;
+  border: 1px solid var(--audio-line);
+  border-radius: 3px 18px 3px 18px;
+  background:
+    radial-gradient(circle at 20% 18%, rgba(126,242,200,.10), transparent 30%),
+    linear-gradient(145deg, rgba(10,29,23,.97), rgba(2,9,7,.98));
+  box-shadow:
+    0 28px 75px rgba(0,0,0,.48),
+    inset 0 0 0 1px rgba(255,255,255,.018);
+  backdrop-filter: blur(18px);
+}
+.fanren-audio-panel::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  pointer-events: none;
+  border: 1px solid rgba(225,189,114,.065);
+  clip-path: polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px);
+}
+.fanren-audio-panel::after {
+  content: "乐";
+  position: absolute;
+  right: 17px;
+  top: 16px;
+  color: rgba(225,189,114,.10);
+  font-size: 4.2rem;
+  pointer-events: none;
+}
+.fanren-audio-toggle {
+  position: absolute;
+  z-index: 3;
+  left: 0;
+  top: 50%;
+  width: 56px;
+  height: 102px;
+  transform: translateY(-50%);
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid rgba(126,242,200,.30);
+  border-left: 0;
+  border-radius: 0 24px 24px 0;
+  color: var(--audio-jade);
+  background:
+    radial-gradient(circle at 45% 50%, rgba(126,242,200,.14), transparent 50%),
+    rgba(3,15,12,.96);
+  box-shadow: 8px 0 24px rgba(0,0,0,.30), 0 0 22px rgba(54,185,148,.10);
+  cursor: pointer;
+}
+.fanren-audio-toggle:hover,
+.fanren-audio-toggle:focus-visible {
+  color: #d8fff0;
+  border-color: rgba(126,242,200,.58);
+  outline: none;
+}
+.fanren-audio-disc {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  box-shadow: 0 0 0 5px rgba(126,242,200,.035), 0 0 16px rgba(126,242,200,.17);
+}
+.fanren-audio-disc::before,
+.fanren-audio-disc::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+}
+.fanren-audio-disc::before {
+  inset: 7px;
+  border: 1px solid rgba(225,189,114,.65);
+}
+.fanren-audio-disc::after {
+  width: 4px;
+  height: 4px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  background: currentColor;
+  box-shadow: 0 0 9px currentColor;
+}
+.fanren-audio-dock.is-playing .fanren-audio-disc {
+  animation: audio-spin 3.6s linear infinite;
+}
+@keyframes audio-spin { to { transform: rotate(360deg); } }
+
+.fanren-audio-head {
+  position: relative;
+  z-index: 2;
+  padding-right: 38px;
+}
+.fanren-audio-kicker {
+  color: var(--audio-jade);
+  font-size: .62rem;
+  letter-spacing: .30em;
+  opacity: .7;
+}
+.fanren-audio-title {
+  margin-top: 7px;
+  color: var(--audio-paper);
+  font-size: 1.05rem;
+  line-height: 1.4;
+  letter-spacing: .08em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.fanren-audio-subtitle {
+  margin-top: 4px;
+  color: #7e8e83;
+  font-size: .68rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.fanren-audio-visualizer {
+  position: relative;
+  z-index: 2;
+  height: 31px;
+  display: flex;
+  align-items: end;
+  gap: 4px;
+  margin: 17px 0 9px;
+}
+.fanren-audio-visualizer i {
+  display: block;
+  width: 3px;
+  height: 20%;
+  border-radius: 4px;
+  background: linear-gradient(to top,var(--audio-jade-deep),var(--audio-gold));
+  opacity: .40;
+  transform-origin: bottom;
+}
+.fanren-audio-dock.is-playing .fanren-audio-visualizer i {
+  animation: audio-bar .82s ease-in-out infinite alternate;
+  opacity: .82;
+}
+.fanren-audio-visualizer i:nth-child(2n) { animation-delay: -.26s; }
+.fanren-audio-visualizer i:nth-child(3n) { animation-delay: -.49s; }
+.fanren-audio-visualizer i:nth-child(5n) { animation-delay: -.67s; }
+@keyframes audio-bar { from { height: 18%; } to { height: 96%; } }
+
+.fanren-audio-progress {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 4px;
+  margin: 0;
+  accent-color: var(--audio-jade);
+  cursor: pointer;
+}
+.fanren-audio-times {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+  color: #718178;
+  font-size: .61rem;
+  font-variant-numeric: tabular-nums;
+}
+.fanren-audio-controls {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 34px 44px 34px 1fr;
+  align-items: center;
+  gap: 7px;
+  margin-top: 11px;
+}
+.fanren-audio-btn {
+  min-width: 0;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid rgba(225,189,114,.18);
+  border-radius: 2px 9px 2px 9px;
+  color: #c6d2c9;
+  background: rgba(255,255,255,.025);
+  cursor: pointer;
+}
+.fanren-audio-btn:hover,
+.fanren-audio-btn:focus-visible {
+  color: var(--audio-jade);
+  border-color: rgba(126,242,200,.42);
+  outline: none;
+}
+.fanren-audio-btn.is-main {
+  height: 42px;
+  color: #092018;
+  border-color: transparent;
+  background: linear-gradient(135deg,var(--audio-gold),#82c5ad);
+  box-shadow: 0 8px 24px rgba(126,242,200,.11);
+  font-size: 1.05rem;
+}
+.fanren-audio-volume {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 25px 1fr;
+  align-items: center;
+  gap: 5px;
+}
+.fanren-audio-volume input {
+  min-width: 0;
+  width: 100%;
+  height: 4px;
+  accent-color: var(--audio-gold);
+}
+.fanren-audio-playlist {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 5px;
+  margin-top: 13px;
+}
+.fanren-audio-track {
+  width: 100%;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 25px minmax(0,1fr);
+  align-items: center;
+  gap: 7px;
+  min-height: 30px;
+  padding: 4px 7px;
+  border: 1px solid transparent;
+  border-radius: 2px 8px 2px 8px;
+  color: #86958b;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+.fanren-audio-track:hover {
+  color: #d7e4da;
+  background: rgba(126,242,200,.035);
+}
+.fanren-audio-track.is-active {
+  color: #e8d9b7;
+  border-color: rgba(225,189,114,.19);
+  background: linear-gradient(90deg,rgba(225,189,114,.07),rgba(126,242,200,.025));
+}
+.fanren-audio-track-index {
+  color: var(--audio-gold);
+  font-size: .62rem;
+}
+.fanren-audio-track-name {
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: .69rem;
+}
+.fanren-audio-resume {
+  display: none;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  margin-top: 9px;
+  padding: 7px 9px;
+  border: 1px dashed rgba(225,189,114,.25);
+  color: #d6bb7c;
+  background: rgba(225,189,114,.035);
+  border-radius: 2px 8px 2px 8px;
+  cursor: pointer;
+  font-size: .65rem;
+}
+.fanren-audio-resume.is-visible { display: block; }
+.fanren-audio-foot {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 9px;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(225,189,114,.11);
+}
+.fanren-audio-sfx {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 27px;
+  padding: 0 8px;
+  border: 1px solid rgba(126,242,200,.16);
+  border-radius: 99px;
+  color: #8fa198;
+  background: rgba(126,242,200,.025);
+  cursor: pointer;
+  font-size: .64rem;
+}
+.fanren-audio-sfx[aria-pressed="true"] {
+  color: #9be8cc;
+  border-color: rgba(126,242,200,.34);
+}
+.fanren-audio-status {
+  min-width: 0;
+  color: #718077;
+  font-size: .60rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: right;
+}
+.fanren-audio-persistence {
+  position: relative;
+  z-index: 2;
+  margin-top: 8px;
+  color: rgba(126,242,200,.52);
+  font-size: .57rem;
+  letter-spacing: .06em;
+  text-align: center;
+}
+
+@media (max-width: 760px) {
+  .fanren-audio-dock {
+    top: auto;
+    right: 10px;
+    bottom: 12px;
+    width: min(330px, calc(100vw - 20px));
+    transform: translateX(calc(100% - 54px));
+  }
+  .fanren-audio-dock.is-open { transform: translateX(0); }
+  .fanren-audio-panel { min-height: 300px; padding-left: 66px; }
+  .fanren-audio-toggle { height: 92px; }
+  .fanren-shell-route { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fanren-audio-dock,
+  .fanren-audio-disc,
+  .fanren-audio-visualizer i,
+  .fanren-app-frame {
+    transition: none;
+    animation: none;
+  }
+}
+
+</style>
+</head>
+<body>
+<div id="fanrenShellLoading" class="fanren-shell-loading">山河卷正在展开</div>
+
+<iframe
+  id="fanrenAppFrame"
+  class="fanren-app-frame"
+  name="fanren-content"
+  title="凡人修仙传阅读助手内容"
+  src="home.html">
+</iframe>
+
+<div id="fanrenShellRoute" class="fanren-shell-route">当前卷页：首页</div>
+
+<aside class="fanren-audio-dock" aria-label="持续背景音乐播放器">
+  <div class="fanren-audio-panel">
+    <button class="fanren-audio-toggle" type="button" aria-label="展开音乐播放器" aria-expanded="false">
+      <span class="fanren-audio-disc" aria-hidden="true"></span>
+    </button>
+
+    <div class="fanren-audio-head">
+      <div class="fanren-audio-kicker">听风入道</div>
+      <div class="fanren-audio-title">落英</div>
+      <div class="fanren-audio-subtitle">银临 · 陈巧倩角色曲</div>
+    </div>
+
+    <div class="fanren-audio-visualizer" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
+    <input class="fanren-audio-progress" type="range" min="0" max="1000" value="0" aria-label="播放进度">
+    <div class="fanren-audio-times">
+      <span class="fanren-audio-current">0:00</span>
+      <span class="fanren-audio-duration">0:00</span>
+    </div>
+
+    <div class="fanren-audio-controls">
+      <button class="fanren-audio-btn fanren-audio-prev" type="button" aria-label="上一首">‹</button>
+      <button class="fanren-audio-btn is-main fanren-audio-play" type="button" aria-label="播放">▶</button>
+      <button class="fanren-audio-btn fanren-audio-next" type="button" aria-label="下一首">›</button>
+      <label class="fanren-audio-volume">
+        <button class="fanren-audio-btn fanren-audio-mute" type="button" aria-label="静音">♪</button>
+        <input type="range" min="0" max="1" step="0.01" value=".42" aria-label="音量">
+      </label>
+    </div>
+
+    <div class="fanren-audio-playlist"></div>
+
+    <button class="fanren-audio-resume" type="button">继续上次播放</button>
+
+    <div class="fanren-audio-foot">
+      <button class="fanren-audio-sfx" type="button" aria-pressed="true">
+        <span aria-hidden="true">◇</span><span>互动音效</span>
+      </button>
+      <span class="fanren-audio-status">等待选择音乐</span>
+    </div>
+
+    <div class="fanren-audio-persistence">持续播放器 · 切换版块不重载音频</div>
+  </div>
+</aside>
+
+<script id="fanren-persistent-shell-script">
+
+(() => {
+  'use strict';
+
+  const ROUTES = {
+    home: { file: 'home.html', title: '凡人修仙传 · 阅读助手' },
+    characters: { file: 'characters.html', title: '人物关系 · 凡人修仙传阅读助手' },
+    plot: { file: 'plot.html', title: '情节发展 · 凡人修仙传阅读助手' },
+    world: { file: 'world.html', title: '世界观 · 凡人修仙传阅读助手' },
+    map: { file: 'map.html', title: '地图 · 凡人修仙传阅读助手' }
+  };
+
+  const TRACKS = [
+    { title: '落英', subtitle: '银临 · 陈巧倩角色曲', src: 'assets/audio/fanren-bgm-01.mp3' },
+    { title: '归期', subtitle: '钱润玉 · 墨彩环角色曲', src: 'assets/audio/fanren-bgm-02.mp3' },
+    { title: '不凡', subtitle: '王铮亮 · 片头曲', src: 'assets/audio/fanren-bgm-03.mp3' },
+    { title: '少年不凡', subtitle: '刘美麟 · 插曲', src: 'assets/audio/fanren-bgm-04.mp3' }
+  ];
+
+  const STORAGE_KEY = 'fanren-reader-persistent-audio-v2';
+  const DEFAULT_STATE = {
+    trackIndex: 0,
+    volume: 0.42,
+    muted: false,
+    currentTime: 0,
+    wasPlaying: false,
+    open: false,
+    sfxEnabled: true
+  };
+
+  const safeParse = value => {
+    try { return JSON.parse(value); } catch (_) { return null; }
+  };
+  const clamp = (value, min, max) => Math.min(max, Math.max(min, Number(value) || 0));
+  const saved = safeParse(localStorage.getItem(STORAGE_KEY)) || {};
+  const state = Object.assign({}, DEFAULT_STATE, saved);
+  state.trackIndex = clamp(state.trackIndex, 0, TRACKS.length - 1);
+  state.volume = clamp(state.volume, 0, 1);
+  state.currentTime = Math.max(0, Number(state.currentTime) || 0);
+
+  const frame = document.querySelector('#fanrenAppFrame');
+  const loading = document.querySelector('#fanrenShellLoading');
+  const routeLabel = document.querySelector('#fanrenShellRoute');
+
+  const dock = document.querySelector('.fanren-audio-dock');
+  const toggle = document.querySelector('.fanren-audio-toggle');
+  const playBtn = document.querySelector('.fanren-audio-play');
+  const prevBtn = document.querySelector('.fanren-audio-prev');
+  const nextBtn = document.querySelector('.fanren-audio-next');
+  const muteBtn = document.querySelector('.fanren-audio-mute');
+  const volumeInput = document.querySelector('.fanren-audio-volume input');
+  const progress = document.querySelector('.fanren-audio-progress');
+  const currentLabel = document.querySelector('.fanren-audio-current');
+  const durationLabel = document.querySelector('.fanren-audio-duration');
+  const titleLabel = document.querySelector('.fanren-audio-title');
+  const subtitleLabel = document.querySelector('.fanren-audio-subtitle');
+  const playlist = document.querySelector('.fanren-audio-playlist');
+  const statusLabel = document.querySelector('.fanren-audio-status');
+  const resumeBtn = document.querySelector('.fanren-audio-resume');
+  const sfxBtn = document.querySelector('.fanren-audio-sfx');
+
+  const audio = new Audio();
+  audio.preload = 'metadata';
+  audio.volume = state.volume;
+  audio.muted = Boolean(state.muted);
+
+  let currentRoute = 'home';
+  let pendingResume = Boolean(state.wasPlaying);
+  let audioContext = null;
+  let lastSfxTime = 0;
+  let lastSaveAt = 0;
+  let restoringTrack = true;
+
+  function saveState(force = false) {
+    const now = Date.now();
+    if (!force && now - lastSaveAt < 500) return;
+    lastSaveAt = now;
+    state.currentTime = Number.isFinite(audio.currentTime) ? audio.currentTime : state.currentTime;
+    state.wasPlaying = !audio.paused && !audio.ended;
+    state.volume = audio.volume;
+    state.muted = audio.muted;
+    state.open = dock.classList.contains('is-open');
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch (_) {}
+  }
+
+  function formatTime(seconds) {
+    const value = Number.isFinite(seconds) ? Math.max(0, seconds) : 0;
+    const minutes = Math.floor(value / 60);
+    const secs = Math.floor(value % 60).toString().padStart(2, '0');
+    return `${minutes}:${secs}`;
+  }
+
+  function setStatus(text) {
+    statusLabel.textContent = text;
+  }
+
+  function applyOpenState(open, persist = true) {
+    state.open = Boolean(open);
+    dock.classList.toggle('is-open', state.open);
+    toggle.setAttribute('aria-expanded', String(state.open));
+    toggle.setAttribute('aria-label', state.open ? '收起音乐播放器' : '展开音乐播放器');
+    if (persist) saveState(true);
+  }
+
+  function buildPlaylist() {
+    playlist.innerHTML = TRACKS.map((track, index) => `
+      <button class="fanren-audio-track" type="button" data-track-index="${index}">
+        <span class="fanren-audio-track-index">${String(index + 1).padStart(2, '0')}</span>
+        <span class="fanren-audio-track-name">${track.title}</span>
+      </button>`).join('');
+  }
+
+  function updateTrackUI() {
+    const track = TRACKS[state.trackIndex];
+    titleLabel.textContent = track.title;
+    subtitleLabel.textContent = track.subtitle;
+    playlist.querySelectorAll('.fanren-audio-track').forEach((item, index) => {
+      item.classList.toggle('is-active', index === state.trackIndex);
+      item.setAttribute('aria-current', index === state.trackIndex ? 'true' : 'false');
+    });
+  }
+
+  function setTrack(index, { autoplay = false, restoreTime = false } = {}) {
+    state.trackIndex = (Number(index) + TRACKS.length) % TRACKS.length;
+    const track = TRACKS[state.trackIndex];
+
+    restoringTrack = restoreTime;
+    audio.src = track.src;
+    updateTrackUI();
+    setStatus('正在读取本地音频…');
+
+    const onMetadata = () => {
+      if (restoringTrack && state.currentTime > 0 && Number.isFinite(audio.duration)) {
+        audio.currentTime = Math.min(state.currentTime, Math.max(0, audio.duration - 0.15));
+      }
+      restoringTrack = false;
+      durationLabel.textContent = formatTime(audio.duration);
+      setStatus(autoplay ? '正在恢复播放…' : '曲目已就绪');
+      if (autoplay) playAudio();
+    };
+
+    audio.addEventListener('loadedmetadata', onMetadata, { once: true });
+    audio.load();
+    saveState(true);
+  }
+
+  async function playAudio() {
+    try {
+      await audio.play();
+      pendingResume = false;
+      resumeBtn.classList.remove('is-visible');
+      setStatus('灵音流转中 · 切换版块不会中断');
+    } catch (_) {
+      pendingResume = true;
+      resumeBtn.classList.add('is-visible');
+      setStatus('点击继续上次播放');
+    }
+  }
+
+  function pauseAudio() {
+    audio.pause();
+    setStatus('已暂停');
+    saveState(true);
+  }
+
+  function updatePlaybackUI() {
+    const playing = !audio.paused && !audio.ended;
+    dock.classList.toggle('is-playing', playing);
+    playBtn.textContent = playing ? 'Ⅱ' : '▶';
+    playBtn.title = playing ? '暂停' : '播放';
+    playBtn.setAttribute('aria-label', playing ? '暂停' : '播放');
+  }
+
+  function updateMuteUI() {
+    const muted = audio.muted || audio.volume <= 0.001;
+    muteBtn.textContent = muted ? '×' : '♪';
+    muteBtn.title = muted ? '取消静音' : '静音';
+    muteBtn.setAttribute('aria-label', muted ? '取消静音' : '静音');
+  }
+
+  function ensureAudioContext() {
+    if (!audioContext) {
+      const Context = window.AudioContext || window.webkitAudioContext;
+      if (Context) audioContext = new Context();
+    }
+    if (audioContext?.state === 'suspended') {
+      audioContext.resume().catch(() => {});
+    }
+    return audioContext;
+  }
+
+  function playInteractionSfx(kind = 'tap') {
+    if (!state.sfxEnabled) return;
+    const now = performance.now();
+    if (now - lastSfxTime < 65) return;
+    lastSfxTime = now;
+
+    const ctx = ensureAudioContext();
+    if (!ctx) return;
+
+    const start = ctx.currentTime;
+    const master = ctx.createGain();
+    master.gain.setValueAtTime(0.0001, start);
+    master.gain.exponentialRampToValueAtTime(kind === 'open' ? 0.045 : 0.027, start + 0.008);
+    master.gain.exponentialRampToValueAtTime(0.0001, start + (kind === 'open' ? 0.29 : 0.17));
+    master.connect(ctx.destination);
+
+    const notes = kind === 'open'
+      ? [[659.25, 0], [987.77, 0.055]]
+      : [[783.99, 0], [1046.50, 0.035]];
+
+    notes.forEach(([frequency, delay]) => {
+      const oscillator = ctx.createOscillator();
+      const gain = ctx.createGain();
+      oscillator.type = 'sine';
+      oscillator.frequency.setValueAtTime(frequency, start + delay);
+      oscillator.frequency.exponentialRampToValueAtTime(frequency * 0.94, start + delay + 0.14);
+      gain.gain.setValueAtTime(0.0001, start + delay);
+      gain.gain.exponentialRampToValueAtTime(0.9, start + delay + 0.006);
+      gain.gain.exponentialRampToValueAtTime(0.0001, start + delay + 0.16);
+      oscillator.connect(gain);
+      gain.connect(master);
+      oscillator.start(start + delay);
+      oscillator.stop(start + delay + 0.18);
+    });
+  }
+
+  function routeFromQuery() {
+    const value = new URLSearchParams(location.search).get('page');
+    return ROUTES[value] ? value : 'home';
+  }
+
+  function setRoute(page, { push = true } = {}) {
+    if (!ROUTES[page]) page = 'home';
+    currentRoute = page;
+
+    const targetFile = ROUTES[page].file;
+    const currentFile = (() => {
+      try {
+        return new URL(frame.src, location.href).pathname.split('/').pop();
+      } catch (_) {
+        return '';
+      }
+    })();
+
+    if (currentFile !== targetFile) {
+      frame.classList.remove('is-ready');
+      loading.classList.remove('is-hidden');
+      frame.src = targetFile;
+    }
+
+    document.title = ROUTES[page].title;
+    routeLabel.textContent = `当前卷页：${ROUTES[page].title.replace(' · 凡人修仙传阅读助手', '').replace('凡人修仙传 · ', '')}`;
+
+    if (push) {
+      const next = new URL(location.href);
+      next.searchParams.set('page', page);
+      history.pushState({ page }, '', next);
+    }
+  }
+
+  window.addEventListener('message', event => {
+    const data = event.data;
+    if (!data || typeof data !== 'object') return;
+
+    if (data.type === 'fanren:navigate' && ROUTES[data.page]) {
+      setRoute(data.page, { push: data.page !== currentRoute });
+      playInteractionSfx('open');
+      return;
+    }
+
+    if (data.type === 'fanren:sfx') {
+      playInteractionSfx(data.kind || 'tap');
+      return;
+    }
+
+    if (data.type === 'fanren:ready') {
+      frame.classList.add('is-ready');
+      loading.classList.add('is-hidden');
+    }
+  });
+
+  frame.addEventListener('load', () => {
+    frame.classList.add('is-ready');
+    loading.classList.add('is-hidden');
+  });
+
+  window.addEventListener('popstate', event => {
+    const page = event.state?.page || routeFromQuery();
+    setRoute(page, { push: false });
+  });
+
+  buildPlaylist();
+  updateTrackUI();
+  volumeInput.value = String(state.volume);
+  sfxBtn.setAttribute('aria-pressed', String(Boolean(state.sfxEnabled)));
+  applyOpenState(Boolean(state.open), false);
+  updateMuteUI();
+
+  setTrack(state.trackIndex, {
+    autoplay: false,
+    restoreTime: true
+  });
+
+  if (pendingResume) {
+    resumeBtn.classList.add('is-visible');
+    setStatus('点击页面或按钮继续上次播放');
+  }
+
+  toggle.addEventListener('click', () => {
+    applyOpenState(!dock.classList.contains('is-open'));
+    playInteractionSfx('open');
+  });
+
+  playBtn.addEventListener('click', () => {
+    if (audio.paused) playAudio();
+    else pauseAudio();
+  });
+
+  prevBtn.addEventListener('click', () => {
+    const shouldPlay = !audio.paused;
+    state.currentTime = 0;
+    setTrack(state.trackIndex - 1, { autoplay: shouldPlay });
+  });
+
+  nextBtn.addEventListener('click', () => {
+    const shouldPlay = !audio.paused;
+    state.currentTime = 0;
+    setTrack(state.trackIndex + 1, { autoplay: shouldPlay });
+  });
+
+  muteBtn.addEventListener('click', () => {
+    audio.muted = !audio.muted;
+    updateMuteUI();
+    saveState(true);
+  });
+
+  volumeInput.addEventListener('input', () => {
+    audio.volume = clamp(volumeInput.value, 0, 1);
+    if (audio.volume > 0 && audio.muted) audio.muted = false;
+    updateMuteUI();
+    saveState();
+  });
+
+  progress.addEventListener('input', () => {
+    if (Number.isFinite(audio.duration) && audio.duration > 0) {
+      audio.currentTime = (Number(progress.value) / 1000) * audio.duration;
+      saveState(true);
+    }
+  });
+
+  playlist.addEventListener('click', event => {
+    const item = event.target.closest('[data-track-index]');
+    if (!item) return;
+    const shouldPlay = !audio.paused;
+    state.currentTime = 0;
+    setTrack(Number(item.dataset.trackIndex), { autoplay: shouldPlay });
+  });
+
+  resumeBtn.addEventListener('click', playAudio);
+
+  sfxBtn.addEventListener('click', () => {
+    state.sfxEnabled = !state.sfxEnabled;
+    sfxBtn.setAttribute('aria-pressed', String(state.sfxEnabled));
+    saveState(true);
+    if (state.sfxEnabled) playInteractionSfx('open');
+  });
+
+  audio.addEventListener('play', () => {
+    updatePlaybackUI();
+    setStatus('灵音流转中 · 切换版块不会中断');
+    saveState(true);
+  });
+
+  audio.addEventListener('pause', () => {
+    updatePlaybackUI();
+    saveState(true);
+  });
+
+  audio.addEventListener('timeupdate', () => {
+    const ratio = Number.isFinite(audio.duration) && audio.duration > 0
+      ? audio.currentTime / audio.duration
+      : 0;
+    progress.value = String(Math.round(ratio * 1000));
+    currentLabel.textContent = formatTime(audio.currentTime);
+    durationLabel.textContent = formatTime(audio.duration);
+    saveState();
+  });
+
+  audio.addEventListener('ended', () => {
+    state.currentTime = 0;
+    setTrack(state.trackIndex + 1, { autoplay: true });
+  });
+
+  audio.addEventListener('error', () => {
+    dock.classList.remove('is-playing');
+    playBtn.textContent = '▶';
+    setStatus(`未找到 ${TRACKS[state.trackIndex].src.split('/').pop()}`);
+  });
+
+  // Only a full shell reload—not section switching—can require browser permission again.
+  document.addEventListener('pointerdown', () => {
+    ensureAudioContext();
+    if (pendingResume && audio.paused) playAudio();
+  }, { once: true, capture: true });
+
+  window.addEventListener('pagehide', () => saveState(true));
+  window.addEventListener('beforeunload', () => saveState(true));
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) saveState(true);
+  });
+
+  const initialRoute = routeFromQuery();
+  history.replaceState({ page: initialRoute }, '', location.href);
+  setRoute(initialRoute, { push: false });
+})();
+
+</script>
+</body>
+</html>

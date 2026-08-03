@@ -1,0 +1,2296 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="#08110f" name="theme-color"/>
+<meta content="dark" name="color-scheme"/>
+<title>世界观 · 凡人修仙传阅读助手</title>
+<style id="fanren-standalone-style">
+/* Embedded by make_fanren_standalone.py */
+/* =========================================================
+   凡人修仙传阅读助手 · 玄墨天青 UI
+   Original fan-inspired interface. No copyrighted artwork used.
+   ========================================================= */
+
+:root {
+  --ink-950: #050908;
+  --ink-900: #08110f;
+  --ink-850: #0d1714;
+  --ink-800: #12201c;
+  --ink-700: #1b3029;
+  --paper: #e6dcc8;
+  --paper-soft: #cfc3ad;
+  --text-primary: #e9e2d4;
+  --text-secondary: #b7b0a3;
+  --text-dim: #777f77;
+  --jade: #79c6ac;
+  --jade-soft: #4c8f7b;
+  --jade-dark: #214c40;
+  --gold: #d0ad67;
+  --gold-soft: #8e754a;
+  --cinnabar: #d46a55;
+  --blue: #6f9fbd;
+  --purple: #9a85ba;
+  --line: rgba(208, 173, 103, .18);
+  --line-strong: rgba(208, 173, 103, .36);
+  --glass: rgba(10, 22, 18, .72);
+  --glass-deep: rgba(7, 14, 12, .91);
+  --shadow: 0 22px 70px rgba(0, 0, 0, .44);
+  --shadow-soft: 0 14px 40px rgba(0, 0, 0, .24);
+  --radius-lg: 22px;
+  --radius-md: 14px;
+  --radius-sm: 8px;
+  --font-heading: "Ma Shan Zheng", "STKaiti", "KaiTi", serif;
+  --font-serif: "Noto Serif SC", "Songti SC", "SimSun", serif;
+  --font-display: "ZCOOL XiaoWei", "Noto Serif SC", serif;
+  --nav-h: 72px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; background: var(--ink-950); }
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text-primary);
+  font-family: var(--font-serif);
+  background:
+    radial-gradient(circle at 15% 10%, rgba(70, 129, 107, .17), transparent 28%),
+    radial-gradient(circle at 84% 18%, rgba(104, 83, 48, .12), transparent 25%),
+    radial-gradient(circle at 50% 110%, rgba(35, 91, 76, .22), transparent 38%),
+    linear-gradient(180deg, #07100e 0%, #0a1210 50%, #050908 100%);
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -4;
+}
+body::before {
+  opacity: .18;
+  background-image:
+    linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: linear-gradient(to bottom, black, transparent 78%);
+}
+body::after {
+  background:
+    linear-gradient(150deg, transparent 0 58%, rgba(4, 7, 6, .72) 58.2%),
+    linear-gradient(204deg, transparent 0 67%, rgba(12, 23, 20, .72) 67.2%);
+  clip-path: polygon(0 55%, 13% 47%, 23% 57%, 38% 34%, 50% 51%, 64% 30%, 77% 47%, 90% 28%, 100% 39%, 100% 100%, 0 100%);
+  opacity: .82;
+  z-index: -3;
+}
+
+a { color: inherit; text-decoration: none; }
+button, input { font: inherit; }
+button { color: inherit; }
+::selection { background: rgba(121, 198, 172, .25); color: #fff; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #07100e; }
+::-webkit-scrollbar-thumb { background: linear-gradient(var(--jade-dark), var(--gold-soft)); border-radius: 99px; border: 2px solid #07100e; }
+
+/* Ambient layers */
+.cloud-layer {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -2;
+  opacity: .55;
+}
+.cloud {
+  position: absolute;
+  width: 340px;
+  height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(184, 205, 194, .10), rgba(184, 205, 194, 0) 68%);
+  filter: blur(11px);
+  animation: cloud-drift 28s linear infinite;
+}
+.cloud::before, .cloud::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background: inherit;
+}
+.cloud::before { width: 180px; height: 110px; left: 36px; top: -32px; }
+.cloud::after { width: 220px; height: 115px; right: 18px; top: -28px; }
+.cloud:nth-child(1) { top: 12%; left: -22%; animation-duration: 34s; }
+.cloud:nth-child(2) { top: 30%; left: 12%; animation-duration: 42s; animation-delay: -18s; transform: scale(.72); }
+.cloud:nth-child(3) { top: 56%; left: -15%; animation-duration: 38s; animation-delay: -9s; transform: scale(1.2); }
+.cloud:nth-child(4) { top: 72%; left: 34%; animation-duration: 46s; animation-delay: -26s; transform: scale(.86); }
+.cloud:nth-child(5) { top: 18%; left: 66%; animation-duration: 31s; animation-delay: -14s; transform: scale(.58); }
+@keyframes cloud-drift { from { translate: -10vw 0; } to { translate: 125vw 3vh; } }
+
+#particles-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  opacity: .65;
+}
+
+/* Navigation */
+.top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  height: var(--nav-h);
+  background: linear-gradient(180deg, rgba(5, 12, 10, .94), rgba(6, 14, 12, .76));
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(18px) saturate(125%);
+  box-shadow: 0 12px 45px rgba(0,0,0,.18);
+}
+.top-nav::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 -1px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-soft), var(--jade-soft), transparent);
+  opacity: .55;
+}
+.nav-inner {
+  width: min(1180px, calc(100% - 40px));
+  height: 100%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+}
+.nav-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  color: var(--paper);
+  font-family: var(--font-heading);
+  font-size: 1.38rem;
+  letter-spacing: .12em;
+  white-space: nowrap;
+}
+.logo-icon {
+  width: 36px;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(208, 173, 103, .56);
+  border-radius: 50% 50% 46% 54%;
+  color: var(--gold);
+  background: radial-gradient(circle at 38% 32%, rgba(121,198,172,.2), rgba(5,9,8,.8) 62%);
+  box-shadow: inset 0 0 20px rgba(121,198,172,.08), 0 0 24px rgba(208,173,103,.08);
+  font-family: serif;
+  transition: .45s ease;
+}
+.nav-logo:hover .logo-icon { transform: rotate(180deg); box-shadow: 0 0 28px rgba(121,198,172,.18); }
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-links a {
+  position: relative;
+  display: block;
+  padding: 13px 16px;
+  color: var(--text-secondary);
+  font-size: .92rem;
+  letter-spacing: .06em;
+  transition: color .24s ease, background .24s ease;
+  border-radius: 10px;
+}
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 50%; right: 50%; bottom: 4px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold), var(--jade));
+  transition: .28s ease;
+}
+.nav-links a:hover, .nav-links a.active { color: #f2eadc; background: rgba(208,173,103,.055); }
+.nav-links a.active::after, .nav-links a:hover::after { left: 17px; right: 17px; }
+.nav-toggle {
+  display: none;
+  width: 42px; height: 42px;
+  border: 1px solid var(--line-strong);
+  background: rgba(255,255,255,.03);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* Layout */
+.app-container { min-height: calc(100vh - var(--nav-h)); }
+.main-content {
+  position: relative;
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 58px 0 64px;
+}
+.main-content::before {
+  content: "";
+  position: absolute;
+  top: 26px; left: 50%;
+  width: min(880px, 80vw); height: 240px;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse at center, rgba(121,198,172,.09), transparent 68%);
+  filter: blur(12px);
+  pointer-events: none;
+  z-index: -1;
+}
+.page-header {
+  position: relative;
+  text-align: center;
+  padding: 32px 20px 56px;
+}
+.page-header::before {
+  content: attr(data-kicker);
+  display: block;
+  min-height: 18px;
+  color: var(--gold);
+  font-size: .72rem;
+  letter-spacing: .42em;
+  text-indent: .42em;
+  opacity: .7;
+  margin-bottom: 12px;
+}
+.page-title {
+  margin: 0;
+  color: var(--paper);
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 5vw, 4.2rem);
+  font-weight: 400;
+  letter-spacing: .16em;
+  text-indent: .16em;
+  line-height: 1.15;
+  text-shadow: 0 4px 20px rgba(0,0,0,.35), 0 0 32px rgba(208,173,103,.08);
+}
+.page-subtitle {
+  margin: 16px auto 0;
+  color: var(--text-secondary);
+  max-width: 720px;
+  font-size: .95rem;
+  letter-spacing: .07em;
+  line-height: 1.8;
+}
+.page-header::after,
+.hero-divider {
+  content: "";
+  display: block;
+  width: min(420px, 62vw);
+  height: 14px;
+  margin: 26px auto 0;
+  background:
+    radial-gradient(circle, var(--gold) 0 2px, transparent 2.5px) center/14px 14px no-repeat,
+    linear-gradient(90deg, transparent, var(--gold-soft), transparent) center/100% 1px no-repeat;
+  opacity: .62;
+}
+
+/* Hero */
+.hero-section {
+  position: relative;
+  min-height: 530px;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  text-align: center;
+  padding: 82px 30px 72px;
+  isolation: isolate;
+  overflow: hidden;
+}
+.hero-section::before {
+  content: "凡 · 人";
+  position: absolute;
+  inset: 52px auto auto 50%;
+  transform: translateX(-50%);
+  color: rgba(229, 220, 200, .018);
+  font-family: var(--font-heading);
+  font-size: clamp(9rem, 26vw, 20rem);
+  line-height: 1;
+  letter-spacing: .03em;
+  white-space: nowrap;
+  z-index: -2;
+}
+.hero-section::after {
+  content: "";
+  position: absolute;
+  width: min(860px, 82vw); aspect-ratio: 1.9;
+  bottom: -21%; left: 50%; transform: translateX(-50%);
+  border: 1px solid rgba(208,173,103,.14);
+  border-radius: 50%;
+  box-shadow: 0 -22px 80px rgba(121,198,172,.07), inset 0 26px 90px rgba(121,198,172,.05);
+  z-index: -1;
+}
+.hero-glow {
+  position: absolute;
+  width: min(650px, 80vw); aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(121,198,172,.13), rgba(208,173,103,.04) 32%, transparent 68%);
+  filter: blur(8px);
+  animation: breathe 5s ease-in-out infinite;
+  z-index: -1;
+}
+@keyframes breathe { 50% { transform: scale(1.08); opacity: .72; } }
+.hero-title {
+  margin: 0;
+  font-family: var(--font-heading);
+  color: var(--paper);
+  font-weight: 400;
+  font-size: clamp(4rem, 9vw, 7.5rem);
+  letter-spacing: .12em;
+  text-indent: .12em;
+  line-height: 1;
+  text-shadow: 0 7px 30px #000, 0 0 60px rgba(121,198,172,.08);
+}
+.hero-title small {
+  display: block;
+  margin-top: 22px;
+  color: var(--gold);
+  font-family: var(--font-serif);
+  font-size: clamp(.78rem, 1.4vw, 1rem);
+  letter-spacing: .7em;
+  text-indent: .7em;
+  font-weight: 500;
+}
+.hero-divider { margin-top: 30px; }
+.hero-desc {
+  max-width: 680px;
+  margin: 22px auto 0;
+  color: var(--text-secondary);
+  font-size: clamp(.95rem, 1.5vw, 1.08rem);
+  line-height: 2;
+  letter-spacing: .08em;
+}
+.spirit-bottle {
+  position: absolute;
+  right: 4%; top: 24%;
+  width: 100px; height: 170px;
+  opacity: .42;
+  filter: drop-shadow(0 0 28px rgba(121,198,172,.35));
+  animation: bottle-float 6s ease-in-out infinite;
+  pointer-events: none;
+}
+.spirit-bottle::before {
+  content: "";
+  position: absolute;
+  left: 29px; top: 26px;
+  width: 42px; height: 24px;
+  border: 2px solid rgba(121,198,172,.72);
+  border-bottom: 0;
+  border-radius: 10px 10px 3px 3px;
+  box-shadow: inset 0 0 13px rgba(121,198,172,.18);
+}
+.spirit-bottle::after {
+  content: "";
+  position: absolute;
+  left: 12px; top: 48px;
+  width: 76px; height: 100px;
+  border: 2px solid rgba(121,198,172,.72);
+  border-radius: 38% 38% 48% 48% / 22% 22% 72% 72%;
+  background:
+    radial-gradient(circle at 50% 70%, rgba(121,198,172,.58) 0 3px, transparent 4px),
+    radial-gradient(circle at 42% 62%, rgba(208,173,103,.45) 0 1px, transparent 2px),
+    linear-gradient(to top, rgba(67,151,123,.17), transparent 65%);
+  box-shadow: inset 0 -18px 30px rgba(121,198,172,.12), 0 0 24px rgba(121,198,172,.18);
+}
+@keyframes bottle-float { 50% { transform: translateY(-14px) rotate(2deg); } }
+
+/* Cards and common components */
+.card {
+  position: relative;
+  overflow: hidden;
+  padding: 26px;
+  background:
+    linear-gradient(145deg, rgba(21, 38, 32, .82), rgba(7, 15, 13, .88)),
+    var(--glass);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft), inset 0 1px rgba(255,255,255,.025);
+  backdrop-filter: blur(14px);
+  transition: transform .35s cubic-bezier(.2,.8,.2,1), border-color .35s ease, box-shadow .35s ease;
+}
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, rgba(208,173,103,.11), transparent 22%) top left/90px 90px no-repeat,
+    linear-gradient(315deg, rgba(121,198,172,.08), transparent 20%) bottom right/120px 120px no-repeat;
+  pointer-events: none;
+  opacity: .7;
+}
+.card::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 18px; right: 18px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(208,173,103,.5), transparent);
+  opacity: .5;
+}
+.card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(208,173,103,.36);
+  box-shadow: 0 24px 60px rgba(0,0,0,.34), 0 0 0 1px rgba(121,198,172,.04) inset;
+}
+.card-title {
+  position: relative;
+  margin-bottom: 13px;
+  color: var(--paper);
+  font-family: var(--font-display);
+  font-size: 1.12rem;
+  letter-spacing: .08em;
+}
+.card p { position: relative; margin: 0; }
+.features-grid, .info-grid, .characters-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+.features-grid { margin: -16px 0 38px; }
+.feature-card { min-height: 260px; display: flex; flex-direction: column; align-items: flex-start; }
+.feature-card:nth-child(1) { --accent: var(--jade); }
+.feature-card:nth-child(2) { --accent: var(--gold); }
+.feature-card:nth-child(3) { --accent: var(--purple); }
+.feature-card:nth-child(4) { --accent: var(--blue); }
+.feature-card .card-title { font-size: 1.32rem; color: var(--accent); }
+.feature-card p { color: var(--text-secondary); line-height: 1.8; font-size: .92rem; flex: 1; }
+.feature-icon {
+  width: 48px; height: 48px;
+  display: grid; place-items: center;
+  margin-bottom: 18px;
+  border-radius: 50% 44% 50% 42%;
+  border: 1px solid color-mix(in srgb, var(--accent) 52%, transparent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  font-size: 1.35rem;
+  filter: saturate(.6);
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 0 18px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  transition: .25s ease;
+  cursor: pointer;
+}
+.btn-primary {
+  margin-top: 20px;
+  color: #102019;
+  background: linear-gradient(135deg, var(--gold), #9e814b);
+  box-shadow: 0 8px 26px rgba(208,173,103,.13);
+  font-weight: 600;
+}
+.btn-primary:hover { transform: translateX(4px); filter: brightness(1.08); }
+
+/* Tags and filters */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 3px 10px;
+  border-radius: 99px;
+  color: #aeb6ae;
+  background: rgba(255,255,255,.035);
+  border: 1px solid rgba(255,255,255,.08);
+  font-size: .77rem;
+  line-height: 1.25;
+  vertical-align: middle;
+}
+.tag-gold { color: #e2c786; border-color: rgba(208,173,103,.32); background: rgba(208,173,103,.075); }
+.tag-jade { color: #8ed2bc; border-color: rgba(121,198,172,.28); background: rgba(121,198,172,.065); }
+.tag-cinnabar { color: #df8a78; border-color: rgba(212,106,85,.3); background: rgba(212,106,85,.065); }
+.filter-btn {
+  min-height: 38px;
+  padding: 0 15px;
+  border: 1px solid rgba(208,173,103,.16);
+  border-radius: 99px;
+  color: var(--text-secondary);
+  background: rgba(255,255,255,.025);
+  cursor: pointer;
+  transition: .25s ease;
+}
+.filter-btn:hover { color: var(--paper); border-color: rgba(208,173,103,.4); background: rgba(208,173,103,.07); }
+.filter-btn.active {
+  color: #0b1712;
+  background: linear-gradient(135deg, #d7b56f, #83bca9);
+  border-color: transparent;
+  box-shadow: 0 7px 22px rgba(121,198,172,.1);
+}
+
+/* Characters */
+.toolbar {
+  position: sticky;
+  top: calc(var(--nav-h) + 12px);
+  z-index: 40;
+  display: grid;
+  grid-template-columns: minmax(220px, .72fr) 1.5fr;
+  gap: 14px;
+  align-items: center;
+  margin: 0 0 24px;
+  padding: 13px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(7,15,13,.82);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 14px 40px rgba(0,0,0,.22);
+}
+.search-box { position: relative; }
+.search-box input {
+  width: 100%; height: 44px;
+  padding: 0 15px 0 42px;
+  color: var(--paper);
+  background: rgba(255,255,255,.035);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 11px;
+  outline: none;
+  transition: .25s ease;
+}
+.search-box input:focus { border-color: rgba(121,198,172,.55); box-shadow: 0 0 0 3px rgba(121,198,172,.08); }
+.search-box input::placeholder { color: #68716a; }
+.search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); z-index: 2; opacity: .55; font-size: .9rem; }
+.filter-group { display: flex; gap: 7px; flex-wrap: wrap; justify-content: flex-end; }
+.characters-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.character-card {
+  min-height: 265px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  isolation: isolate;
+}
+.character-card[style*="grid-column:1/-1"] {
+  min-height: 220px;
+  background:
+    radial-gradient(circle at 88% 22%, rgba(121,198,172,.17), transparent 25%),
+    linear-gradient(120deg, rgba(28,50,42,.94), rgba(7,15,13,.9));
+}
+.character-card[style*="grid-column:1/-1"]::before {
+  content: "韩";
+  position: absolute;
+  right: 45px; top: 50%; transform: translateY(-50%);
+  font-family: var(--font-heading);
+  font-size: 10rem;
+  color: rgba(121,198,172,.035);
+  z-index: -1;
+}
+.char-header { display: flex; justify-content: space-between; gap: 12px; }
+.char-name { color: var(--paper); font-family: var(--font-display); font-size: 1.28rem; letter-spacing: .08em; }
+.char-alias { margin-top: 5px; color: var(--gold-soft); font-size: .78rem; line-height: 1.5; }
+.char-realm { margin-top: 16px; }
+.char-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.char-desc { margin-top: 15px; color: var(--text-secondary); font-size: .88rem; line-height: 1.75; }
+.character-card.is-hidden { display: none !important; }
+.character-card::after { transition: opacity .3s ease; }
+.character-card:hover::after { opacity: 1; }
+.empty-state {
+  grid-column: 1 / -1;
+  padding: 80px 20px;
+  text-align: center;
+  color: var(--text-dim);
+  border: 1px dashed var(--line-strong);
+  border-radius: 16px;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(2,6,5,.72);
+  backdrop-filter: blur(16px);
+  opacity: 0;
+  visibility: hidden;
+  transition: .3s ease;
+}
+.modal-overlay.active, .modal-overlay.visible { opacity: 1; visibility: visible; }
+.modal-content {
+  position: relative;
+  width: min(820px, 100%);
+  max-height: min(780px, calc(100vh - 48px));
+  overflow: auto;
+  padding: clamp(28px, 5vw, 48px);
+  border: 1px solid rgba(208,173,103,.32);
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 88% 10%, rgba(121,198,172,.14), transparent 24%),
+    linear-gradient(145deg, rgba(18,32,27,.98), rgba(5,11,9,.98));
+  box-shadow: 0 40px 120px rgba(0,0,0,.65), inset 0 1px rgba(255,255,255,.035);
+  transform: translateY(18px) scale(.975);
+  transition: .34s cubic-bezier(.2,.8,.2,1);
+}
+.modal-overlay.active .modal-content, .modal-overlay.visible .modal-content { transform: none; }
+.modal-close {
+  position: sticky;
+  float: right;
+  top: 0;
+  width: 40px; height: 40px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  background: rgba(5,10,8,.72);
+  cursor: pointer;
+  z-index: 3;
+}
+.modal-close:hover { color: var(--cinnabar); transform: rotate(90deg); }
+.modal-hero { padding-right: 50px; margin-bottom: 28px; }
+.modal-name { margin: 0; color: var(--paper); font-family: var(--font-heading); font-size: clamp(2.4rem,6vw,4rem); font-weight: 400; letter-spacing: .08em; }
+.modal-alias { color: var(--gold); margin-top: 8px; }
+.modal-lead { margin: 20px 0 0; color: var(--text-secondary); line-height: 1.9; }
+.modal-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.modal-section { margin-top: 28px; }
+.modal-section h3 { margin: 0 0 13px; color: var(--jade); font-family: var(--font-display); font-size: 1.05rem; letter-spacing: .1em; }
+.modal-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 9px; }
+.modal-list li { position: relative; padding: 9px 12px 9px 28px; color: var(--text-secondary); line-height: 1.65; background: rgba(255,255,255,.022); border-left: 1px solid rgba(121,198,172,.28); }
+.modal-list li::before { content: "✦"; position: absolute; left: 10px; top: 11px; color: var(--gold); font-size: .68rem; }
+
+/* Plot timeline */
+.timeline {
+  position: relative;
+  width: min(900px, 100%);
+  margin: 0 auto;
+  padding: 8px 0 10px;
+}
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0; left: 28px;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--gold-soft) 5%, var(--jade-soft) 92%, transparent);
+}
+.timeline-item {
+  position: relative;
+  padding: 0 0 28px 78px;
+}
+.timeline-marker {
+  position: absolute;
+  left: 17px; top: 31px;
+  width: 23px; aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid var(--gold);
+  background: #0a1713;
+  box-shadow: 0 0 0 6px rgba(208,173,103,.04), 0 0 28px rgba(208,173,103,.13);
+}
+.timeline-marker::after { content: ""; position: absolute; inset: 7px; border-radius: 50%; background: var(--gold); }
+.timeline-content {
+  position: relative;
+  padding: 27px 30px;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  background: linear-gradient(135deg, rgba(18,33,28,.82), rgba(7,14,12,.85));
+  box-shadow: var(--shadow-soft);
+  transition: .35s ease;
+}
+.timeline-content::before {
+  content: "";
+  position: absolute;
+  left: -11px; top: 29px;
+  width: 20px; height: 20px;
+  transform: rotate(45deg);
+  border-left: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: #0d1a16;
+}
+.timeline-item:hover .timeline-content { transform: translateX(5px); border-color: rgba(208,173,103,.34); }
+.timeline-arc-title { color: var(--paper); font-family: var(--font-display); font-size: 1.25rem; letter-spacing: .08em; }
+.timeline-chapters { margin-top: 7px; color: var(--gold-soft); font-size: .8rem; letter-spacing: .05em; }
+.timeline-realm { margin-top: 13px; }
+.timeline-desc { margin: 14px 0 0; color: var(--text-secondary); font-size: .92rem; line-height: 1.9; }
+.timeline-desc b { color: #d9c08e; font-weight: 600; }
+
+/* World: realm ladder */
+.realms-ladder {
+  position: relative;
+  width: min(850px, 100%);
+  margin: 0 auto;
+  display: grid;
+  gap: 12px;
+}
+.realms-ladder::before {
+  content: "";
+  position: absolute;
+  left: 31px; top: 36px; bottom: 36px;
+  width: 1px;
+  background: linear-gradient(var(--jade-dark), var(--gold), #d7e8df);
+  opacity: .42;
+}
+.realm-step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  align-items: center;
+  gap: 20px;
+  padding: 18px 20px 18px 0;
+  border-radius: 14px;
+  transition: .3s ease;
+}
+.realm-step:hover { background: rgba(121,198,172,.035); transform: translateX(6px); }
+.realm-icon {
+  position: relative;
+  z-index: 2;
+  width: 64px; aspect-ratio: 1;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  border: 1px solid rgba(121,198,172,.34);
+  color: var(--jade);
+  background: radial-gradient(circle, #142720, #07100e 74%);
+  box-shadow: 0 0 0 7px #08110f, 0 0 24px rgba(121,198,172,.07);
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+}
+.realm-info {
+  position: relative;
+  min-height: 92px;
+  padding: 16px 18px;
+  border-left: 2px solid rgba(208,173,103,.2);
+  background: linear-gradient(90deg, rgba(255,255,255,.025), transparent 85%);
+}
+.realm-name { color: var(--paper); font-family: var(--font-display); font-size: 1.12rem; letter-spacing: .09em; }
+.realm-desc { margin-top: 7px; color: var(--text-secondary); font-size: .87rem; line-height: 1.72; }
+.realm-lifespan { margin-top: 6px; color: var(--gold-soft); font-size: .76rem; }
+.info-grid { margin-bottom: 30px; }
+.info-grid .card { min-height: 175px; }
+
+/* Map */
+.map-container {
+  position: relative;
+  overflow: hidden;
+  min-height: 520px;
+  border: 1px solid rgba(208,173,103,.22);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(121,198,172,.06), transparent 45%),
+    linear-gradient(145deg, rgba(13,28,23,.84), rgba(5,10,9,.93));
+  box-shadow: inset 0 0 80px rgba(0,0,0,.42), var(--shadow-soft);
+}
+.map-container::before {
+  content: "山 河 图";
+  position: absolute;
+  top: 22px; right: 27px;
+  color: rgba(208,173,103,.17);
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  letter-spacing: .25em;
+  writing-mode: vertical-rl;
+  pointer-events: none;
+  z-index: 2;
+}
+.map-container::after {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  border: 1px solid rgba(208,173,103,.08);
+  border-radius: 12px;
+  pointer-events: none;
+}
+.map-svg { display: block; filter: drop-shadow(0 12px 25px rgba(0,0,0,.28)); }
+.map-region { cursor: pointer; transform-origin: center; transition: filter .25s ease, opacity .25s ease; }
+.map-region:hover { filter: brightness(1.28) drop-shadow(0 0 10px rgba(121,198,172,.18)); }
+.map-region text { pointer-events: none; }
+.map-tooltip {
+  position: fixed;
+  z-index: 1600;
+  max-width: 300px;
+  padding: 12px 14px;
+  border: 1px solid rgba(208,173,103,.32);
+  border-radius: 10px;
+  background: rgba(5,12,10,.94);
+  box-shadow: 0 14px 40px rgba(0,0,0,.38);
+  backdrop-filter: blur(14px);
+  font-size: .82rem;
+  line-height: 1.65;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(7px);
+  transition: .16s ease;
+}
+.map-tooltip.visible { opacity: 1; visibility: visible; transform: none; }
+.realm-tab { min-width: 92px; }
+
+/* Footer */
+.site-footer {
+  position: relative;
+  width: min(1180px, calc(100% - 40px));
+  margin: 20px auto 0;
+  padding: 30px 0 42px;
+  color: var(--text-dim);
+  text-align: center;
+  font-size: .78rem;
+  line-height: 1.8;
+  border-top: 1px solid var(--line);
+}
+.site-footer::before {
+  content: "✦";
+  position: absolute;
+  top: -10px; left: 50%; transform: translateX(-50%);
+  width: 38px;
+  color: var(--gold-soft);
+  background: var(--ink-950);
+}
+
+/* Reveal + misc */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1); }
+.reveal.is-visible { opacity: 1; transform: none; }
+.back-to-top {
+  position: fixed;
+  right: 22px; bottom: 22px;
+  z-index: 900;
+  width: 44px; height: 44px;
+  display: grid; place-items: center;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  color: var(--gold);
+  background: rgba(7,15,13,.82);
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+  opacity: 0; visibility: hidden; transform: translateY(10px);
+  transition: .25s ease;
+}
+.back-to-top.visible { opacity: 1; visibility: visible; transform: none; }
+.back-to-top:hover { border-color: var(--gold); transform: translateY(-3px); }
+body.modal-open { overflow: hidden; }
+
+/* Page-specific accents */
+.page-characters { --page-accent: var(--jade); }
+.page-plot { --page-accent: var(--gold); }
+.page-world { --page-accent: var(--purple); }
+.page-map { --page-accent: var(--blue); }
+.page-header .page-title { background: linear-gradient(135deg, var(--paper), color-mix(in srgb, var(--page-accent, var(--jade)) 60%, var(--paper))); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* Responsive */
+@media (max-width: 980px) {
+  .characters-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .toolbar { grid-template-columns: 1fr; }
+  .filter-group { justify-content: flex-start; }
+  .spirit-bottle { right: 1%; opacity: .25; }
+}
+@media (max-width: 760px) {
+  :root { --nav-h: 64px; }
+  .nav-inner, .main-content, .site-footer { width: min(100% - 28px, 1180px); }
+  .nav-toggle { display: grid; place-items: center; }
+  .nav-links {
+    position: absolute;
+    left: 14px; right: 14px; top: calc(100% + 10px);
+    display: grid;
+    gap: 4px;
+    padding: 10px;
+    border: 1px solid var(--line-strong);
+    border-radius: 14px;
+    background: rgba(6,14,12,.96);
+    box-shadow: 0 20px 50px rgba(0,0,0,.45);
+    opacity: 0; visibility: hidden; transform: translateY(-8px);
+    transition: .25s ease;
+  }
+  .top-nav.menu-open .nav-links { opacity: 1; visibility: visible; transform: none; }
+  .nav-links a { padding: 12px 14px; }
+  .main-content { padding-top: 30px; }
+  .hero-section { min-height: 500px; padding-inline: 8px; }
+  .hero-title { letter-spacing: .06em; text-indent: .06em; }
+  .features-grid, .info-grid, .characters-grid { grid-template-columns: 1fr; }
+  .character-card[style*="grid-column:1/-1"] { grid-column: auto !important; }
+  .toolbar { position: relative; top: auto; }
+  .filter-group { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
+  .filter-group::-webkit-scrollbar { display:none; }
+  .filter-btn { white-space: nowrap; }
+  .timeline::before { left: 18px; }
+  .timeline-item { padding-left: 52px; }
+  .timeline-marker { left: 7px; }
+  .timeline-content { padding: 22px 20px; }
+  .timeline-content::before { top: 30px; }
+  .realm-step { grid-template-columns: 48px 1fr; gap: 12px; }
+  .realm-icon { width: 48px; box-shadow: 0 0 0 5px #08110f; }
+  .realms-ladder::before { left: 23px; }
+  .realm-info { padding-right: 2px; }
+  .map-container { min-height: 380px !important; padding: 8px !important; overflow-x: auto; }
+  .map-svg { min-width: 760px; }
+  .page-header { padding-bottom: 40px; }
+  .modal-overlay { padding: 10px; }
+  .modal-content { max-height: calc(100vh - 20px); border-radius: 16px; }
+  .spirit-bottle { display: none; }
+}
+@media (max-width: 480px) {
+  .nav-logo { font-size: 1.15rem; }
+  .logo-icon { width: 32px; }
+  .hero-section { min-height: 440px; }
+  .card { padding: 21px; }
+  .hero-desc br { display: none; }
+  .back-to-top { right: 14px; bottom: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .001ms !important; }
+  .reveal { opacity: 1; transform: none; }
+}
+
+</style>
+<style id="fanren-v2-theme">
+
+/* =========================================================
+   凡人阅读助手 V2 · 玄墨天青沉浸主题
+   纯 CSS/SVG 意象，不依赖外部图片和在线字体
+   ========================================================= */
+:root{
+  --v2-night:#020706;
+  --v2-ink:#06100d;
+  --v2-ink2:#0b1915;
+  --v2-ink3:#112720;
+  --v2-jade:#7ef2c8;
+  --v2-jade2:#36b994;
+  --v2-jade3:#174f42;
+  --v2-gold:#e2be73;
+  --v2-gold2:#8d6b35;
+  --v2-red:#d85a47;
+  --v2-paper:#e8dcc1;
+  --v2-muted:#9eaa9e;
+  --v2-shadow:0 30px 90px rgba(0,0,0,.58);
+}
+html{background:var(--v2-night)}
+body{
+  background:
+    radial-gradient(circle at 50% -20%,rgba(56,198,151,.16),transparent 34%),
+    radial-gradient(circle at 92% 15%,rgba(210,170,91,.11),transparent 24%),
+    linear-gradient(180deg,#020706 0,#07120f 32%,#020706 100%)!important;
+}
+body::before{
+  opacity:.32!important;
+  background-image:
+    radial-gradient(circle,rgba(126,242,200,.18) 0 1px,transparent 1.5px),
+    linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px)!important;
+  background-size:78px 78px,46px 46px,46px 46px!important;
+  animation:v2-star-drift 24s linear infinite;
+}
+body::after{
+  position:fixed!important;
+  inset:auto 0 0!important;
+  height:46vh!important;
+  clip-path:none!important;
+  opacity:.9!important;
+  background:
+    linear-gradient(158deg,transparent 0 59%,rgba(8,22,18,.82) 59.2%) 0 0/36% 100% no-repeat,
+    linear-gradient(201deg,transparent 0 61%,rgba(4,13,11,.92) 61.2%) 30% 0/45% 100% no-repeat,
+    linear-gradient(155deg,transparent 0 54%,rgba(10,27,22,.76) 54.2%) 68% 0/40% 100% no-repeat,
+    linear-gradient(180deg,transparent,rgba(1,5,4,.96));
+  filter:drop-shadow(0 -30px 55px rgba(0,0,0,.3));
+}
+@keyframes v2-star-drift{to{background-position:78px 156px,0 0,0 0}}
+
+/* 顶部导航：像悬浮的青铜法器边框 */
+.top-nav{
+  height:78px!important;
+  background:linear-gradient(180deg,rgba(2,8,6,.97),rgba(5,15,12,.82))!important;
+  border-bottom:1px solid rgba(226,190,115,.22)!important;
+  box-shadow:0 12px 55px rgba(0,0,0,.45)!important;
+}
+.nav-inner{max-width:1320px!important;padding:0 34px!important}
+.nav-logo{gap:13px!important;font-family:var(--font-heading)!important;font-size:1.35rem!important;letter-spacing:.16em!important}
+.logo-icon{
+  width:43px!important;height:43px!important;border-radius:50%!important;display:grid!important;place-items:center!important;
+  color:var(--v2-jade)!important;border:1px solid rgba(126,242,200,.45)!important;
+  background:radial-gradient(circle,rgba(126,242,200,.14),rgba(5,18,14,.9) 68%)!important;
+  box-shadow:0 0 0 5px rgba(126,242,200,.035),0 0 30px rgba(54,185,148,.22)!important;
+  animation:v2-logo-breathe 3s ease-in-out infinite;
+}
+@keyframes v2-logo-breathe{50%{box-shadow:0 0 0 8px rgba(126,242,200,.025),0 0 38px rgba(54,185,148,.38)}}
+.nav-links{gap:4px!important}
+.nav-links a{position:relative!important;padding:12px 17px!important;font-size:.91rem!important;letter-spacing:.1em!important;color:#aeb9ae!important}
+.nav-links a::before{content:"";position:absolute;inset:5px 9px;border:1px solid transparent;clip-path:polygon(9px 0,100% 0,100% calc(100% - 9px),calc(100% - 9px) 100%,0 100%,0 9px);transition:.3s}
+.nav-links a:hover,.nav-links a.active{color:var(--v2-paper)!important;background:rgba(126,242,200,.035)!important}
+.nav-links a:hover::before,.nav-links a.active::before{border-color:rgba(226,190,115,.35)}
+.nav-links a.active::after{height:2px!important;background:linear-gradient(90deg,transparent,var(--v2-jade),var(--v2-gold),transparent)!important;box-shadow:0 0 12px var(--v2-jade)}
+
+.app-container{position:relative!important;z-index:2!important;max-width:none!important;padding:0!important}
+.main-content{max-width:1280px!important;margin:auto!important;padding:0 42px 70px!important}
+
+/* 通用页面题头：古卷门楣 */
+.page-header{
+  position:relative!important;margin:0 -42px 42px!important;padding:98px 42px 68px!important;min-height:330px!important;
+  display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;
+  background:
+    radial-gradient(circle at 50% 18%,rgba(72,201,158,.14),transparent 25%),
+    linear-gradient(180deg,rgba(5,17,14,.18),rgba(5,14,12,.76));
+  border-bottom:1px solid rgba(226,190,115,.17)!important;
+}
+.page-header::before{
+  content:attr(data-kicker)!important;position:relative!important;inset:auto!important;order:-1!important;
+  color:rgba(126,242,200,.68)!important;font:600 .69rem/1 var(--font-serif)!important;letter-spacing:.48em!important;
+  margin:0 0 23px!important;padding-left:.48em!important;background:none!important;width:auto!important;height:auto!important;clip-path:none!important;
+}
+.page-header::after{
+  content:""!important;position:absolute!important;left:50%!important;bottom:-108px!important;width:720px!important;height:280px!important;transform:translateX(-50%)!important;
+  border:1px solid rgba(126,242,200,.13)!important;border-radius:50%!important;
+  box-shadow:0 0 0 38px rgba(126,242,200,.018),0 0 0 76px rgba(226,190,115,.012),0 0 120px rgba(54,185,148,.12)!important;
+  background:radial-gradient(ellipse,rgba(126,242,200,.06),transparent 65%)!important;
+}
+.page-title{position:relative!important;z-index:2!important;font-size:clamp(3rem,7vw,6.2rem)!important;font-weight:400!important;letter-spacing:.16em!important;text-shadow:0 0 40px rgba(126,242,200,.16),0 4px 0 #020706!important}
+.page-title::before,.page-title::after{content:"";display:inline-block;width:90px;height:1px;vertical-align:middle;margin:0 28px;background:linear-gradient(90deg,transparent,var(--v2-gold))}
+.page-title::after{background:linear-gradient(90deg,var(--v2-gold),transparent)}
+.page-subtitle{position:relative!important;z-index:2!important;max-width:680px!important;margin-top:19px!important;font-size:1rem!important;letter-spacing:.14em!important;color:#9eada2!important}
+.v2-header-seal{position:absolute;right:max(28px,calc((100vw - 1280px)/2 + 46px));bottom:42px;width:58px;height:58px;border:2px solid rgba(216,90,71,.75);color:rgba(216,90,71,.9);display:grid;place-items:center;font-family:var(--font-heading);font-size:1rem;line-height:1.05;transform:rotate(-7deg);box-shadow:inset 0 0 0 4px rgba(216,90,71,.08)}
+
+/* 首页：两栏仙境主视觉 */
+.page-home .main-content{max-width:none!important;padding:0!important}
+.hero-section{
+  max-width:none!important;margin:0!important;min-height:calc(100vh - 78px)!important;padding:84px max(6vw,42px) 95px!important;
+  display:grid!important;grid-template-columns:minmax(0,1.05fr) minmax(390px,.95fr)!important;align-items:center!important;text-align:left!important;overflow:hidden!important;
+  background:
+    radial-gradient(circle at 72% 42%,rgba(82,230,180,.16),transparent 24%),
+    radial-gradient(circle at 74% 42%,rgba(226,190,115,.08),transparent 36%),
+    linear-gradient(90deg,rgba(2,8,6,.65),rgba(2,8,6,.18));
+  border-bottom:1px solid rgba(226,190,115,.16)!important;
+}
+.hero-section::before{
+  width:850px!important;height:850px!important;left:auto!important;right:-150px!important;top:50%!important;transform:translateY(-50%)!important;
+  border:1px solid rgba(126,242,200,.11)!important;border-radius:50%!important;background:none!important;
+  box-shadow:0 0 0 55px rgba(126,242,200,.018),0 0 0 112px rgba(226,190,115,.012),0 0 120px rgba(54,185,148,.1)!important;
+  animation:v2-orbit 28s linear infinite!important;
+}
+.hero-section::after{
+  content:""!important;position:absolute!important;inset:auto 0 0!important;height:38%!important;background:
+    linear-gradient(158deg,transparent 0 56%,rgba(13,34,28,.8) 56.3%) 0 100%/38% 100% no-repeat,
+    linear-gradient(205deg,transparent 0 60%,rgba(4,17,14,.95) 60.3%) 22% 100%/52% 100% no-repeat,
+    linear-gradient(157deg,transparent 0 60%,rgba(10,26,22,.86) 60.3%) 72% 100%/38% 100% no-repeat,
+    linear-gradient(180deg,transparent,rgba(1,6,5,.92))!important;opacity:.96!important;clip-path:none!important;
+}
+@keyframes v2-orbit{to{transform:translateY(-50%) rotate(360deg)}}
+.hero-glow{left:72%!important;top:43%!important;width:510px!important;height:510px!important;background:radial-gradient(circle,rgba(82,240,190,.2),rgba(43,149,116,.06) 37%,transparent 67%)!important;filter:blur(18px)!important;animation:v2-glow 5s ease-in-out infinite!important}
+@keyframes v2-glow{50%{transform:translate(-50%,-50%) scale(1.14);opacity:.7}}
+.hero-title{position:relative!important;z-index:3!important;max-width:720px!important;font-size:clamp(4.5rem,8.5vw,9rem)!important;line-height:.9!important;letter-spacing:.08em!important;text-shadow:0 0 55px rgba(126,242,200,.13),0 8px 0 rgba(0,0,0,.4)!important}
+.hero-title::before{content:"A MORTAL'S JOURNEY";display:block;margin-bottom:28px;color:var(--v2-jade);font:600 .72rem/1 var(--font-serif);letter-spacing:.44em;padding-left:.44em;opacity:.78}
+.hero-title small{margin:35px 0 0!important;font-size:clamp(1rem,2vw,1.45rem)!important;letter-spacing:.55em!important;color:var(--v2-gold)!important;text-align:left!important;padding-left:.3em!important}
+.hero-divider{margin:33px 0 26px!important;width:300px!important;height:1px!important;background:linear-gradient(90deg,var(--v2-gold),var(--v2-jade),transparent)!important;box-shadow:0 0 15px rgba(126,242,200,.3)!important}
+.hero-desc{position:relative!important;z-index:3!important;max-width:570px!important;margin:0!important;color:#aeb9b0!important;font-size:1.05rem!important;line-height:2.12!important;letter-spacing:.08em!important}
+.v2-bottle-stage{position:relative;z-index:4;display:grid;place-items:center;min-height:630px;perspective:1000px}
+.v2-bottle-orbit{position:absolute;width:510px;height:510px;border:1px solid rgba(126,242,200,.16);border-radius:50%;animation:v2-spin 22s linear infinite}
+.v2-bottle-orbit::before,.v2-bottle-orbit::after{content:"";position:absolute;border-radius:50%;border:1px dashed rgba(226,190,115,.18)}
+.v2-bottle-orbit::before{inset:46px;animation:v2-spin 16s linear reverse infinite}.v2-bottle-orbit::after{inset:102px;border-style:solid;border-color:rgba(126,242,200,.1)}
+@keyframes v2-spin{to{transform:rotate(360deg)}}
+.v2-rune{position:absolute;color:rgba(226,190,115,.74);font-family:var(--font-heading);font-size:1.4rem;text-shadow:0 0 12px rgba(226,190,115,.35)}
+.v2-rune.r1{top:6%;left:50%}.v2-rune.r2{right:6%;top:50%}.v2-rune.r3{bottom:6%;left:50%}.v2-rune.r4{left:6%;top:50%}
+.v2-bottle{
+  position:relative;width:190px;height:315px;border-radius:48% 48% 31% 31%/23% 23% 15% 15%;
+  background:
+    radial-gradient(circle at 50% 58%,rgba(154,255,218,.52),transparent 13%),
+    linear-gradient(90deg,rgba(5,37,29,.98),rgba(40,130,100,.92) 43%,rgba(10,55,43,.98));
+  border:2px solid rgba(165,255,222,.48);box-shadow:inset 15px 0 28px rgba(255,255,255,.05),inset -22px 0 38px rgba(0,0,0,.5),0 0 42px rgba(60,220,168,.32),0 35px 90px rgba(0,0,0,.65);
+  animation:v2-float 4.5s ease-in-out infinite;transform-style:preserve-3d;
+}
+.v2-bottle::before{content:"";position:absolute;left:50%;top:-80px;width:86px;height:100px;transform:translateX(-50%);border-radius:18px 18px 9px 9px;background:linear-gradient(90deg,#092d24,#2e8d6e 52%,#0a3d30);border:2px solid rgba(165,255,222,.42);box-shadow:inset 0 10px 18px rgba(255,255,255,.05),0 0 24px rgba(60,220,168,.22)}
+.v2-bottle::after{content:"掌\A 天";white-space:pre;position:absolute;inset:68px 38px 66px;display:grid;place-items:center;border:1px solid rgba(226,190,115,.32);color:rgba(232,220,193,.84);font-family:var(--font-heading);font-size:2.2rem;line-height:1.5;text-align:center;background:radial-gradient(circle,rgba(226,190,115,.08),transparent 65%);clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px)}
+@keyframes v2-float{50%{transform:translateY(-18px) rotateY(5deg);filter:brightness(1.12)}}
+.v2-bottle-mist{position:absolute;width:460px;height:180px;bottom:65px;border-radius:50%;background:radial-gradient(ellipse,rgba(126,242,200,.12),transparent 70%);filter:blur(20px);animation:v2-mist 6s ease-in-out infinite}
+@keyframes v2-mist{50%{transform:scaleX(1.18);opacity:.55}}
+.v2-scroll-cta{position:absolute;left:max(6vw,42px);bottom:33px;z-index:5;color:#7e8e82;font-size:.68rem;letter-spacing:.32em;writing-mode:vertical-rl;display:flex;align-items:center;gap:12px}
+.v2-scroll-cta::after{content:"";width:1px;height:62px;background:linear-gradient(var(--v2-jade),transparent);animation:v2-scroll-line 1.8s ease-in-out infinite}
+@keyframes v2-scroll-line{50%{transform:translateY(8px);opacity:.35}}
+
+/* 首页功能入口：四卷古籍 */
+.page-home .features-grid{max-width:1280px;margin:-40px auto 40px!important;padding:0 42px;position:relative;z-index:8;grid-template-columns:repeat(4,1fr)!important;gap:18px!important}
+.feature-card{
+  min-height:345px!important;padding:34px 29px 28px!important;border:1px solid rgba(226,190,115,.22)!important;border-radius:3px 22px 3px 22px!important;
+  background:
+   linear-gradient(135deg,rgba(226,190,115,.07),transparent 20%),
+   linear-gradient(160deg,rgba(13,34,28,.96),rgba(4,13,11,.98))!important;
+  box-shadow:0 18px 55px rgba(0,0,0,.38),inset 0 0 0 1px rgba(255,255,255,.02)!important;overflow:hidden!important;
+}
+.feature-card::before{content:attr(data-volume);position:absolute;right:17px;top:15px;color:rgba(226,190,115,.42);font-family:var(--font-heading);font-size:.78rem;writing-mode:vertical-rl;letter-spacing:.25em}
+.feature-card::after{content:"";position:absolute;inset:10px;border:1px solid rgba(126,242,200,.08);clip-path:polygon(16px 0,100% 0,100% calc(100% - 16px),calc(100% - 16px) 100%,0 100%,0 16px);pointer-events:none}
+.feature-card:hover{transform:translateY(-10px)!important;border-color:rgba(126,242,200,.35)!important;box-shadow:0 30px 75px rgba(0,0,0,.55),0 0 35px rgba(54,185,148,.12)!important}
+.feature-icon{width:76px!important;height:76px!important;border:1px solid rgba(126,242,200,.3)!important;border-radius:50%!important;background:radial-gradient(circle,rgba(126,242,200,.12),rgba(5,20,16,.8))!important;color:var(--v2-jade)!important;display:grid!important;place-items:center!important;font-size:0!important;box-shadow:0 0 0 7px rgba(126,242,200,.025),0 0 32px rgba(54,185,148,.16)!important}
+.feature-icon::before{font:400 2rem/1 var(--font-heading)}
+.feature-card:nth-child(1) .feature-icon::before{content:"命"}.feature-card:nth-child(2) .feature-icon::before{content:"轨"}.feature-card:nth-child(3) .feature-icon::before{content:"法"}.feature-card:nth-child(4) .feature-icon::before{content:"界"}
+.feature-card .card-title{font-size:1.65rem!important;letter-spacing:.16em!important;margin-top:26px!important;color:var(--v2-paper)!important}
+.feature-card p{font-size:.9rem!important;line-height:1.9!important;color:#97a49a!important}
+.feature-card .btn{margin-top:auto!important;align-self:flex-start!important;background:transparent!important;border:0!important;border-bottom:1px solid rgba(226,190,115,.4)!important;border-radius:0!important;padding:9px 0!important;color:var(--v2-gold)!important;letter-spacing:.18em!important}
+.page-home .features-grid + div{max-width:1280px;margin:auto!important;padding:45px 42px 90px!important;gap:12px!important}
+.page-home .features-grid + div .card{border-radius:0!important;background:linear-gradient(180deg,rgba(11,30,24,.88),rgba(4,14,11,.96))!important;border-top:2px solid rgba(126,242,200,.25)!important;padding:28px 20px!important}
+
+/* 通用卡片：玉石边、卷轴角 */
+.card{border:1px solid rgba(226,190,115,.16)!important;background:linear-gradient(145deg,rgba(12,29,24,.9),rgba(4,13,11,.95))!important;box-shadow:0 16px 50px rgba(0,0,0,.3)!important;backdrop-filter:blur(8px)}
+.card::before{background:linear-gradient(90deg,transparent,rgba(126,242,200,.48),rgba(226,190,115,.36),transparent)!important;height:1px!important}
+.card:hover{border-color:rgba(126,242,200,.28)!important;box-shadow:0 25px 70px rgba(0,0,0,.5),0 0 30px rgba(54,185,148,.07)!important}
+.card-title{font-family:var(--font-display)!important;letter-spacing:.11em!important}
+.tag{border-radius:2px 9px 2px 9px!important;letter-spacing:.07em!important;background:rgba(255,255,255,.025)!important;border-color:rgba(226,190,115,.18)!important}
+.tag-gold{color:#e7c77f!important;background:rgba(226,190,115,.075)!important;border-color:rgba(226,190,115,.3)!important}
+.tag-jade{color:#8ee8c5!important;background:rgba(54,185,148,.07)!important;border-color:rgba(126,242,200,.22)!important}
+.tag-cinnabar{color:#ef8f7d!important;background:rgba(216,90,71,.08)!important;border-color:rgba(216,90,71,.26)!important}
+
+/* 人物页：众生命牌谱 */
+.page-characters .page-header::after{box-shadow:0 0 0 38px rgba(216,90,71,.012),0 0 0 76px rgba(126,242,200,.012),0 0 120px rgba(54,185,148,.1)!important}
+.toolbar{position:sticky!important;top:94px!important;z-index:50!important;padding:18px!important;margin:0 0 30px!important;border:1px solid rgba(226,190,115,.18)!important;border-radius:2px 18px 2px 18px!important;background:rgba(4,14,11,.88)!important;backdrop-filter:blur(18px)!important;box-shadow:0 18px 50px rgba(0,0,0,.3)!important}
+.search-box{border-radius:2px 14px 2px 14px!important;border-color:rgba(126,242,200,.2)!important;background:rgba(126,242,200,.035)!important}
+.search-box:focus-within{border-color:rgba(126,242,200,.55)!important;box-shadow:0 0 0 4px rgba(126,242,200,.04),0 0 22px rgba(54,185,148,.1)!important}
+.filter-btn{position:relative!important;border-radius:2px 10px 2px 10px!important;background:transparent!important;border-color:rgba(226,190,115,.16)!important}
+.filter-btn.active{background:linear-gradient(135deg,rgba(216,90,71,.18),rgba(226,190,115,.08))!important;border-color:rgba(216,90,71,.5)!important;color:#f0c5b8!important;box-shadow:inset 0 0 18px rgba(216,90,71,.06)!important}
+.characters-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:24px!important;align-items:stretch!important;position:relative}
+.characters-grid::before{content:"";position:absolute;inset:30px 6% auto;height:1px;background:linear-gradient(90deg,transparent,rgba(216,90,71,.34),rgba(226,190,115,.3),rgba(216,90,71,.34),transparent);z-index:-1}
+.character-card{
+  min-height:310px!important;padding:31px 27px 28px!important;border-radius:3px 20px 3px 20px!important;cursor:pointer!important;overflow:hidden!important;
+  background:
+    radial-gradient(circle at 86% 16%,rgba(126,242,200,.07),transparent 18%),
+    linear-gradient(152deg,rgba(13,33,27,.98),rgba(3,12,10,.98))!important;
+  transform-style:preserve-3d!important;
+}
+.character-card::after{content:"";position:absolute;inset:10px;border:1px solid rgba(226,190,115,.075);clip-path:polygon(14px 0,100% 0,100% calc(100% - 14px),calc(100% - 14px) 100%,0 100%,0 14px);pointer-events:none}
+.character-card::before{height:2px!important;background:linear-gradient(90deg,var(--v2-red),var(--v2-gold),transparent)!important;opacity:.7!important}
+.character-card:hover{transform:translateY(-9px) rotateX(1deg)!important;border-color:rgba(216,90,71,.38)!important;box-shadow:0 34px 80px rgba(0,0,0,.55),0 0 30px rgba(216,90,71,.06)!important}
+.character-card .char-header{padding-right:76px!important;min-height:70px!important}
+.char-name{font-size:1.7rem!important;letter-spacing:.16em!important;color:var(--v2-paper)!important;text-shadow:0 0 24px rgba(126,242,200,.08)}
+.char-alias{margin-top:8px!important;color:#9aaa9d!important;font-size:.78rem!important;letter-spacing:.1em!important}
+.char-realm{position:absolute!important;right:25px!important;top:28px!important}
+.char-meta{margin-top:24px!important;border-top:1px dashed rgba(226,190,115,.14)!important;padding-top:17px!important}
+.char-desc{margin-top:18px!important;color:#99a69c!important;line-height:1.85!important}
+.v2-life-seal{position:absolute;right:24px;bottom:22px;width:45px;height:45px;display:grid;place-items:center;border:2px solid rgba(216,90,71,.62);color:rgba(216,90,71,.82);font-family:var(--font-heading);font-size:1.3rem;transform:rotate(-8deg);opacity:.9;box-shadow:inset 0 0 0 3px rgba(216,90,71,.06)}
+.v2-hanging-cord{position:absolute;left:50%;top:-24px;width:1px;height:30px;background:linear-gradient(var(--v2-red),rgba(216,90,71,.16));box-shadow:0 0 8px rgba(216,90,71,.25)}
+.character-card[style*="grid-column"]{min-height:360px!important;display:grid!important;grid-template-columns:minmax(0,.8fr) minmax(320px,1.2fr)!important;align-content:center!important;padding:50px 44px!important;background:radial-gradient(circle at 20% 50%,rgba(126,242,200,.13),transparent 24%),linear-gradient(110deg,rgba(9,31,24,.98),rgba(4,13,11,.98))!important}
+.character-card[style*="grid-column"] .char-name{font-size:3.1rem!important}.character-card[style*="grid-column"] .char-desc{grid-column:2;grid-row:1/5;font-size:1rem!important;padding-left:35px;border-left:1px solid rgba(226,190,115,.18);align-self:center}.character-card[style*="grid-column"] .v2-life-seal{width:64px;height:64px;font-size:1.65rem}
+.modal-overlay{background:radial-gradient(circle at 50% 30%,rgba(54,185,148,.12),transparent 30%),rgba(0,5,4,.88)!important;backdrop-filter:blur(17px)!important}
+.modal-content{border-radius:3px 28px 3px 28px!important;border-color:rgba(226,190,115,.3)!important;background:linear-gradient(145deg,rgba(18,38,31,.99),rgba(3,12,10,.995))!important;box-shadow:0 50px 150px rgba(0,0,0,.75),0 0 80px rgba(54,185,148,.08)!important;padding:50px!important}
+.modal-content::before,.modal-content::after{content:"";position:absolute;left:18px;right:18px;height:18px;border:1px solid rgba(226,190,115,.22);border-left:0;border-right:0;background:linear-gradient(90deg,transparent,rgba(226,190,115,.06),transparent)}.modal-content::before{top:14px}.modal-content::after{bottom:14px}
+.modal-name{font-size:clamp(3rem,7vw,5.4rem)!important;color:var(--v2-paper)!important}
+.modal-section h3{display:flex;align-items:center;gap:15px!important;color:var(--v2-gold)!important}.modal-section h3::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,rgba(226,190,115,.3),transparent)}
+
+/* 情节页：中央修仙命轨 */
+.page-plot .main-content{max-width:1320px!important}
+.page-plot .page-header{margin-bottom:15px!important}
+.v2-realm-rail{position:relative;margin:0 auto 72px;padding:22px 30px;display:flex;gap:0;overflow:auto;scrollbar-width:none;border:1px solid rgba(126,242,200,.14);background:linear-gradient(90deg,rgba(5,20,16,.9),rgba(13,34,28,.8),rgba(5,20,16,.9));clip-path:polygon(16px 0,100% 0,100% calc(100% - 16px),calc(100% - 16px) 100%,0 100%,0 16px)}
+.v2-realm-rail::-webkit-scrollbar{display:none}.v2-realm-node{min-width:86px;display:flex;align-items:center;justify-content:center;position:relative;color:#8d9b90;font-size:.78rem;letter-spacing:.1em}.v2-realm-node:not(:last-child)::after{content:"";position:absolute;right:-1px;width:30px;height:1px;transform:translateX(50%);background:linear-gradient(90deg,var(--v2-gold),var(--v2-jade));opacity:.34}.v2-realm-node.active{color:var(--v2-jade);text-shadow:0 0 13px rgba(126,242,200,.35)}
+.timeline{max-width:1180px!important;margin:0 auto!important;padding:15px 0 70px!important}
+.timeline::before{left:50%!important;width:2px!important;background:linear-gradient(transparent,var(--v2-jade) 8%,var(--v2-gold) 48%,var(--v2-jade) 88%,transparent)!important;box-shadow:0 0 18px rgba(126,242,200,.35)!important}
+.timeline-item{width:50%!important;padding:0 68px 52px 0!important;position:relative!important}
+.timeline-item:nth-child(even){margin-left:50%!important;padding:0 0 52px 68px!important}
+.timeline-marker{left:auto!important;right:-16px!important;top:38px!important;width:32px!important;height:32px!important;border:1px solid rgba(226,190,115,.68)!important;background:#07140f!important;box-shadow:0 0 0 7px rgba(126,242,200,.035),0 0 25px rgba(126,242,200,.2)!important}
+.timeline-item:nth-child(even) .timeline-marker{right:auto!important;left:-16px!important}
+.timeline-marker::after{inset:9px!important;background:var(--v2-jade)!important;box-shadow:0 0 15px var(--v2-jade)!important}
+.timeline-marker::before{content:attr(data-index);position:absolute;left:50%;top:-30px;transform:translateX(-50%);color:rgba(226,190,115,.62);font-size:.68rem;letter-spacing:.08em}
+.timeline-content{padding:30px 30px 28px!important;border-radius:3px 22px 3px 22px!important;background:linear-gradient(145deg,rgba(12,31,25,.96),rgba(3,12,10,.98))!important;border-color:rgba(226,190,115,.19)!important;box-shadow:0 20px 55px rgba(0,0,0,.32)!important}
+.timeline-content::before{right:-12px!important;left:auto!important;width:22px!important;height:22px!important;border:0!important;border-top:1px solid rgba(226,190,115,.22)!important;border-right:1px solid rgba(226,190,115,.22)!important;background:#071710!important;transform:rotate(45deg)!important}
+.timeline-item:nth-child(even) .timeline-content::before{left:-12px!important;right:auto!important;transform:rotate(225deg)!important}
+.timeline-item:hover .timeline-content{transform:translateY(-6px)!important;border-color:rgba(126,242,200,.34)!important;box-shadow:0 30px 75px rgba(0,0,0,.5),0 0 35px rgba(54,185,148,.08)!important}
+.timeline-arc-title{font-size:1.55rem!important;color:var(--v2-paper)!important}.timeline-chapters{display:inline-block;margin-top:10px!important;padding:5px 10px;border-left:2px solid var(--v2-red);background:rgba(216,90,71,.04);color:#be9870!important}.timeline-desc{font-size:.94rem!important;line-height:2!important}
+
+/* 世界观：登仙阶 */
+.page-world{background-image:radial-gradient(circle at 50% 24%,rgba(109,89,162,.1),transparent 25%)}
+.page-world section>h2{position:relative!important;margin:0 auto 34px!important;color:var(--v2-gold)!important;font-size:1.55rem!important;letter-spacing:.25em!important}.page-world section>h2::before,.page-world section>h2::after{content:"✦";margin:0 18px;color:rgba(126,242,200,.48);font-size:.65rem;vertical-align:middle}
+.realms-ladder{max-width:1050px!important;margin:0 auto!important;padding:20px 0 70px!important;display:grid!important;gap:18px!important}
+.realms-ladder::before{left:50%!important;width:2px!important;background:linear-gradient(transparent,var(--v2-jade),var(--v2-gold),#9a85ba,transparent)!important;box-shadow:0 0 20px rgba(126,242,200,.22)!important}
+.realm-step{width:calc(50% - 40px)!important;min-height:150px!important;margin-right:auto!important;padding:27px 28px 25px 84px!important;border-radius:2px 22px 2px 22px!important;border:1px solid rgba(226,190,115,.17)!important;background:linear-gradient(145deg,rgba(12,31,25,.96),rgba(3,12,10,.98))!important;box-shadow:0 18px 55px rgba(0,0,0,.3)!important;position:relative!important}
+.realm-step:nth-child(even){margin-left:auto!important;margin-right:0!important;padding:27px 84px 25px 28px!important;text-align:right!important}
+.realm-step:nth-child(even) .realm-icon{left:auto!important;right:-65px!important}.realm-step:nth-child(odd) .realm-icon{left:auto!important;right:-65px!important}
+.realm-icon{top:43px!important;width:50px!important;height:50px!important;border-radius:50%!important;background:radial-gradient(circle,rgba(126,242,200,.18),#071710 68%)!important;border:1px solid rgba(126,242,200,.5)!important;color:var(--v2-jade)!important;box-shadow:0 0 0 8px rgba(126,242,200,.025),0 0 28px rgba(54,185,148,.2)!important}
+.realm-step:nth-child(even) .realm-icon{right:auto!important;left:-65px!important}
+.realm-name{font-size:1.5rem!important;color:var(--v2-paper)!important;letter-spacing:.15em!important}.realm-desc{line-height:1.85!important;color:#99a69c!important}.realm-lifespan{display:inline-block;margin-top:12px!important;padding:5px 9px!important;border:1px solid rgba(226,190,115,.16)!important;color:#b79863!important;background:rgba(226,190,115,.035)!important}
+.realm-step:hover{transform:translateY(-5px)!important;border-color:rgba(126,242,200,.32)!important;box-shadow:0 28px 70px rgba(0,0,0,.45),0 0 30px rgba(54,185,148,.06)!important}
+.page-world .info-grid{gap:22px!important}.page-world .info-grid>.card{min-height:230px!important;padding:30px!important;border-radius:3px 20px 3px 20px!important;overflow:hidden!important}.page-world .info-grid>.card::after{content:"法";position:absolute;right:15px;bottom:-18px;font-family:var(--font-heading);font-size:6rem;color:rgba(126,242,200,.025);pointer-events:none}.page-world .info-grid>.card:hover::after{color:rgba(126,242,200,.05)}
+
+/* 地图页：暗色山河图卷 */
+.page-map .main-content{max-width:1380px!important}
+.page-map .page-header{margin-bottom:25px!important}
+.page-map .page-header + div{position:sticky!important;top:92px!important;z-index:60!important;width:max-content!important;margin:0 auto 28px!important;padding:8px!important;border:1px solid rgba(226,190,115,.18)!important;background:rgba(3,12,10,.9)!important;backdrop-filter:blur(18px)!important;border-radius:2px 14px 2px 14px!important}
+.realm-tab{min-width:110px!important;padding:11px 20px!important;font-family:var(--font-display)!important;letter-spacing:.18em!important}.realm-tab.active{color:var(--v2-paper)!important;border-color:rgba(126,242,200,.45)!important;background:radial-gradient(circle,rgba(126,242,200,.12),rgba(54,185,148,.04))!important;box-shadow:0 0 22px rgba(54,185,148,.09)!important}
+.map-panel>.card{border-radius:3px 18px 3px 18px!important;padding:27px 30px!important;background:linear-gradient(90deg,rgba(10,29,23,.96),rgba(4,14,11,.96))!important;border-left:3px solid var(--v2-red)!important}
+.map-container{position:relative!important;min-height:590px!important;padding:46px!important;border-radius:3px!important;overflow:hidden!important;border:1px solid rgba(226,190,115,.31)!important;background:
+ radial-gradient(circle at 50% 50%,rgba(126,242,200,.045),transparent 48%),
+ linear-gradient(rgba(226,190,115,.026) 1px,transparent 1px),
+ linear-gradient(90deg,rgba(226,190,115,.026) 1px,transparent 1px),
+ linear-gradient(145deg,#091914,#020907)!important;background-size:auto,32px 32px,32px 32px,auto!important;box-shadow:var(--v2-shadow),inset 0 0 100px rgba(0,0,0,.55)!important}
+.map-container::before{content:""!important;inset:14px!important;border:1px solid rgba(226,190,115,.19)!important;border-radius:0!important;background:none!important;box-shadow:inset 0 0 0 5px rgba(226,190,115,.015)!important;clip-path:polygon(18px 0,100% 0,100% calc(100% - 18px),calc(100% - 18px) 100%,0 100%,0 18px)!important}
+.map-container::after{content:"山河图"!important;inset:auto 31px 25px auto!important;width:auto!important;height:auto!important;color:rgba(216,90,71,.55)!important;border:2px solid rgba(216,90,71,.34)!important;padding:8px 7px!important;font:400 1rem/1.1 var(--font-heading)!important;writing-mode:vertical-rl!important;background:rgba(216,90,71,.025)!important;clip-path:none!important;transform:rotate(-4deg)!important;opacity:1!important}
+.map-svg{min-width:900px!important;filter:drop-shadow(0 18px 28px rgba(0,0,0,.4))!important}
+.map-region{cursor:pointer!important;outline:none!important}.map-region ellipse,.map-region path,.map-region polygon{transition:filter .3s,stroke-width .3s,opacity .3s!important}.map-region:hover ellipse,.map-region:focus ellipse,.map-region:hover path,.map-region:focus path{filter:drop-shadow(0 0 12px rgba(126,242,200,.55))!important;stroke-width:2.5!important}.map-region:focus{outline:none}.map-region text{font-family:var(--font-heading)!important;letter-spacing:.06em!important;text-shadow:0 2px 8px rgba(0,0,0,.8)}
+.v2-compass{position:absolute;left:28px;top:26px;width:92px;height:92px;border:1px solid rgba(226,190,115,.32);border-radius:50%;display:grid;place-items:center;color:rgba(226,190,115,.72);font-family:var(--font-heading);background:radial-gradient(circle,rgba(226,190,115,.08),rgba(3,12,10,.65) 68%);box-shadow:0 0 0 8px rgba(226,190,115,.02),0 0 24px rgba(0,0,0,.38);pointer-events:none;z-index:4}.v2-compass::before{content:"北";position:absolute;top:7px;font-size:.72rem}.v2-compass::after{content:"◆";font-size:2rem;color:rgba(126,242,200,.72);transform:rotate(45deg);text-shadow:0 0 13px rgba(126,242,200,.35)}
+.v2-map-tip{position:fixed;z-index:2000;max-width:280px;padding:13px 15px;border:1px solid rgba(226,190,115,.28);border-radius:2px 12px 2px 12px;background:rgba(2,10,8,.95);color:#aeb9b0;box-shadow:0 18px 45px rgba(0,0,0,.5);pointer-events:none;opacity:0;transform:translateY(8px);transition:.18s}.v2-map-tip.show{opacity:1;transform:none}.v2-map-tip b{display:block;color:var(--v2-gold);font-family:var(--font-display);letter-spacing:.1em;margin-bottom:5px}
+
+/* 滚动显现、悬浮光晕和返回顶部 */
+.reveal{transform:translateY(28px) scale(.985)!important;filter:blur(2px)!important;transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1),filter .8s ease!important}.reveal.is-visible{filter:none!important}
+.back-to-top{width:50px!important;height:50px!important;border-radius:3px 16px 3px 16px!important;border-color:rgba(226,190,115,.28)!important;background:rgba(3,14,11,.88)!important;color:var(--v2-jade)!important;box-shadow:0 14px 45px rgba(0,0,0,.42),0 0 20px rgba(54,185,148,.08)!important}
+.v2-cursor-aura{position:fixed;left:0;top:0;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(126,242,200,.055),transparent 65%);transform:translate(-50%,-50%);pointer-events:none;z-index:1;transition:opacity .25s;mix-blend-mode:screen}
+.site-footer{position:relative!important;z-index:3!important;border-top:1px solid rgba(226,190,115,.14)!important;background:rgba(1,7,5,.8)!important;padding:38px 24px!important}
+
+/* 平板与手机 */
+@media(max-width:1000px){
+  .hero-section{grid-template-columns:1fr minmax(330px,.72fr)!important}.hero-title{font-size:clamp(4rem,9vw,7rem)!important}
+  .page-home .features-grid{grid-template-columns:repeat(2,1fr)!important}
+  .characters-grid{grid-template-columns:repeat(2,1fr)!important}
+  .character-card[style*="grid-column"]{grid-template-columns:1fr!important}.character-card[style*="grid-column"] .char-desc{grid-column:auto;grid-row:auto;padding-left:0;border-left:0}
+}
+@media(max-width:760px){
+  .main-content{padding:0 18px 55px!important}.page-header{margin:0 -18px 30px!important;padding:78px 18px 50px!important;min-height:270px!important}
+  .page-title{letter-spacing:.08em!important}.page-title::before,.page-title::after{width:34px;margin:0 9px}.v2-header-seal{right:18px;bottom:18px;width:43px;height:43px;font-size:.78rem}
+  .nav-inner{padding:0 18px!important}.nav-links{background:rgba(2,10,8,.98)!important;border-color:rgba(226,190,115,.18)!important}
+  .hero-section{min-height:900px!important;grid-template-columns:1fr!important;padding:72px 22px 100px!important;text-align:center!important}.hero-title{text-align:center!important;font-size:clamp(4.2rem,20vw,7rem)!important}.hero-title small{text-align:center!important}.hero-divider{margin:30px auto 24px!important}.hero-desc{margin:auto!important}.v2-bottle-stage{min-height:420px!important;transform:scale(.75);margin-top:-30px}.v2-scroll-cta{display:none}
+  .page-home .features-grid{grid-template-columns:1fr!important;padding:0 18px!important;margin:-30px auto 20px!important}.feature-card{min-height:300px!important}.page-home .features-grid + div{padding:30px 18px 70px!important;grid-template-columns:repeat(2,1fr)!important}
+  .toolbar{top:84px!important;padding:12px!important}.characters-grid{grid-template-columns:1fr!important}.character-card[style*="grid-column"]{grid-column:auto!important;padding:34px 27px!important;min-height:330px!important}.character-card[style*="grid-column"] .char-name{font-size:2.2rem!important}
+  .timeline::before{left:18px!important}.timeline-item,.timeline-item:nth-child(even){width:100%!important;margin-left:0!important;padding:0 0 38px 54px!important}.timeline-marker,.timeline-item:nth-child(even) .timeline-marker{left:3px!important;right:auto!important;top:30px!important}.timeline-content::before,.timeline-item:nth-child(even) .timeline-content::before{left:-10px!important;right:auto!important;transform:rotate(225deg)!important}.timeline-content{padding:24px 20px!important}
+  .realms-ladder::before{left:24px!important}.realm-step,.realm-step:nth-child(even){width:calc(100% - 55px)!important;margin-left:55px!important;margin-right:0!important;padding:24px 20px!important;text-align:left!important}.realm-step .realm-icon,.realm-step:nth-child(even) .realm-icon,.realm-step:nth-child(odd) .realm-icon{left:-55px!important;right:auto!important;width:42px!important;height:42px!important}.realm-name{font-size:1.25rem!important}
+  .map-container{padding:24px 12px 35px!important;min-height:440px!important}.v2-compass{width:62px;height:62px;left:18px;top:18px}.map-svg{min-width:760px!important}.page-map .page-header + div{top:85px!important;width:calc(100vw - 36px)!important;overflow-x:auto!important;justify-content:flex-start!important;flex-wrap:nowrap!important}.realm-tab{min-width:90px!important}
+  .modal-content{padding:40px 24px!important}.v2-cursor-aura{display:none}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.01ms!important}.v2-cursor-aura{display:none}}
+
+</style>
+
+<style id="fanren-database-v2-world-style">
+.database-v2-world{margin:38px 0 54px}
+.v2-world-heading{
+  display:grid;grid-template-columns:1fr auto;gap:25px;align-items:end;
+  padding:29px 31px;border:1px solid rgba(226,190,115,.18);
+  border-radius:3px 21px 3px 21px;
+  background:radial-gradient(circle at 88% 20%,rgba(126,242,200,.09),transparent 28%),
+             linear-gradient(145deg,rgba(12,31,25,.94),rgba(3,12,10,.97));
+}
+.v2-world-heading span{color:#73c9aa;font-size:.63rem;letter-spacing:.3em}
+.v2-world-heading h2{margin:9px 0 7px;color:#eadfc7;font-family:var(--font-display);font-size:1.75rem;letter-spacing:.14em;font-weight:500}
+.v2-world-heading p{margin:0;color:#8d9a91;font-size:.78rem;line-height:1.8}
+.v2-world-counts{display:grid;grid-template-columns:auto auto;gap:3px 12px;align-items:center}
+.v2-world-counts b{color:#e2bd73;font-size:1.5rem;font-weight:400;text-align:right}
+.v2-world-counts small{color:#75847a;font-size:.64rem}
+.v2-world-tabs{display:flex;gap:7px;overflow-x:auto;margin:13px 0;padding:9px;border:1px solid rgba(226,190,115,.11);background:rgba(4,14,11,.68)}
+.v2-world-tabs button{min-height:35px;padding:0 14px;white-space:nowrap;border:1px solid rgba(226,190,115,.14);border-radius:2px 9px 2px 9px;color:#8e9c92;background:transparent;cursor:pointer}
+.v2-world-tabs button.active{color:#07140f;background:linear-gradient(135deg,#ddb86e,#7dc4aa);border-color:transparent}
+.v2-world-panel{display:none}.v2-world-panel.active{display:block}
+.v2-ency-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.v2-ency-card{position:relative;min-height:185px;padding:21px;border:1px solid rgba(226,190,115,.14);border-radius:3px 16px 3px 16px;background:linear-gradient(145deg,rgba(10,27,22,.91),rgba(3,11,9,.96));overflow:hidden}
+.v2-ency-icon{position:absolute;right:14px;bottom:4px;color:rgba(126,242,200,.055);font-family:var(--font-heading);font-size:5rem}
+.v2-ency-top{position:relative;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.v2-ency-top small{color:#78c4a8;font-size:.61rem;letter-spacing:.09em}
+.v2-confirmed,.v2-pending{padding:3px 7px;border-radius:99px;font-size:.56rem}
+.v2-confirmed{color:#86d5b8;border:1px solid rgba(126,242,200,.2)}
+.v2-pending{color:#e08d7c;border:1px solid rgba(216,90,71,.25);background:rgba(216,90,71,.05)}
+.v2-ency-card h4{position:relative;margin:13px 0 8px;color:#e7dcc5;font-family:var(--font-display);font-size:1.02rem;font-weight:500;letter-spacing:.08em}
+.v2-ency-card p{position:relative;margin:0;color:#89978d;font-size:.73rem;line-height:1.75}
+.v2-pending-list{padding:28px;border:1px dashed rgba(216,90,71,.3);background:rgba(216,90,71,.035)}
+.v2-pending-list h3{margin:0 0 11px;color:#e18a78;font-family:var(--font-display);font-weight:500}
+.v2-pending-list p{margin:0;color:#929e95;line-height:1.9;font-size:.79rem}
+@media(max-width:900px){.v2-ency-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.v2-world-heading{grid-template-columns:1fr}.v2-world-counts{display:none}.v2-ency-grid{grid-template-columns:1fr}}
+</style></head>
+<noscript><div style="position:fixed;left:12px;right:12px;bottom:12px;z-index:99999;padding:12px 16px;border:1px solid #d0ad67;background:#08110f;color:#e9e2d4;border-radius:10px;text-align:center">当前浏览器禁用了 JavaScript；基础内容仍可阅读，但筛选、弹窗和地图切换不可用。</div></noscript>
+<body class="page-world" data-page="world">
+<div class="cloud-layer">
+<div class="cloud"></div><div class="cloud"></div><div class="cloud"></div><div class="cloud"></div><div class="cloud"></div>
+</div>
+<nav class="top-nav">
+<div class="nav-inner">
+<a class="nav-logo" href="index.html?page=home"><span class="logo-icon">☯</span><span>凡人修仙传</span></a>
+<button aria-label="菜单" class="nav-toggle">☰</button>
+<ul class="nav-links">
+<li><a href="index.html?page=home">首页</a></li>
+<li><a href="index.html?page=characters">人物关系</a></li>
+<li><a href="index.html?page=plot">情节发展</a></li>
+<li><a class="active" href="index.html?page=world">世界观</a></li>
+<li><a href="index.html?page=map">地图</a></li>
+</ul>
+</div>
+</nav>
+<main class="app-container">
+<div class="main-content">
+<header class="page-header">
+<h1 class="page-title">世界观</h1>
+<p class="page-subtitle">修炼体系 · 功法神通 · 丹药法宝 · 天地规则</p>
+</header>
+<!-- ============ 修炼境界 ============ -->
+<section style="margin-bottom:48px">
+<h2 style="font-family:var(--font-heading);color:var(--gold);text-align:center;letter-spacing:0.08em;margin-bottom:32px">—— 修炼境界 ——</h2>
+<p style="text-align:center;color:var(--text-secondary);margin-bottom:32px;font-size:0.95rem">
+        凡人修仙传的修炼体系分为<b style="color:var(--gold)">人界</b>、<b style="color:var(--gold)">灵界</b>、<b style="color:var(--gold)">仙界</b>三大阶段，共十三大境界
+      </p>
+<div class="realms-ladder">
+<div class="realm-step">
+<div class="realm-icon">一</div>
+<div class="realm-info">
+<div class="realm-name">炼气期</div>
+<div class="realm-desc">修仙入门，感应天地灵气，淬炼己身。共十三层，突破十层可尝试筑基。</div>
+<div class="realm-lifespan">寿元：百余岁</div>
+</div>
+</div>
+<div class="realm-step">
+<div class="realm-icon">二</div>
+<div class="realm-info">
+<div class="realm-name">筑基期</div>
+<div class="realm-desc">正式踏入修仙门槛，道基铸成，灵力液化。初、中、后三期。</div>
+<div class="realm-lifespan">寿元：二百余岁</div>
+</div>
+</div>
+<div class="realm-step">
+<div class="realm-icon">三</div>
+<div class="realm-info">
+<div class="realm-name">结丹期</div>
+<div class="realm-desc">凝结金丹于丹田，丹成则为一派长老。初、中、后三期。</div>
+<div class="realm-lifespan">寿元：五百余岁</div>
+</div>
+</div>
+<div class="realm-step">
+<div class="realm-icon">四</div>
+<div class="realm-info">
+<div class="realm-name">元婴期</div>
+<div class="realm-desc">碎丹成婴，元婴凝形可出窍遨游。初、中、后三期。人界顶级战力。</div>
+<div class="realm-lifespan">寿元：千余岁</div>
+</div>
+</div>
+<div class="realm-step">
+<div class="realm-icon">五</div>
+<div class="realm-info">
+<div class="realm-name">化神期</div>
+<div class="realm-desc">化凡为神，元婴与肉身合一。人界巅峰，达到此境方可感应飞升之机。</div>
+<div class="realm-lifespan">寿元：两千余岁</div>
+</div>
+</div>
+<div class="realm-step">
+<div class="realm-icon">六</div>
+<div class="realm-info">
+<div class="realm-name">炼虚期</div>
+<div class="realm-desc">飞升灵界后的起点，将化神之力淬炼至虚空之境。初、中、后三期。</div>
+<div class="realm-lifespan">寿元：五千余岁</div>
+</div>
+</div>
+<div class="realm-step">
+<div class="realm-icon">七</div>
+<div class="realm-info">
+<div class="realm-name">合体期</div>
+<div class="realm-desc">元神与天地初步相合，举手投足皆引动天地之力。灵界中坚战力。</div>
+<div class="realm-lifespan">寿元：万余岁</div>
+</div>
+</div>
+<div class="realm-step">
+<div class="realm-icon">八</div>
+<div class="realm-info">
+<div class="realm-name">大乘期</div>
+<div class="realm-desc">灵界巅峰，渡过天劫即为大乘。万族中皆属顶尖，可准备飞升仙界。</div>
+<div class="realm-lifespan">寿元：数万至十余万岁</div>
+</div>
+</div>
+<div class="realm-step">
+<div class="realm-icon">九</div>
+<div class="realm-info">
+<div class="realm-name">真仙</div>
+<div class="realm-desc">飞升仙界后的起始境界，真正的仙人之体。褪去凡胎，凝聚仙元。</div>
+<div class="realm-lifespan">寿元：与天地同寿</div>
+</div>
+</div>
+<div class="realm-step">
+<div class="realm-icon">十</div>
+<div class="realm-info">
+<div class="realm-name">金仙</div>
+<div class="realm-desc">仙元凝炼为金色，法力浑厚远超真仙。仙界一方强者。</div>
+<div class="realm-lifespan">寿元：与天地同寿</div>
+</div>
+</div>
+<div class="realm-step">
+<div class="realm-icon">十一</div>
+<div class="realm-info">
+<div class="realm-name">太乙玉仙</div>
+<div class="realm-desc">道行精深，玉仙之体万法不侵。仙界顶尖层次的修士。</div>
+<div class="realm-lifespan">寿元：与天地同寿</div>
+</div>
+</div>
+<div class="realm-step">
+<div class="realm-icon">十二</div>
+<div class="realm-info">
+<div class="realm-name">大罗金仙</div>
+<div class="realm-desc">仙中至尊，跳出三界外，不在五行中。距离道祖仅一步之遥。</div>
+<div class="realm-lifespan">寿元：诸天万界不朽</div>
+</div>
+</div>
+<div class="realm-step">
+<div class="realm-icon" style="background:rgba(201,169,110,0.2);border-color:var(--gold)">✦</div>
+<div class="realm-info">
+<div class="realm-name" style="color:var(--gold);font-size:1.2rem">道祖</div>
+<div class="realm-desc">掌控一道法则之力的至高存在，诸天万界的最巅峰。韩立掌控时间法则成道祖。</div>
+<div class="realm-lifespan" style="color:var(--gold)">永恒不朽，万劫不灭</div>
+</div>
+</div>
+</div>
+</section><section class="database-v2-world reveal" id="databaseV2World">
+<div class="v2-world-heading">
+<div>
+<span>DATABASE V2 · 补遗百科卷</span>
+<h2>世界观扩充卷</h2>
+<p>以下内容已直接编译进页面。凡数据库没有提供精确细节的字段，统一显示“待考据”，不作为确定设定。</p>
+</div>
+<div class="v2-world-counts">
+<b>6</b><small>新增分卷</small>
+<b>40+</b><small>新增条目</small>
+</div>
+</div>
+<div class="v2-world-tabs" role="tablist">
+<button class="active" data-v2-world-tab="factions">势力补遗</button>
+<button data-v2-world-tab="beasts">灵兽傀儡</button>
+<button data-v2-world-tab="treasures">宝物法宝</button>
+<button data-v2-world-tab="secrets">秘境</button>
+<button data-v2-world-tab="settings">天地规则</button>
+<button data-v2-world-tab="pending">待考据</button>
+</div>
+<div class="v2-world-panel active" data-v2-world-panel="factions">
+<div class="v2-ency-grid">
+<article class="v2-ency-card">
+<span class="v2-ency-icon">势</span>
+<div class="v2-ency-top"><small>白水剑宗、魁星岛、小寰岛、隐煞门、四大商盟、丰乐盟、魅魔宗、三仙门、夜龙岛、万妖谷定位。</small><span class="v2-confirmed">已补录</span></div>
+<h4>乱星海补遗</h4>
+<p>势</p>
+</article>
+<article class="v2-ency-card">
+<span class="v2-ency-icon">势</span>
+<div class="v2-ency-top"><small>化刀坞、血杀宗、岳阳宫、三皇观、元武国三宗及慕兰／突兀族遗漏部落。</small><span class="v2-confirmed">已补录</span></div>
+<h4>天南与大晋补遗</h4>
+<p>宗</p>
+</article>
+<article class="v2-ency-card">
+<span class="v2-ency-icon">势</span>
+<div class="v2-ency-top"><small>天云十三族新增木疗族、流沙族、墨绿族、心魅族；完整十三族名单仍待核。</small><span class="v2-confirmed">已补录</span></div>
+<h4>灵界势力补遗</h4>
+<p>族</p>
+</article>
+<article class="v2-ency-card">
+<span class="v2-ency-icon">势</span>
+<div class="v2-ency-top"><small>蛮荒八大真灵王族、灰界三域、积鳞空境和小灵天建立独立结构。</small><span class="v2-confirmed">已补录</span></div>
+<h4>仙界势力补遗</h4>
+<p>界</p>
+</article></div>
+</div>
+<div class="v2-world-panel" data-v2-world-panel="beasts">
+<div class="v2-ency-grid">
+<article class="v2-ency-card">
+<span class="v2-ency-icon">兽</span>
+<div class="v2-ency-top"><small>张铁炼尸</small><span class="v2-confirmed">已补录</span></div>
+<h4>曲魂</h4>
+<p>韩立早期长期贴身护卫，兼具人物与炼尸／傀儡属性。</p>
+</article>
+<article class="v2-ency-card">
+<span class="v2-ency-icon">兽</span>
+<div class="v2-ency-top"><small>第一只灵宠</small><span class="v2-confirmed">已补录</span></div>
+<h4>云翅鸟</h4>
+<p>墨大夫遗物，韩立进入黄枫谷后将其放生。</p>
+</article>
+<article class="v2-ency-card">
+<span class="v2-ency-icon">兽</span>
+<div class="v2-ency-top"><small>化形灵药</small><span class="v2-confirmed">已补录</span></div>
+<h4>九曲灵参</h4>
+<p>可辨识灵草并辅助炼丹。</p>
+</article>
+<article class="v2-ency-card">
+<span class="v2-ency-icon">兽</span>
+<div class="v2-ency-top"><small>火中圣兽</small><span class="v2-pending">待考据</span></div>
+<h4>火须子</h4>
+<p>原为马良麾下圣兽，后归顺韩立；完整能力与结局待核。</p>
+</article>
+<article class="v2-ency-card">
+<span class="v2-ency-icon">兽</span>
+<div class="v2-ency-top"><small>上古奇虫</small><span class="v2-confirmed">已补录</span></div>
+<h4>六翼霜蚣</h4>
+<p>经历背叛、二次缔约，最终获得自由。</p>
+</article>
+<article class="v2-ency-card">
+<span class="v2-ency-icon">兽</span>
+<div class="v2-ency-top"><small>成对灵兽</small><span class="v2-confirmed">已补录</span></div>
+<h4>血玉蜘蛛</h4>
+<p>一只战死，一只留存养老。</p>
+</article>
+<article class="v2-ency-card">
+<span class="v2-ency-icon">兽</span>
+<div class="v2-ency-top"><small>遁地灵兽</small><span class="v2-confirmed">已补录</span></div>
+<h4>土甲龙</h4>
+<p>因无法进阶、潜力不足，最终留给南宫婉。</p>
+</article>
+<article class="v2-ency-card">
+<span class="v2-ency-icon">兽</span>
+<div class="v2-ency-top"><small>器灵／顶级灵火</small><span class="v2-confirmed">已补录</span></div>
+<h4>乾蓝冰焰</h4>
+<p>虚天鼎内核心灵火，可冻结元婴。</p>
+</article></div>
+</div>
+<div class="v2-world-panel" data-v2-world-panel="treasures">
+<div class="v2-ency-grid">
+<article class="v2-ency-card">
+<span class="v2-ency-icon">宝</span>
+<div class="v2-ency-top"><small>禁锢型通天灵宝</small><span class="v2-confirmed">已补录</span></div>
+<h4>八灵尺</h4>
+<p>昆吾三老遗物，昆吾山剧情关键至宝。</p>
+</article>
+<article class="v2-ency-card">
+<span class="v2-ency-icon">宝</span>
+<div class="v2-ency-top"><small>顶级灵火</small><span class="v2-confirmed">已补录</span></div>
+<h4>乾蓝冰焰</h4>
+<p>虚天鼎内置核心力量，可冻结元婴。</p>
+</article>
+<article class="v2-ency-card">
+<span class="v2-ency-icon">宝</span>
+<div class="v2-ency-top"><small>本命魔旗</small><span class="v2-confirmed">已补录</span></div>
+<h4>黑风旗</h4>
+<p>元刹圣祖分魂本命魔旗，昆吾山决战道具。</p>
+</article>
+<article class="v2-ency-card">
+<span class="v2-ency-icon">宝</span>
+<div class="v2-ency-top"><small>空间令牌</small><span class="v2-pending">待考据</span></div>
+<h4>大挪移令</h4>
+<p>跨空间关键消耗道具；精确规则待核。</p>
+</article>
+<article class="v2-ency-card">
+<span class="v2-ency-icon">宝</span>
+<div class="v2-ency-top"><small>秘境令牌</small><span class="v2-pending">待考据</span></div>
+<h4>广寒令</h4>
+<p>与进入广寒界相关；精确规则待核。</p>
+</article>
+<article class="v2-ency-card">
+<span class="v2-ency-icon">宝</span>
+<div class="v2-ency-top"><small>攻击性法器</small><span class="v2-confirmed">已补录</span></div>
+<h4>青蛟旗</h4>
+<p>韩立从金光上人处缴获的第一件攻击性法器。</p>
+</article>
+<article class="v2-ency-card">
+<span class="v2-ency-icon">宝</span>
+<div class="v2-ency-top"><small>符宝分类</small><span class="v2-pending">待考据</span></div>
+<h4>高阶符宝合集</h4>
+<p>凤凰符、青冥针符、金光八卦符等。</p>
+</article>
+<article class="v2-ency-card">
+<span class="v2-ency-icon">宝</span>
+<div class="v2-ency-top"><small>攻防至宝</small><span class="v2-pending">待考据</span></div>
+<h4>元合五极山</h4>
+<p>五座灵山来源与各自属性已建立字段，具体内容待核。</p>
+</article>
+<article class="v2-ency-card">
+<span class="v2-ency-icon">宝</span>
+<div class="v2-ency-top"><small>功法配套至宝</small><span class="v2-pending">待考据</span></div>
+<h4>梵圣真片</h4>
+<p>与梵圣真魔功配套，具体作用待核。</p>
+</article>
+<article class="v2-ency-card">
+<span class="v2-ency-icon">宝</span>
+<div class="v2-ency-top"><small>核心至宝</small><span class="v2-pending">待考据</span></div>
+<h4>掌天瓶</h4>
+<p>补充瓶灵完整剧情字段；最终瓶体消散、瓶灵化形，过程待核。</p>
+</article>
+<article class="v2-ency-card">
+<span class="v2-ency-icon">宝</span>
+<div class="v2-ency-top"><small>玄天之宝</small><span class="v2-pending">待考据</span></div>
+<h4>玄天斩灵剑</h4>
+<p>混沌万灵榜排名与玄天仙藤来历字段已建立，具体内容待核。</p>
+</article></div>
+</div>
+<div class="v2-world-panel" data-v2-world-panel="secrets">
+<div class="v2-ency-grid">
+<article class="v2-ency-card">
+<span class="v2-ency-icon">境</span>
+<div class="v2-ency-top"><small>人界秘境</small><span class="v2-confirmed">已补录</span></div>
+<h4>坠魔谷</h4>
+<p>独立秘境结构已建立，完整地理与事件待核。</p>
+</article>
+<article class="v2-ency-card">
+<span class="v2-ency-icon">境</span>
+<div class="v2-ency-top"><small>乱星海秘境</small><span class="v2-confirmed">已补录</span></div>
+<h4>虚天殿</h4>
+<p>关联虚天鼎、银月器灵与乾蓝冰焰。</p>
+</article>
+<article class="v2-ency-card">
+<span class="v2-ency-icon">境</span>
+<div class="v2-ency-top"><small>大晋封印遗址</small><span class="v2-confirmed">已补录</span></div>
+<h4>昆吾山</h4>
+<p>关联昆吾三老、寒骊上人、圭灵、古魔、八灵尺与黑风旗。</p>
+</article>
+<article class="v2-ency-card">
+<span class="v2-ency-icon">境</span>
+<div class="v2-ency-top"><small>仙界时间设施</small><span class="v2-confirmed">已补录</span></div>
+<h4>太阴日晷</h4>
+<p>韩立仙界修炼与进阶相关，完整机制待核。</p>
+</article>
+<article class="v2-ency-card">
+<span class="v2-ency-icon">境</span>
+<div class="v2-ency-top"><small>北寒仙域仙府</small><span class="v2-confirmed">已补录</span></div>
+<h4>冥寒仙府</h4>
+<p>已从剧情提及升级为独立秘境条目。</p>
+</article>
+<article class="v2-ency-card">
+<span class="v2-ency-icon">境</span>
+<div class="v2-ency-top"><small>灵界独立秘境</small><span class="v2-confirmed">已补录</span></div>
+<h4>广寒界</h4>
+<p>通过广寒令等条件进入，完整规则待核。</p>
+</article>
+<article class="v2-ency-card">
+<span class="v2-ency-icon">境</span>
+<div class="v2-ency-top"><small>灵界纵深秘境</small><span class="v2-confirmed">已补录</span></div>
+<h4>地渊</h4>
+<p>风元大陆相关独立空间。</p>
+</article>
+<article class="v2-ency-card">
+<span class="v2-ency-icon">境</span>
+<div class="v2-ency-top"><small>仙界封闭秘境</small><span class="v2-confirmed">已补录</span></div>
+<h4>积鳞空境</h4>
+<p>内部族群与关押修士设定待核。</p>
+</article>
+<article class="v2-ency-card">
+<span class="v2-ency-icon">境</span>
+<div class="v2-ency-top"><small>独立封闭空间</small><span class="v2-confirmed">已补录</span></div>
+<h4>小灵天</h4>
+<p>内部族群与关押修士设定待核。</p>
+</article></div>
+</div>
+<div class="v2-world-panel" data-v2-world-panel="settings">
+<div class="v2-ency-grid">
+<article class="v2-ency-card">
+<span class="v2-ency-icon">法</span>
+<div class="v2-ency-top"><small>数据库只确认总体对应炼气至化神；逐级精确映射未擅自编排。</small><span class="v2-confirmed">已补录</span></div>
+<h4>妖兽 1–10 级</h4>
+<p>True</p>
+</article>
+<article class="v2-ency-card">
+<span class="v2-ency-icon">法</span>
+<div class="v2-ency-top"><small>已建立七劫数据结构；每劫劫难、寿元与战力仍待原著逐条核对。</small><span class="v2-confirmed">已补录</span></div>
+<h4>散仙七劫</h4>
+<p>True</p>
+</article>
+<article class="v2-ency-card">
+<span class="v2-ency-icon">法</span>
+<div class="v2-ency-top"><small>已建立宝物排名体系板块；完整排名及规则待核。</small><span class="v2-confirmed">已补录</span></div>
+<h4>混沌万灵榜</h4>
+<p>True</p>
+</article>
+<article class="v2-ency-card">
+<span class="v2-ency-icon">法</span>
+<div class="v2-ency-top"><small>建立空间裂缝、界面压制、肉身损伤和隔界之力字段。</small><span class="v2-confirmed">已补录</span></div>
+<h4>偷渡灵界</h4>
+<p>True</p>
+</article>
+<article class="v2-ency-card">
+<span class="v2-ency-icon">法</span>
+<div class="v2-ency-top"><small>建立飞升条件、空间压制、接引风险、宝物与记忆损失字段。</small><span class="v2-confirmed">已补录</span></div>
+<h4>飞升仙界</h4>
+<p>True</p>
+</article>
+<article class="v2-ency-card">
+<span class="v2-ency-icon">法</span>
+<div class="v2-ency-top"><small>建立定义与限制字段，未将缺失细节写成确定事实。</small><span class="v2-confirmed">已补录</span></div>
+<h4>隔界之力</h4>
+<p>True</p>
+</article></div>
+</div>
+<div class="v2-world-panel" data-v2-world-panel="pending">
+<div class="v2-pending-list">
+<h3>仍待原著逐条核对</h3>
+<p>天云十三族完整名单、八大真灵王族各族设定、灰界三域内部势力、妖兽逐级映射、散仙七劫逐劫细节、混沌万灵榜完整排名、元合五极山五座灵山、梵圣真片、掌天瓶瓶灵完整化形过程、玄天仙藤来历和跨界规则。</p>
+</div>
+</div>
+</section>
+<!-- ============ 灵根 ============ -->
+<section style="margin-bottom:48px">
+<h2 style="font-family:var(--font-heading);color:var(--gold);text-align:center;letter-spacing:0.08em;margin-bottom:32px">—— 灵根资质 ——</h2>
+<div class="info-grid">
+<div class="card">
+<div class="card-title">天灵根</div>
+<p style="color:var(--text-secondary);font-size:0.9rem;line-height:1.7">单属性灵根，万中无一。修炼速度极快，突破瓶颈轻松。韩立妻子南宫婉即为天灵根。</p>
+<div style="margin-top:10px"><span class="tag tag-gold">顶级资质</span></div>
+</div>
+<div class="card">
+<div class="card-title">异灵根</div>
+<p style="color:var(--text-secondary);font-size:0.9rem;line-height:1.7">两种属性融合变异而成，如风灵根、雷灵根等。修炼速度不弱于天灵根，且有独特神通。</p>
+<div style="margin-top:10px"><span class="tag tag-gold">上等资质</span></div>
+</div>
+<div class="card">
+<div class="card-title">真灵根</div>
+<p style="color:var(--text-secondary);font-size:0.9rem;line-height:1.7">双属性或三属性灵根，绝大多数修仙者的标配。修炼速度适中，突破需靠机缘和丹药。</p>
+<div style="margin-top:10px"><span class="tag tag-jade">中等资质</span></div>
+</div>
+<div class="card">
+<div class="card-title">伪灵根</div>
+<p style="color:var(--text-secondary);font-size:0.9rem;line-height:1.7">四属性或五属性灵根，修炼极为缓慢。韩立即为四属性伪灵根，凭借掌天瓶逆天改命。</p>
+<div style="margin-top:10px"><span class="tag tag-cinnabar">劣等资质</span></div>
+</div>
+</div>
+</section>
+<!-- ============ 韩立的核心手段 ============ -->
+<section style="margin-bottom:48px">
+<h2 style="font-family:var(--font-heading);color:var(--gold);text-align:center;letter-spacing:0.08em;margin-bottom:32px">—— 韩立核心功法与法宝 ——</h2>
+<div class="info-grid">
+<div class="card">
+<div class="card-title">🌿 掌天瓶 <span class="tag tag-gold" style="font-size:0.7rem">核心至宝</span></div>
+<p style="color:var(--text-secondary);font-size:0.9rem;line-height:1.7">韩立最早获得的逆天之物，也是全书最大的谜团之一。可催熟灵药，将数百年生长周期缩短至数日，让伪灵根的韩立有了追赶天才的可能。后期还展现出更多神秘能力。</p>
+</div>
+<div class="card">
+<div class="card-title">🧠 大衍诀</div>
+<p style="color:var(--text-secondary);font-size:0.9rem;line-height:1.7">大衍神君传授的顶级神识功法。可大幅增强神识之力，分神操控多件法宝。韩立以此诀在同阶中神识独步天下，也是他傀儡术的根基。</p>
+</div>
+<div class="card">
+<div class="card-title">⚔️ 青元剑诀</div>
+<p style="color:var(--text-secondary);font-size:0.9rem;line-height:1.7">青元子所创的剑修功法。凌厉无匹，剑气纵横。是韩立最主要的攻击手段，修炼到极致可施展万剑归宗等大神通。</p>
+</div>
+<div class="card">
+<div class="card-title">🦅 惊蛰诀</div>
+<p style="color:var(--text-secondary);font-size:0.9rem;line-height:1.7">炼化十二种真灵之血的无上秘术。每炼化一种真灵之血便可获得该真灵的天赋神通并变身。韩立以大毅力完成十二变化，战力因此恐怖绝伦。</p>
+</div>
+<div class="card">
+<div class="card-title">⚡ 辟邪神雷</div>
+<p style="color:var(--text-secondary);font-size:0.9rem;line-height:1.7">韩立炼化的金色电弧神通，专克魔道功法。源自上古雷法传承，在对抗魔族和魔修时威力倍增，是韩立手上最克制邪魔的手段。</p>
+</div>
+<div class="card">
+<div class="card-title">🎭 傀儡术</div>
+<p style="color:var(--text-secondary);font-size:0.9rem;line-height:1.7">大衍神君毕生心血。韩立可操控多具实力强大的傀儡同时作战，极大弥补了人数劣势。在多次大战中，韩立的傀儡大军曾是他最大的底牌。</p>
+</div>
+</div>
+</section>
+<!-- ============ 修真百艺 ============ -->
+<section style="margin-bottom:48px">
+<h2 style="font-family:var(--font-heading);color:var(--gold);text-align:center;letter-spacing:0.08em;margin-bottom:32px">—— 修真百艺 ——</h2>
+<div class="info-grid">
+<div class="card">
+<div class="card-title">🔥 炼丹术</div>
+<p style="color:var(--text-secondary);font-size:0.9rem;line-height:1.7">以灵药炼制丹药，是修仙者最倚重的副业。丹药可增进修为、突破瓶颈、延长寿命。韩立凭借掌天瓶的灵药优势和自身刻苦钻研，成为一代炼丹宗师。代表丹药：筑基丹、结丹丸、化婴丹、九曲灵丹。</p>
+</div>
+<div class="card">
+<div class="card-title">🔨 炼器术</div>
+<p style="color:var(--text-secondary);font-size:0.9rem;line-height:1.7">炼制法宝法器。法宝分为法器、灵器、法宝、古宝、通天灵宝、玄天之宝等等级。韩立精通炼器，法宝多是亲手打造。代表作：青竹蜂云剑（本命法宝）。</p>
+</div>
+<div class="card">
+<div class="card-title">🔮 阵法</div>
+<p style="color:var(--text-secondary);font-size:0.9rem;line-height:1.7">以灵石、阵旗、阵盘布置阵法，可攻可守。大衍神君也是阵法宗师。韩立继承了其阵法造诣，在对敌和守护洞府时频繁使用。代表：五行困仙阵。</p>
+</div>
+<div class="card">
+<div class="card-title">📜 符箓</div>
+<p style="color:var(--text-secondary);font-size:0.9rem;line-height:1.7">将法术封印于符纸之中，方便随时激发。韩立常备大量符箓用以应对突发状况。高级符箓可蕴含元婴一击之力，是保命利器。</p>
+</div>
+</div>
+</section>
+<!-- ============ 核心概念 ============ -->
+<section style="margin-bottom:48px">
+<h2 style="font-family:var(--font-heading);color:var(--gold);text-align:center;letter-spacing:0.08em;margin-bottom:32px">—— 核心概念 ——</h2>
+<div class="info-grid">
+<div class="card">
+<div class="card-title">🌊 灵气</div>
+<p style="color:var(--text-secondary);font-size:0.9rem;line-height:1.7">修仙世界的根本能量，弥漫于天地之间。人界灵气稀薄，灵界浓郁，仙界最为充沛。灵气的浓度决定了修士能修炼到的上限。</p>
+</div>
+<div class="card">
+<div class="card-title">👁️ 神识</div>
+<p style="color:var(--text-secondary);font-size:0.9rem;line-height:1.7">修士的精神力量，可用于探测、攻击、传音。大衍诀可大幅增强神识。境界越高神识覆盖范围越广，大乘修士的神识可覆盖数十万里。</p>
+</div>
+<div class="card">
+<div class="card-title">💕 道侣</div>
+<p style="color:var(--text-secondary);font-size:0.9rem;line-height:1.7">修仙界的伴侣关系。不同于凡俗的婚姻，道侣之间以大道同修为基础，相伴攀登修仙之路。韩立与南宫婉即为典范。</p>
+</div>
+<div class="card">
+<div class="card-title">🌩️ 天劫</div>
+<p style="color:var(--text-secondary);font-size:0.9rem;line-height:1.7">修士突破大境界时天地降下的考验。度过天劫方可晋升，失败则形神俱灭。元婴劫、化神劫、飞升劫……每一次天劫都是一次生死考验。</p>
+</div>
+<div class="card">
+<div class="card-title">🕳️ 空间节点</div>
+<p style="color:var(--text-secondary);font-size:0.9rem;line-height:1.7">连接不同世界/界面的空间薄弱处。人界通往灵界需要找到稳固的空间节点才能飞升。古魔入侵人界也是通过空间节点。</p>
+</div>
+<div class="card">
+<div class="card-title">✨ 掌天瓶之谜</div>
+<p style="color:var(--text-secondary);font-size:0.9rem;line-height:1.7">贯穿全书的最大谜团（终极道器）。绿液可催生灵药、修复神魂、逆转时间、储存光阴。后期完全解封后展现时间本源法则之力——它是韩立证道时间道祖的本源器物。</p>
+</div>
+<div class="card">
+<div class="card-title">♾️ 轮回殿主之谜</div>
+<p style="color:var(--text-secondary);font-size:0.9rem;line-height:1.7">全书最大伏笔——轮回殿主是飞升超脱后的韩立所分裂出的分魂。因预见古或今会篡改天道抹杀自己，提前数万年创立轮回殿，暗中布局引导过去的韩立成长。韩立一生所历所有危机与机缘，皆是未来自己在护道。</p>
+</div>
+</div>
+</section>
+<!-- ============ 真灵体系 ============ -->
+<section style="margin-bottom:48px">
+<h2 style="font-family:var(--font-heading);color:var(--gold);text-align:center;letter-spacing:0.08em;margin-bottom:32px">—— 真灵与惊蛰十二变化 ——</h2>
+<p style="text-align:center;color:var(--text-secondary);margin-bottom:20px;font-size:0.9rem">
+        韩立修习惊蛰诀，需炼化十二种真灵之血，每种真灵赋予一种变化神通
+      </p>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;max-width:900px;margin:0 auto">
+<div class="card" style="text-align:center;padding:16px"><span style="font-size:1.5rem">🐉</span><br/><span style="color:var(--gold);font-family:var(--font-heading)">1. 真龙变</span><br/><span style="font-size:0.75rem;color:var(--text-dim)">肉身霸体·龙气镇压万法</span></div>
+<div class="card" style="text-align:center;padding:16px"><span style="font-size:1.5rem">🕊️</span><br/><span style="color:var(--gold);font-family:var(--font-heading)">2. 天凤变</span><br/><span style="font-size:0.75rem;color:var(--text-dim)">涅槃重生·超速自愈</span></div>
+<div class="card" style="text-align:center;padding:16px"><span style="font-size:1.5rem">🦅</span><br/><span style="color:var(--gold);font-family:var(--font-heading)">3. 鲲鹏变</span><br/><span style="font-size:0.75rem;color:var(--text-dim)">诸天极速·撕裂空间</span></div>
+<div class="card" style="text-align:center;padding:16px"><span style="font-size:1.5rem">🐯</span><br/><span style="color:var(--gold);font-family:var(--font-heading)">4. 白虎变</span><br/><span style="font-size:0.75rem;color:var(--text-dim)">杀伐煞气·破甲破法</span></div>
+<div class="card" style="text-align:center;padding:16px"><span style="font-size:1.5rem">🔥</span><br/><span style="color:var(--gold);font-family:var(--font-heading)">5. 朱雀变</span><br/><span style="font-size:0.75rem;color:var(--text-dim)">焚天真火·烈焰法则</span></div>
+<div class="card" style="text-align:center;padding:16px"><span style="font-size:1.5rem">🐢</span><br/><span style="color:var(--gold);font-family:var(--font-heading)">6. 玄武变</span><br/><span style="font-size:0.75rem;color:var(--text-dim)">绝对防御·万古不动</span></div>
+<div class="card" style="text-align:center;padding:16px"><span style="font-size:1.5rem">👹</span><br/><span style="color:var(--gold);font-family:var(--font-heading)">7. 饕餮变</span><br/><span style="font-size:0.75rem;color:var(--text-dim)">吞噬万物·吞法吞灵</span></div>
+<div class="card" style="text-align:center;padding:16px"><span style="font-size:1.5rem">😈</span><br/><span style="color:var(--gold);font-family:var(--font-heading)">8. 穷奇变</span><br/><span style="font-size:0.75rem;color:var(--text-dim)">凶煞滔天·压制心魔</span></div>
+<div class="card" style="text-align:center;padding:16px"><span style="font-size:1.5rem">💀</span><br/><span style="color:var(--gold);font-family:var(--font-heading)">9. 梼杌变</span><br/><span style="font-size:0.75rem;color:var(--text-dim)">神魂狂暴·击溃幻术</span></div>
+<div class="card" style="text-align:center;padding:16px"><span style="font-size:1.5rem">🐍</span><br/><span style="color:var(--gold);font-family:var(--font-heading)">10. 螣蛇变</span><br/><span style="font-size:0.75rem;color:var(--text-dim)">剧毒缠身·阴寒侵蚀</span></div>
+<div class="card" style="text-align:center;padding:16px"><span style="font-size:1.5rem">⚡</span><br/><span style="color:var(--gold);font-family:var(--font-heading)">11. 应龙变</span><br/><span style="font-size:0.75rem;color:var(--text-dim)">风雷双翼·遁速无双</span></div>
+<div class="card" style="text-align:center;padding:16px"><span style="font-size:1.5rem">🌑</span><br/><span style="color:var(--gold);font-family:var(--font-heading)">12. 九幽变</span><br/><span style="font-size:0.75rem;color:var(--text-dim)">幽冥克制·神魂灭杀</span></div>
+</div>
+</section>
+</div>
+<footer class="site-footer">
+<p>凡人修仙传 · 阅读助手 — 数据整理自网络公开资料，仅供书友阅读参考</p>
+</footer>
+</main>
+<script id="fanren-standalone-script">
+/* Embedded by make_fanren_standalone.py */
+(() => {
+  'use strict';
+
+  const $ = (selector, root = document) => root.querySelector(selector);
+  const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+
+  document.documentElement.classList.add('js');
+
+  function setPageKicker() {
+    const map = {
+      home: 'A MORTAL\'S JOURNEY',
+      characters: '众 生 命 牌',
+      plot: '修 仙 命 轨',
+      world: '三 界 法 则',
+      map: '山 河 图 志'
+    };
+    const page = document.body.dataset.page || 'home';
+    const header = $('.page-header');
+    if (header) header.dataset.kicker = map[page] || '';
+  }
+
+  function setupNavigation() {
+    const nav = $('.top-nav');
+    const toggle = $('.nav-toggle');
+    if (!nav || !toggle) return;
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.addEventListener('click', () => {
+      const open = nav.classList.toggle('menu-open');
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.textContent = open ? '✕' : '☰';
+    });
+    $$('.nav-links a').forEach(link => link.addEventListener('click', () => {
+      nav.classList.remove('menu-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.textContent = '☰';
+    }));
+    document.addEventListener('click', (event) => {
+      if (!nav.contains(event.target)) {
+        nav.classList.remove('menu-open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.textContent = '☰';
+      }
+    });
+  }
+
+  function injectHomepageVisual() {
+    const hero = $('.hero-section');
+    if (!hero || $('.spirit-bottle', hero)) return;
+    const bottle = document.createElement('div');
+    bottle.className = 'spirit-bottle';
+    bottle.setAttribute('aria-hidden', 'true');
+    hero.appendChild(bottle);
+  }
+
+  function setupReveal() {
+    const targets = [
+      ...$$('.card'), ...$$('.timeline-item'), ...$$('.realm-step'),
+      ...$$('.map-panel'), ...$$('.page-header')
+    ];
+    targets.forEach((node, i) => {
+      node.classList.add('reveal');
+      node.style.transitionDelay = `${Math.min((i % 6) * 55, 220)}ms`;
+    });
+    if (!('IntersectionObserver' in window)) {
+      targets.forEach(node => node.classList.add('is-visible'));
+      return;
+    }
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: .08, rootMargin: '0px 0px -5% 0px' });
+    targets.forEach(node => observer.observe(node));
+  }
+
+  function setupCardTilt() {
+    if (window.matchMedia('(pointer: coarse)').matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    $$('.feature-card, .character-card').forEach(card => {
+      card.addEventListener('mousemove', event => {
+        const r = card.getBoundingClientRect();
+        const x = (event.clientX - r.left) / r.width - .5;
+        const y = (event.clientY - r.top) / r.height - .5;
+        card.style.transform = `perspective(900px) rotateX(${y * -2.5}deg) rotateY(${x * 3}deg) translateY(-5px)`;
+      });
+      card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+    });
+  }
+
+  function setupBackToTop() {
+    const button = document.createElement('button');
+    button.className = 'back-to-top';
+    button.type = 'button';
+    button.setAttribute('aria-label', '返回顶部');
+    button.textContent = '↑';
+    document.body.appendChild(button);
+    const sync = () => button.classList.toggle('visible', window.scrollY > 500);
+    window.addEventListener('scroll', sync, { passive: true });
+    sync();
+    button.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  }
+
+  function setupParticles() {
+    const canvas = $('#particles-canvas');
+    if (!canvas || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const ctx = canvas.getContext('2d');
+    let width = 0, height = 0, ratio = 1;
+    let particles = [];
+    const resize = () => {
+      ratio = Math.min(window.devicePixelRatio || 1, 2);
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width * ratio;
+      canvas.height = height * ratio;
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+      const count = Math.min(70, Math.max(28, Math.floor(width / 24)));
+      particles = Array.from({ length: count }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        r: Math.random() * 1.35 + .25,
+        vx: (Math.random() - .5) * .06,
+        vy: -(Math.random() * .12 + .035),
+        a: Math.random() * .38 + .08,
+        phase: Math.random() * Math.PI * 2,
+        gold: Math.random() > .76
+      }));
+    };
+    const render = (t = 0) => {
+      ctx.clearRect(0, 0, width, height);
+      for (const p of particles) {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.y < -8) { p.y = height + 8; p.x = Math.random() * width; }
+        if (p.x < -8) p.x = width + 8;
+        if (p.x > width + 8) p.x = -8;
+        const alpha = p.a * (.6 + .4 * Math.sin(t * .0008 + p.phase));
+        ctx.beginPath();
+        ctx.fillStyle = p.gold ? `rgba(208,173,103,${alpha})` : `rgba(121,198,172,${alpha})`;
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      requestAnimationFrame(render);
+    };
+    window.addEventListener('resize', resize, { passive: true });
+    resize();
+    requestAnimationFrame(render);
+  }
+
+  function escapeHTML(value = '') {
+    return String(value).replace(/[&<>'"]/g, ch => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
+    }[ch]));
+  }
+
+  window.filterCharacters = function filterCharacters(search = '', filter = '') {
+    const cards = $$('.character-card');
+    const q = String(search).trim().toLowerCase();
+    let visible = 0;
+    cards.forEach(card => {
+      const haystack = [
+        card.dataset.name, card.dataset.alias, card.dataset.sect,
+        card.dataset.type, card.dataset.realm, card.textContent
+      ].filter(Boolean).join(' ').toLowerCase();
+      const matchesSearch = !q || haystack.includes(q);
+      const matchesFilter = !filter || filter === 'all' || (card.dataset.type || '').includes(filter);
+      const show = matchesSearch && matchesFilter;
+      card.classList.toggle('is-hidden', !show);
+      if (show) visible += 1;
+    });
+
+    const grid = $('#charactersGrid');
+    if (!grid) return;
+    let empty = $('.empty-state', grid);
+    if (!visible) {
+      if (!empty) {
+        empty = document.createElement('div');
+        empty.className = 'empty-state';
+        empty.innerHTML = '<div style="font-size:2rem;margin-bottom:10px">☯</div>未寻到此人命牌，请换个关键词或筛选条件。';
+        grid.appendChild(empty);
+      }
+    } else if (empty) {
+      empty.remove();
+    }
+  };
+
+  window.openCharModal = function openCharModal(character) {
+    const modal = $('#char-modal');
+    const body = $('#modal-body');
+    if (!modal || !body || !character) return;
+    const list = (items = []) => items.length
+      ? `<ul class="modal-list">${items.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul>`
+      : '<p style="color:var(--text-dim)">暂无记载</p>';
+
+    body.innerHTML = `
+      <div class="modal-hero">
+        <h2 class="modal-name">${escapeHTML(character.name)}</h2>
+        ${character.alias ? `<div class="modal-alias">${escapeHTML(character.alias)}</div>` : ''}
+        <div class="modal-meta">
+          ${character.realm ? `<span class="tag tag-gold">${escapeHTML(character.realm)}</span>` : ''}
+          ${character.sect ? `<span class="tag tag-jade">${escapeHTML(character.sect)}</span>` : ''}
+          ${character.type ? `<span class="tag tag-cinnabar">${escapeHTML(character.type)}</span>` : ''}
+        </div>
+        <p class="modal-lead">${escapeHTML(character.description || '')}</p>
+      </div>
+      <section class="modal-section"><h3>功法与神通</h3>${list(character.abilities)}</section>
+      <section class="modal-section"><h3>人物关系</h3>${list(character.relationships)}</section>
+      <section class="modal-section"><h3>命途节点</h3>${list(character.events)}</section>`;
+
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+    $('.modal-content', modal)?.scrollTo({ top: 0 });
+  };
+
+  window.closeCharModal = function closeCharModal() {
+    const modal = $('#char-modal');
+    if (!modal) return;
+    modal.classList.remove('active', 'visible');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
+  };
+
+  function setupModal() {
+    const modal = $('#char-modal');
+    if (!modal) return;
+    modal.setAttribute('aria-hidden', 'true');
+    modal.addEventListener('click', event => {
+      if (event.target === modal) window.closeCharModal();
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') window.closeCharModal();
+    });
+  }
+
+  function setupMapA11y() {
+    $$('.map-region').forEach(region => {
+      region.setAttribute('tabindex', '0');
+      region.setAttribute('role', 'button');
+      const name = region.dataset.name || '地图区域';
+      region.setAttribute('aria-label', `${name}：${region.dataset.desc || ''}`);
+      region.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          region.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+        }
+      });
+    });
+  }
+
+  function initialize() {
+    setPageKicker();
+    setupNavigation();
+    injectHomepageVisual();
+    setupReveal();
+    setupCardTilt();
+    setupBackToTop();
+    setupParticles();
+    setupModal();
+    setupMapA11y();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initialize, { once: true });
+  } else {
+    initialize();
+  }
+})();
+
+</script>
+<script id="fanren-v2-effects">
+
+(() => {
+  'use strict';
+  const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+  const page=document.body.dataset.page||'home';
+
+  function headerSeal(){
+    const h=$('.page-header'); if(!h||$('.v2-header-seal',h))return;
+    const seal=document.createElement('span'); seal.className='v2-header-seal';
+    seal.innerHTML=({characters:'众生<br>命牌',plot:'修仙<br>命轨',world:'天地<br>法则',map:'三界<br>山河'}[page]||'凡人<br>修仙');
+    h.appendChild(seal);
+  }
+
+  function homeArt(){
+    const hero=$('.hero-section'); if(!hero||$('.v2-bottle-stage',hero))return;
+    const stage=document.createElement('div'); stage.className='v2-bottle-stage'; stage.setAttribute('aria-label','原创掌天瓶灵光意象');
+    stage.innerHTML='<div class="v2-bottle-mist"></div><div class="v2-bottle-orbit"><i class="v2-rune r1">乾</i><i class="v2-rune r2">灵</i><i class="v2-rune r3">坤</i><i class="v2-rune r4">道</i></div><div class="v2-bottle"></div>';
+    hero.appendChild(stage);
+    const scroll=document.createElement('div');scroll.className='v2-scroll-cta';scroll.textContent='入卷';hero.appendChild(scroll);
+    $$('.feature-card').forEach((c,i)=>c.dataset.volume=['卷一·众生','卷二·命轨','卷三·法则','卷四·山河'][i]||'');
+  }
+
+  function characterDecor(){
+    $$('.character-card').forEach(card=>{
+      if(!$('.v2-life-seal',card)){
+        const name=$('.char-name',card)?.textContent.trim()||'命';
+        const seal=document.createElement('span');seal.className='v2-life-seal';seal.textContent=name.replace(/[（）()·\s]/g,'').slice(0,1);card.appendChild(seal);
+        const cord=document.createElement('span');cord.className='v2-hanging-cord';card.appendChild(cord);
+      }
+      if(!card.hasAttribute('tabindex'))card.tabIndex=0;
+      card.setAttribute('role','button');
+      card.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&typeof card.onclick==='function'){e.preventDefault();card.click();}});
+    });
+  }
+
+  function plotRail(){
+    if(page!=='plot')return;
+    const timeline=$('.timeline'); if(!timeline)return;
+    $$('.timeline-marker',timeline).forEach((m,i)=>m.dataset.index=String(i+1).padStart(2,'0'));
+    const old=timeline.previousElementSibling;
+    if(old && old.tagName==='DIV' && !old.classList.contains('v2-realm-rail')){
+      const names=['炼气','筑基','结丹','元婴','化神','炼虚','合体','大乘','真仙','金仙','太乙','大罗','道祖'];
+      const rail=document.createElement('div');rail.className='v2-realm-rail';rail.setAttribute('aria-label','韩立境界进阶');
+      rail.innerHTML=names.map((n,i)=>`<span class="v2-realm-node ${i===0||i===4||i===8||i===12?'active':''}">${n}</span>`).join('');
+      old.replaceWith(rail);
+    }
+  }
+
+  function worldDecor(){
+    if(page!=='world')return;
+    $$('.realm-step').forEach((step,i)=>{step.dataset.realmIndex=String(i+1);});
+  }
+
+  function mapDecor(){
+    if(page!=='map')return;
+    const tip=document.createElement('div');tip.className='v2-map-tip';document.body.appendChild(tip);
+    $$('.map-container').forEach(container=>{
+      if(!$('.v2-compass',container)){const c=document.createElement('div');c.className='v2-compass';container.appendChild(c)}
+    });
+    $$('.map-region').forEach(region=>{
+      region.tabIndex=0;region.setAttribute('role','button');
+      const name=region.dataset.name||$('text',region)?.textContent||'区域';
+      const desc=region.dataset.desc||'点击查看区域信息';
+      const show=e=>{tip.innerHTML=`<b>${name}</b>${desc}`;tip.classList.add('show');const x=(e.clientX||innerWidth/2)+16,y=(e.clientY||innerHeight/2)+16;tip.style.left=Math.min(x,innerWidth-300)+'px';tip.style.top=Math.min(y,innerHeight-100)+'px'};
+      region.addEventListener('pointerenter',show);region.addEventListener('pointermove',show);region.addEventListener('pointerleave',()=>tip.classList.remove('show'));
+      region.addEventListener('focus',()=>{const r=region.getBoundingClientRect();show({clientX:r.left+r.width/2,clientY:r.top+r.height/2})});region.addEventListener('blur',()=>tip.classList.remove('show'));
+      region.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();show({clientX:innerWidth/2,clientY:innerHeight/2});setTimeout(()=>tip.classList.remove('show'),2600)}});
+    });
+  }
+
+  function tilt(){
+    if(matchMedia('(pointer:coarse)').matches||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+    $$('.feature-card,.character-card,.page-world .info-grid>.card').forEach(card=>{
+      card.addEventListener('pointermove',e=>{const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;card.style.transform=`perspective(900px) rotateX(${-y*3.2}deg) rotateY(${x*4.2}deg) translateY(-5px)`;});
+      card.addEventListener('pointerleave',()=>card.style.transform='');
+    });
+  }
+
+  function aura(){
+    if(matchMedia('(pointer:coarse)').matches)return;
+    const a=document.createElement('div');a.className='v2-cursor-aura';document.body.appendChild(a);
+    document.addEventListener('pointermove',e=>{a.style.left=e.clientX+'px';a.style.top=e.clientY+'px'});
+    document.addEventListener('mouseleave',()=>a.style.opacity='0');document.addEventListener('mouseenter',()=>a.style.opacity='1');
+  }
+
+  function init(){headerSeal();homeArt();characterDecor();plotRail();worldDecor();mapDecor();tilt();aura();}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+
+</script>
+
+<script id="fanren-database-v2-world-script">
+(() => {
+  const root = document.querySelector('#databaseV2World');
+  if (!root) return;
+  root.querySelectorAll('[data-v2-world-tab]').forEach(button => {
+    button.addEventListener('click', () => {
+      root.querySelectorAll('[data-v2-world-tab]').forEach(x => x.classList.remove('active'));
+      root.querySelectorAll('[data-v2-world-panel]').forEach(x => x.classList.remove('active'));
+      button.classList.add('active');
+      root.querySelector(`[data-v2-world-panel="${button.dataset.v2WorldTab}"]`)?.classList.add('active');
+    });
+  });
+})();
+</script>
+<script id="fanren-persistent-shell-bridge">
+(() => {
+  'use strict';
+  if (window.__fanrenPersistentShellBridgeInstalled) return;
+  window.__fanrenPersistentShellBridgeInstalled = true;
+
+  const PAGE_NAME = document.body?.dataset.page === 'index'
+    ? 'home'
+    : (document.body?.dataset.page || location.pathname.split('/').pop().replace('.html', '') || 'home');
+
+  const ROUTES = new Set(['home', 'characters', 'plot', 'world', 'map']);
+
+  function routeFromAnchor(anchor) {
+    if (!anchor || !anchor.href) return null;
+    if (anchor.hasAttribute('download') || anchor.target === '_blank') return null;
+
+    let url;
+    try {
+      url = new URL(anchor.getAttribute('href'), location.href);
+    } catch (_) {
+      return null;
+    }
+
+    if (url.protocol !== 'file:' && url.origin !== location.origin) return null;
+
+    if (url.pathname.endsWith('/index.html') || url.pathname.endsWith('index.html')) {
+      const queryPage = url.searchParams.get('page');
+      return ROUTES.has(queryPage) ? queryPage : 'home';
+    }
+
+    const file = url.pathname.split('/').pop().toLowerCase();
+    const map = {
+      'home.html': 'home',
+      'characters.html': 'characters',
+      'plot.html': 'plot',
+      'world.html': 'world',
+      'map.html': 'map'
+    };
+    return map[file] || null;
+  }
+
+  function requestNavigation(page) {
+    if (!ROUTES.has(page)) return;
+    if (window.parent !== window) {
+      window.parent.postMessage({ type: 'fanren:navigate', page }, '*');
+    } else {
+      location.href = `index.html?page=${encodeURIComponent(page)}`;
+    }
+  }
+
+  // Directly opening a child file should still enter the persistent-player shell.
+  if (window.parent === window) {
+    const target = `index.html?page=${encodeURIComponent(PAGE_NAME)}`;
+    location.replace(target);
+    return;
+  }
+
+  document.addEventListener('click', event => {
+    const anchor = event.target.closest('a[href]');
+    const route = routeFromAnchor(anchor);
+    if (route) {
+      event.preventDefault();
+      event.stopPropagation();
+      requestNavigation(route);
+      return;
+    }
+
+    if (event.target.closest(
+      'button, .character-card, .feature-card, .timeline-content, .realm-step, .map-region, [role="button"]'
+    )) {
+      window.parent.postMessage({ type: 'fanren:sfx', kind: 'tap' }, '*');
+    }
+  }, true);
+
+  document.addEventListener('keydown', event => {
+    if ((event.key === 'Enter' || event.key === ' ') && event.target.closest(
+      'button, a, .character-card, .feature-card, .timeline-content, .realm-step, .map-region, [role="button"]'
+    )) {
+      window.parent.postMessage({ type: 'fanren:sfx', kind: 'tap' }, '*');
+    }
+  }, true);
+
+  window.parent.postMessage({
+    type: 'fanren:ready',
+    page: PAGE_NAME,
+    title: document.title
+  }, '*');
+})();
+</script>
+</body>
+</html>
