@@ -12,7 +12,7 @@
 - 格式：WebP 优先，PNG 备选
 - 背景：深色/透明，让 CSS 渐变叠加层自然融合
 
-## 人物与文件映射表（27 张）
+## 人物与文件映射表（40 张）
 
 | 人物 | 文件名 | 卡片位置 |
 |------|--------|----------|
@@ -43,6 +43,19 @@
 | 轮回殿主 | `lunhuidianzhu.webp` | 盟友 |
 | 莫简离 | `mojianli.webp` | 挚友 |
 | 石穿空 | `shichuankong.webp` | 挚友 |
+| 慕沛灵 | `mupeiling.webp` | 名义侍妾 |
+| 寒骊上人 | `hanlishangren.webp` | 敌人 |
+| 齐云霄 | `qiyunxiao.webp` | 挚友 |
+| 付天华 | `futianhua.webp` | 配角 |
+| 金光上人 | `jinguangshangren.webp` | 敌人 |
+| 云露老祖 | `yunlulaozu.webp` | 师长 |
+| 骷髅 | `kulou.webp` | 敌人 |
+| 红粉 | `hongfen.webp` | 敌人 |
+| 温天仁 | `wentianren.webp` | 敌人 |
+| 圭灵 | `guiling.webp` | 盟友 |
+| 洞天鼠王 | `dongtianshuwang.webp` | 妖王 |
+| 昆吾三老 | `kunwusanlao.webp` | 师长 |
+| 妍丽 | `yanli.webp` | 挚友 |
 
 ## 未提供图片的降级方案
 未放置图片的角色自动退回纯 CSS/SVG 原创意象肖像，
